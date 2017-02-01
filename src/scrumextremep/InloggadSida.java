@@ -23,6 +23,7 @@ public class InloggadSida extends javax.swing.JFrame {
         initComponents();
         fetchBlognamesForskning();
         anvID = anvandarID;
+        //hej
     }
 
     /**
