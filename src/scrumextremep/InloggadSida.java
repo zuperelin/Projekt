@@ -45,6 +45,7 @@ public class InloggadSida extends javax.swing.JFrame {
         taUtbildning = new javax.swing.JTextArea();
         spInformell = new javax.swing.JScrollPane();
         taInformell = new javax.swing.JTextArea();
+        admin = new javax.swing.JButton();
         btnLoggaUt = new javax.swing.JButton();
         BtCalendar = new javax.swing.JButton();
         BtNewBlog = new javax.swing.JButton();
@@ -60,7 +61,7 @@ public class InloggadSida extends javax.swing.JFrame {
         lblRubrik.setFont(new java.awt.Font("Impact", 0, 52)); // NOI18N
         lblRubrik.setText("Informatikblogg");
         getContentPane().add(lblRubrik);
-        lblRubrik.setBounds(120, 10, 480, 120);
+        lblRubrik.setBounds(140, 40, 480, 120);
 
         tblBlogTitlar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,6 +130,16 @@ public class InloggadSida extends javax.swing.JFrame {
 
         getContentPane().add(tpBloggar);
         tpBloggar.setBounds(20, 190, 490, 440);
+
+        admin.setText("Redigera profiler");
+        admin.setActionCommand("Administratör");
+        admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminActionPerformed(evt);
+            }
+        });
+        getContentPane().add(admin);
+        admin.setBounds(130, 10, 113, 23);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +232,14 @@ public class InloggadSida extends javax.swing.JFrame {
          dispose();
     }//GEN-LAST:event_BtNewBlogActionPerformed
 
+    private void adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminActionPerformed
+
+        new AdminAnd().setVisible(true);
+        dispose();
+        
+        
+    }//GEN-LAST:event_adminActionPerformed
+
     private void fetchBlognamesUtbildning() {
         String sqlquery = "select blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning')";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
@@ -286,6 +305,7 @@ public class InloggadSida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCalendar;
     private javax.swing.JButton BtNewBlog;
+    private javax.swing.JButton admin;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
