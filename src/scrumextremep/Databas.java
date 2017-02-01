@@ -19,7 +19,7 @@ public class Databas {
         
         
             try {
-            File db = new File("ORUDB.FDB");
+            File db = new File("PROJEKTDB.FDB");
             idb = new InfDB(db.getAbsolutePath());
             System.out.println("Lyckades!");
             }
