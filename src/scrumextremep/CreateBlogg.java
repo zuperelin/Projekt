@@ -59,6 +59,11 @@ public class CreateBlogg extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         TFTitle.setText("Titel");
+        TFTitle.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TFTitleFocusGained(evt);
+            }
+        });
         getContentPane().add(TFTitle);
         TFTitle.setBounds(240, 130, 220, 30);
 
@@ -109,7 +114,7 @@ public class CreateBlogg extends javax.swing.JFrame {
 
         BtAddFile.setText("Bifoga fil");
         getContentPane().add(BtAddFile);
-        BtAddFile.setBounds(800, 430, 73, 23);
+        BtAddFile.setBounds(800, 430, 79, 32);
 
         BtCreateBlog.setText("Skapa blogginlägg");
         BtCreateBlog.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +123,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtCreateBlog);
-        BtCreateBlog.setBounds(780, 510, 119, 40);
+        BtCreateBlog.setBounds(780, 510, 134, 40);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
         lblRubrik.setBackground(new java.awt.Color(255, 255, 255));
@@ -188,6 +193,10 @@ public class CreateBlogg extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_cbBlogActionPerformed
+
+    private void TFTitleFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TFTitleFocusGained
+        TFTitle.setText("");
+    }//GEN-LAST:event_TFTitleFocusGained
 
     
   
