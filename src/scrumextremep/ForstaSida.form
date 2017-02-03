@@ -51,7 +51,9 @@
     <Component class="javax.swing.JTextField" name="tfAnvNamn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anv&#xe4;ndarnamn"/>
-        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+        <Property name="requestFocusEnabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfAnvNamnFocusGained"/>
@@ -64,7 +66,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="pfLosenord">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+        <Property name="text" type="java.lang.String" value="vdsvsvvsvd"/>
       </Properties>
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="pfLosenordFocusGained"/>

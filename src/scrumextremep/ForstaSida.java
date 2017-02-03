@@ -8,6 +8,7 @@ package scrumextremep;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -58,7 +59,7 @@ public class ForstaSida extends javax.swing.JFrame {
         lblRubrik.setBounds(100, 20, 480, 120);
 
         tfAnvNamn.setText("Användarnamn");
-        tfAnvNamn.setRequestFocusEnabled(false);
+        tfAnvNamn.setRequestFocusEnabled(true);
         tfAnvNamn.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tfAnvNamnFocusGained(evt);
@@ -67,7 +68,7 @@ public class ForstaSida extends javax.swing.JFrame {
         getContentPane().add(tfAnvNamn);
         tfAnvNamn.setBounds(600, 50, 160, 30);
 
-        pfLosenord.setText("jPasswordField1");
+        pfLosenord.setText("vdsvsvvsvd");
         pfLosenord.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 pfLosenordFocusGained(evt);
@@ -83,7 +84,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(680, 140, 73, 23);
+        btnLoggaIn.setBounds(680, 140, 93, 29);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
@@ -134,9 +135,7 @@ public class ForstaSida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        anvandarID();
-        new InloggadSida(anvID).setVisible(true);
-        dispose();
+        logInCheck();
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void anvandarID() {
@@ -194,10 +193,34 @@ public class ForstaSida extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
-         
- 
     }
+    
+     private void logInCheck() {
+        try { // Code below gets the username and password from the database.
+            String anvName = tfAnvNamn.getText();
+            String sqlqueryAID = "Select A_ID FROM ANVANDARE WHERE ANVNAMN = '" + anvName + "'";
+            anvID = Databas.getDatabas().fetchSingle(sqlqueryAID);
+            String sqlqueryPass = "SELECT LOSENORD FROM ANVANDARE WHERE A_ID = " + anvID;
+            String passwordUser = Databas.getDatabas().fetchSingle(sqlqueryPass);
+            char[] triedPassword = pfLosenord.getPassword();
+            String matchPassword = new String(triedPassword);
+
+            if (passwordUser != null) { // If password exists
+                if (passwordUser.equals(matchPassword)) { // and matches inserted password
+                    this.dispose();
+                    new InloggadSida(anvID).setVisible(true);               
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord!");
+                }
+            } 
+                else {
+                    JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord!");
+                }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
