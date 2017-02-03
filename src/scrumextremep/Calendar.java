@@ -44,6 +44,7 @@ public class Calendar extends javax.swing.JFrame {
         createBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
         BtnShowAllMeetings = new javax.swing.JButton();
+        btn_AcceptedMoten = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +131,13 @@ public class Calendar extends javax.swing.JFrame {
             }
         });
 
+        btn_AcceptedMoten.setText("Accepterade Mötesförslag");
+        btn_AcceptedMoten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AcceptedMotenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,13 +162,14 @@ public class Calendar extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnShowAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(BtnShowAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_AcceptedMoten, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +189,9 @@ public class Calendar extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(BtnShowAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_AcceptedMoten, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(BtnShowAllMeetings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(235, 235, 235))
         );
 
@@ -254,6 +265,11 @@ public class Calendar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnShowAllMeetingsActionPerformed
 
+    private void btn_AcceptedMotenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AcceptedMotenActionPerformed
+        new AccepteradeMoten(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_AcceptedMotenActionPerformed
+
     private void clearTblMoten1() {
  
         DefaultTableModel dm = (DefaultTableModel) tblMoten1.getModel();
@@ -296,6 +312,7 @@ public class Calendar extends javax.swing.JFrame {
     private javax.swing.JButton BtnShowAllMeetings;
     private javax.swing.JButton backBtn;
     private javax.swing.JButton btnDate;
+    private javax.swing.JButton btn_AcceptedMoten;
     private javax.swing.JButton createBtn;
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JButton jButton2;
