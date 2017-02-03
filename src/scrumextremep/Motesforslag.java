@@ -5,7 +5,10 @@
  */
 package scrumextremep;
 
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,13 +17,15 @@ import javax.swing.JOptionPane;
 public class Motesforslag extends javax.swing.JFrame {
     
     private String anvID;
+    private String mfID = "";
+    int index = 0;
 
     /**
      * Creates new form Motesforslag
      */
     public Motesforslag(String anvandarID) {
         initComponents();
-        anvID = anvandarID;
+        anvID = "1";
     }
 
     /**
@@ -32,165 +37,245 @@ public class Motesforslag extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblMeetingname = new javax.swing.JLabel();
-        lblSuggestion1 = new javax.swing.JLabel();
-        lblSuggestion2 = new javax.swing.JLabel();
-        lblSuggestion3el4 = new javax.swing.JLabel();
-        lblSuggestion4 = new javax.swing.JLabel();
-        lblMeetingDescrip = new javax.swing.JLabel();
-        tfMeetingname = new javax.swing.JTextField();
-        dcSuggestion1 = new com.toedter.calendar.JDateChooser();
-        dcSuggestion2 = new com.toedter.calendar.JDateChooser();
-        dcSuggestion3 = new com.toedter.calendar.JDateChooser();
-        dcSuggestion4 = new com.toedter.calendar.JDateChooser();
+        lblMotesTitel = new javax.swing.JLabel();
+        lblText = new javax.swing.JLabel();
+        tfMotesTitel = new javax.swing.JTextField();
+        dcDatum = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        taMeetingDescrip = new javax.swing.JTextArea();
-        btnRequest = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
+        taMotesText = new javax.swing.JTextArea();
+        btnSkickaForslag = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblForslag = new javax.swing.JTable();
+        lblDatumForslag = new javax.swing.JLabel();
+        btnLaggTillForslag = new javax.swing.JButton();
+        lblTidOchDatum = new javax.swing.JLabel();
+        tfTid = new javax.swing.JTextField();
+        lblTidForslag = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblMeetingname.setText("Name for Meeting");
+        lblMotesTitel.setText("Mötestitel");
 
-        lblSuggestion1.setText("Suggestion 1");
+        lblText.setText("Text");
 
-        lblSuggestion2.setText("Suggestion 2");
+        taMotesText.setColumns(20);
+        taMotesText.setRows(5);
+        jScrollPane1.setViewportView(taMotesText);
 
-        lblSuggestion3el4.setText("Suggestion 3");
-
-        lblSuggestion4.setText("Suggestion 4");
-
-        lblMeetingDescrip.setText("Description");
-
-        taMeetingDescrip.setColumns(20);
-        taMeetingDescrip.setRows(5);
-        jScrollPane1.setViewportView(taMeetingDescrip);
-
-        btnRequest.setText("Send request");
-        btnRequest.addActionListener(new java.awt.event.ActionListener() {
+        btnSkickaForslag.setText("Skicka förslag");
+        btnSkickaForslag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRequestActionPerformed(evt);
+                btnSkickaForslagActionPerformed(evt);
             }
         });
 
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                btnTillbakaActionPerformed(evt);
             }
         });
+
+        tblForslag.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Datum", "Tid"
+            }
+        ));
+        jScrollPane2.setViewportView(tblForslag);
+
+        lblDatumForslag.setText("Datumsförslag");
+
+        btnLaggTillForslag.setText("Lägg till");
+        btnLaggTillForslag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillForslagActionPerformed(evt);
+            }
+        });
+
+        lblTidOchDatum.setText("Dina datum- & tidsförslag");
+
+        tfTid.setText("t.ex 14:30");
+        tfTid.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfTidFocusGained(evt);
+            }
+        });
+
+        lblTidForslag.setText("Tidsförslag");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMeetingname)
-                    .addComponent(lblSuggestion1)
-                    .addComponent(lblSuggestion2)
-                    .addComponent(lblSuggestion3el4)
-                    .addComponent(lblSuggestion4)
-                    .addComponent(lblMeetingDescrip)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblText)
+                            .addComponent(lblMotesTitel))
+                        .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblTidForslag)
+                            .addComponent(lblDatumForslag))
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfMotesTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfMeetingname)
-                        .addComponent(dcSuggestion1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                        .addComponent(dcSuggestion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dcSuggestion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dcSuggestion4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(33, 33, 33)
-                .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(btnSkickaForslag, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(dcDatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(tfTid, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnLaggTillForslag))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTidOchDatum)
+                        .addGap(46, 98, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMeetingname)
-                            .addComponent(tfMeetingname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSuggestion1)
-                            .addComponent(dcSuggestion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSuggestion2)
-                            .addComponent(dcSuggestion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSuggestion3el4)
-                            .addComponent(dcSuggestion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSuggestion4)
-                            .addComponent(dcSuggestion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblMeetingDescrip)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfMotesTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMotesTitel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblText))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dcDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDatumForslag))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTidForslag)
+                    .addComponent(btnLaggTillForslag))
+                .addGap(26, 26, 26)
+                .addComponent(btnSkickaForslag, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTidOchDatum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
-        String meetingName = tfMeetingname.getText();
-        String suggest1 = dcSuggestion1.getName();
-        String suggest2 = dcSuggestion2.getName();
-        String suggest3 = dcSuggestion3.getName();
-        String suggest4 = dcSuggestion4.getName();
-        String description = taMeetingDescrip.getText();
-        
-        
-        try{
-        String increment = Databas.getDatabas().getAutoIncrement("MOTESFORSLAG", "MF_ID");
-        String sqlquery = "Insert into MOTESFORSLAG\n"
-                + "values ('" + increment + "', '" + meetingName + "', '" + description + "', '" + suggest1 + "', '" + suggest2 + "', '" + suggest3 + "', '" + suggest4 + "', '" + anvID + "')";
-                
-        Databas.getDatabas().insert(sqlquery);
-        
-                JOptionPane.showMessageDialog(null, "A new suggestion has been sent!");
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }//GEN-LAST:event_btnRequestActionPerformed
+    private void btnSkickaForslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkickaForslagActionPerformed
+        DefaultTableModel dmt = (DefaultTableModel)tblForslag.getModel();
+        dmt.getDataVector().removeAllElements();
+        revalidate();
+        tfMotesTitel.setText("");
+        taMotesText.setText("");
+        dcDatum.cleanup();
+        tfTid.setText("t.ex 14:30");
+        dmt.fireTableDataChanged();
+    }//GEN-LAST:event_btnSkickaForslagActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         new Calendar(anvID).setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void btnLaggTillForslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillForslagActionPerformed
+        DefaultTableModel dmt = (DefaultTableModel)tblForslag.getModel();
+        String titel = tfMotesTitel.getText();
+        String text = taMotesText.getText();
+        Date datumet = dcDatum.getDate();
+        String valtDatum = String.format("%1$td.%1$tm.%1$tY", datumet);
+        String tiden = tfTid.getText();
+        String valdTid = tiden.replaceAll("[^0-9]", "");
+        String nyttID = "";
+        boolean mfIDInteFinns = true;
+        try
+        {
+            String finnsID = Databas.getDatabas().fetchSingle("Select mf_id from motesforslag where titel = '" +titel+ "'");
+            String mfNyttID = Databas.getDatabas().getAutoIncrement("MOTESFORSLAG", "MF_ID");
+            String sqlQueryInsertMF = "Insert into motesforslag values (" +mfNyttID+ ", '" +titel+ "', '" +text+ "', " +anvID+ ")";
+            String sqlQueryHamtaNyttID = "select mf_id from motesforslag where titel = '" +titel+ "'";
+                if(finnsID != null) {
+                    mfIDInteFinns = false;
+                    mfID = finnsID;
+                }
+                
+            if(mfIDInteFinns) {
+                Databas.getDatabas().insert(sqlQueryInsertMF);
+                nyttID = Databas.getDatabas().fetchSingle(sqlQueryHamtaNyttID);
+            } 
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try
+        {
+            String tidDatumNyttID = Databas.getDatabas().getAutoIncrement("MFTIDDATUM", "TIDDATUM_ID");
+            String sqlQueryInsertTidDatumNyttMF = "insert into mftiddatum values (" +tidDatumNyttID+ ", '" +valtDatum+ "', " +valdTid+ ", " +nyttID+ ")";
+            String sqlQueryInsertTidDatum = "insert into mftiddatum values (" +tidDatumNyttID+ ", '"+valtDatum+ "', " +valdTid+ ", " +mfID+ ")";
+            if(mfIDInteFinns) {
+                Databas.getDatabas().insert(sqlQueryInsertTidDatumNyttMF);
+                System.out.println("Ett nytt datumförslag har registrerats med ett nytt mötesförslag!");
+            } else {
+                Databas.getDatabas().insert(sqlQueryInsertTidDatum);
+                System.out.println("Ett nytt datumförslag har registrerats!");
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try
+        {
+            dmt.addRow(new Object[] {});
+            tblForslag.setValueAt(valtDatum, index, 0);
+            tblForslag.setValueAt(valdTid, index, 1);
+            
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        index++;
+        dmt.fireTableDataChanged();
+    }//GEN-LAST:event_btnLaggTillForslagActionPerformed
+
+    private void tfTidFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTidFocusGained
+        tfTid.setText("");
+    }//GEN-LAST:event_tfTidFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnRequest;
-    private com.toedter.calendar.JDateChooser dcSuggestion1;
-    private com.toedter.calendar.JDateChooser dcSuggestion2;
-    private com.toedter.calendar.JDateChooser dcSuggestion3;
-    private com.toedter.calendar.JDateChooser dcSuggestion4;
+    private javax.swing.JButton btnLaggTillForslag;
+    private javax.swing.JButton btnSkickaForslag;
+    private javax.swing.JButton btnTillbaka;
+    private com.toedter.calendar.JDateChooser dcDatum;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblMeetingDescrip;
-    private javax.swing.JLabel lblMeetingname;
-    private javax.swing.JLabel lblSuggestion1;
-    private javax.swing.JLabel lblSuggestion2;
-    private javax.swing.JLabel lblSuggestion3el4;
-    private javax.swing.JLabel lblSuggestion4;
-    private javax.swing.JTextArea taMeetingDescrip;
-    private javax.swing.JTextField tfMeetingname;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblDatumForslag;
+    private javax.swing.JLabel lblMotesTitel;
+    private javax.swing.JLabel lblText;
+    private javax.swing.JLabel lblTidForslag;
+    private javax.swing.JLabel lblTidOchDatum;
+    private javax.swing.JTextArea taMotesText;
+    private javax.swing.JTable tblForslag;
+    private javax.swing.JTextField tfMotesTitel;
+    private javax.swing.JTextField tfTid;
     // End of variables declaration//GEN-END:variables
 }
