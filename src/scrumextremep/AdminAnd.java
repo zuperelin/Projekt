@@ -5,7 +5,9 @@
  */
 package scrumextremep;
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,16 +15,18 @@ import javax.swing.DefaultListModel;
  */
 public class AdminAnd extends javax.swing.JFrame {
 
+    private String anvID;
+    private String selectedAID;
+    private boolean chbAdminChanged;
     /**
      * Creates new form AdminAnd
      */
-    public AdminAnd() {
+    public AdminAnd(String anvandarID) {
         initComponents();
+        anvID = anvandarID;
+        fillAnvCB();
     }
 
-    AdminAnd(String anvID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,19 +38,23 @@ public class AdminAnd extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         saver = new javax.swing.JButton();
-        upadm = new javax.swing.JButton();
-        deleteadm = new javax.swing.JButton();
         deleteu = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        profillista = new javax.swing.JList<>();
-        visaprofiler = new javax.swing.JButton();
+        lblAnv = new javax.swing.JLabel();
+        lblFornamn = new javax.swing.JLabel();
+        lblEfternamn = new javax.swing.JLabel();
+        lblAnvNamn = new javax.swing.JLabel();
+        lblLosenord = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        chbAdmin = new javax.swing.JCheckBox();
+        btnTillbaka = new javax.swing.JButton();
+        tfFornamn = new javax.swing.JTextField();
+        tfAnvNamn = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
+        tfEfternamn = new javax.swing.JTextField();
+        tfLosenord = new javax.swing.JTextField();
+        btnSkapa = new javax.swing.JButton();
+        cbAnv = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(790, 623));
@@ -55,39 +63,55 @@ public class AdminAnd extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Redigera Profil");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Användarnamn");
-
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Nytt lösenord");
-
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Redigera e-mail");
-
         saver.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         saver.setText("Spara");
-
-        upadm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        upadm.setText("Uppdatera till admin");
-
-        deleteadm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        deleteadm.setText("Ta bort som admin");
+        saver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saverActionPerformed(evt);
+            }
+        });
 
         deleteu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         deleteu.setText("Ta bort användare");
-
-        profillista.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jScrollPane1.setViewportView(profillista);
-
-        visaprofiler.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        visaprofiler.setText("Visa alla profiler");
-        visaprofiler.addActionListener(new java.awt.event.ActionListener() {
+        deleteu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                visaprofilerActionPerformed(evt);
+                deleteuActionPerformed(evt);
+            }
+        });
+
+        lblAnv.setText("Användare");
+
+        lblFornamn.setText("Förnamn");
+
+        lblEfternamn.setText("Efternamn");
+
+        lblAnvNamn.setText("Användarnamn");
+
+        lblLosenord.setText("Lösenord");
+
+        lblEmail.setText("Email");
+
+        chbAdmin.setText("Administratör");
+
+        btnTillbaka.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
+        btnSkapa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSkapa.setText("Skapa användare");
+        btnSkapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkapaActionPerformed(evt);
+            }
+        });
+
+        cbAnv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAnvActionPerformed(evt);
             }
         });
 
@@ -95,138 +119,198 @@ public class AdminAnd extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField3)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField4)
-                            .addComponent(saver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(upadm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deleteadm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deleteu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAnvNamn)
+                                    .addComponent(lblEmail))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfAnvNamn)
+                                    .addComponent(tfEmail)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblFornamn)
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbAnv, 0, 180, Short.MAX_VALUE)
+                                    .addComponent(tfFornamn))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(218, 218, 218)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblEfternamn)
+                                        .addGap(32, 32, 32))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblLosenord)
+                                        .addGap(40, 40, 40)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfEfternamn)
+                                    .addComponent(tfLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                            .addComponent(chbAdmin)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAnv)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(282, 282, 282)
-                                .addComponent(visaprofiler, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(saver, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(62, 62, 62)
+                                        .addComponent(deleteu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(79, 79, 79)
+                                .addComponent(btnTillbaka))
+                            .addComponent(btnSkapa, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 40, Short.MAX_VALUE)))
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(69, 69, 69)
                 .addComponent(jLabel1)
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(saver)
-                        .addGap(18, 18, 18)
-                        .addComponent(upadm)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteadm)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteu))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(visaprofiler)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAnv)
+                    .addComponent(cbAnv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFornamn)
+                    .addComponent(lblEfternamn)
+                    .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAnvNamn)
+                    .addComponent(lblLosenord)
+                    .addComponent(tfAnvNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(chbAdmin)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saver)
+                    .addComponent(deleteu)
+                    .addComponent(btnTillbaka))
+                .addGap(51, 51, 51)
+                .addComponent(btnSkapa)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void visaprofilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visaprofilerActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        new InloggadSida(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
-        //String sql = "SELECT * FROM ";
-        
-        DefaultListModel model = new DefaultListModel();
-        model.addElement("hej");
+    private void btnSkapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaActionPerformed
+        new Laggtill(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnSkapaActionPerformed
 
+    private void cbAnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnvActionPerformed
+        fillUserValues();
+    }//GEN-LAST:event_cbAnvActionPerformed
 
+    private void saverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saverActionPerformed
+        updateValuesDB();
+        JOptionPane.showMessageDialog(null, "Användare har uppdaterats!");
+        cbAnv.removeAllItems();
+        fillAnvCB();
+    }//GEN-LAST:event_saverActionPerformed
 
-    }//GEN-LAST:event_visaprofilerActionPerformed
+    private void deleteuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteuActionPerformed
+        deleteUser();
+        JOptionPane.showMessageDialog(null, "Användare borttagen!");
+        cbAnv.removeAllItems();
+        fillAnvCB();
+    }//GEN-LAST:event_deleteuActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void fillAnvCB() {
+        String sqlfraga = "Select email from ANVANDARE";
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminAnd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminAnd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminAnd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminAnd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            ArrayList<String> email = Databas.getDatabas().fetchColumn(sqlfraga);
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminAnd().setVisible(true);
+                for (int i = 0; i < email.size(); i++)
+                    cbAnv.addItem(email.get(i)); 
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+        
+    private void fillUserValues() {
+        String admin;
+        chbAdmin.setSelected(false);
+        if (cbAnv.getSelectedItem() != null) {
+            String email = cbAnv.getSelectedItem().toString();
+            try {
+                selectedAID = Databas.getDatabas().fetchSingle("select A_ID from anvandare where email = '" + email + "';");
+                tfFornamn.setText(Databas.getDatabas().fetchSingle("select fornamn from anvandare where A_ID = " + selectedAID + ";"));
+                tfEfternamn.setText(Databas.getDatabas().fetchSingle("select efternamn from anvandare where A_ID = " + selectedAID + ";"));
+                tfAnvNamn.setText(Databas.getDatabas().fetchSingle("select anvnamn from anvandare where A_ID = " + selectedAID + ";"));
+                tfEmail.setText(email);
+                tfLosenord.setText(Databas.getDatabas().fetchSingle("select losenord from anvandare where A_ID = " + selectedAID + ";"));
+                admin = Databas.getDatabas().fetchSingle("select administrator from anvandare where A_ID = " + selectedAID + ";");
+                if (admin.contains("T")) {
+                    chbAdmin.setSelected(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-        });
+        }
     }
     
+    private void updateValuesDB() {
+        String sqlfragaT = "update anvandare set fornamn ='" + tfFornamn.getText() + "', efternamn ='" + tfEfternamn.getText() + "', anvnamn ='" + tfAnvNamn.getText() + "', losenord ='" + tfLosenord.getText() + "', administrator ='T', email ='" + tfEmail.getText() + "' where a_id =" + selectedAID + ";";
+        String sqlfragaF = "update anvandare set fornamn ='" + tfFornamn.getText() + "', efternamn ='" + tfEfternamn.getText() + "', anvnamn ='" + tfAnvNamn.getText() + "', losenord ='" + tfLosenord.getText() + "', administrator ='F', email ='" + tfEmail.getText() + "' where a_id =" + selectedAID + ";";
+        try {
+            if (chbAdmin.isSelected()) {
+                Databas.getDatabas().update(sqlfragaT);
+                } else {
+                Databas.getDatabas().update(sqlfragaF);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
-    public void fillList() {
-        
-       
-        
-        
+    private void deleteUser() {
+        String sqlfraga = "delete from anvandare where A_ID =" + selectedAID + ";";
+        try {
+            Databas.getDatabas().delete(sqlfraga);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton deleteadm;
+    private javax.swing.JButton btnSkapa;
+    private javax.swing.JButton btnTillbaka;
+    private javax.swing.JComboBox<String> cbAnv;
+    private javax.swing.JCheckBox chbAdmin;
     private javax.swing.JButton deleteu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JList<String> profillista;
+    private javax.swing.JLabel lblAnv;
+    private javax.swing.JLabel lblAnvNamn;
+    private javax.swing.JLabel lblEfternamn;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFornamn;
+    private javax.swing.JLabel lblLosenord;
     private javax.swing.JButton saver;
-    private javax.swing.JButton upadm;
-    private javax.swing.JButton visaprofiler;
+    private javax.swing.JTextField tfAnvNamn;
+    private javax.swing.JTextField tfEfternamn;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfFornamn;
+    private javax.swing.JTextField tfLosenord;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,17 +5,22 @@
  */
 package scrumextremep;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author elin-
  */
 public class Laggtill extends javax.swing.JFrame {
 
+    private boolean chbAdminChanged = false;
+    private String anvID;
     /**
      * Creates new form Laggtill
      */
-    public Laggtill() {
+    public Laggtill(String anvandarID) {
         initComponents();
+        anvID = anvandarID;
     }
 
     /**
@@ -38,10 +43,9 @@ public class Laggtill extends javax.swing.JFrame {
         email = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         pword = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        nobox = new javax.swing.JCheckBox();
-        yesbox = new javax.swing.JCheckBox();
         savenew = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
+        chbAdmin = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,15 +77,6 @@ public class Laggtill extends javax.swing.JFrame {
 
         pword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("Administratör");
-
-        nobox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nobox.setText("Nej");
-
-        yesbox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        yesbox.setText("Ja");
-
         savenew.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         savenew.setText("Spara");
         savenew.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +84,15 @@ public class Laggtill extends javax.swing.JFrame {
                 savenewActionPerformed(evt);
             }
         });
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
+        chbAdmin.setText("Administratör");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +102,9 @@ public class Laggtill extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(260, 260, 260)
-                        .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(savenew, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -109,19 +115,14 @@ public class Laggtill extends javax.swing.JFrame {
                             .addComponent(lastname)
                             .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                         .addGap(188, 188, 188)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pword, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(yesbox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                                .addComponent(nobox))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(298, 298, 298)
-                        .addComponent(savenew)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTillbaka)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(pword, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(chbAdmin))))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -146,76 +147,63 @@ public class Laggtill extends javax.swing.JFrame {
                     .addComponent(pword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lastname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nobox)
-                    .addComponent(yesbox))
-                .addGap(41, 41, 41)
-                .addComponent(savenew)
-                .addGap(179, 179, 179))
+                    .addComponent(chbAdmin))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(savenew, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(148, 148, 148))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void savenewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savenewActionPerformed
-
-       String forn = forname.getText();
-       String lastn = lastname.getText();
-       String usern = username.getText();
-       String mail = email.getText();
-       String password = pword.getText();
-       
-       //String sql = "INSERT INTO (anställd) VALUES ('"+forn+"', '"+lastn+"', '"+usern+"', '"+mail+"', '"+password+"')";
-       
-       
-       
-           
-           
-           
-       
+        addUser();
+        JOptionPane.showMessageDialog(null, "Användare skapad!");
+        forname.setText("");
+        lastname.setText("");
+        username.setText("");
+        email.setText("");
+        pword.setText("");
     }//GEN-LAST:event_savenewActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Laggtill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Laggtill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Laggtill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Laggtill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        new AdminAnd(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Laggtill().setVisible(true);
+    private void addUser() {
+        String forn = forname.getText();
+        String lastn = lastname.getText();
+        String usern = username.getText();
+        String mail = email.getText();
+        String password = pword.getText();
+        if (chbAdmin.isSelected()) {
+            try {
+                String nextID = Databas.getDatabas().getAutoIncrement("ANVANDARE", "A_ID");
+                Databas.getDatabas().insert("INSERT INTO ANVANDARE VALUES (" + nextID + ", '" + forn + "', '" + lastn + "', '" + usern + "', '" + password + "', 'T', '" + mail + "');");
+           
+        } catch (Exception e) {
+            System.out.println(e.getMessage());         
+        } 
+        } else {
+            try {
+                String nextID = Databas.getDatabas().getAutoIncrement("ANVANDARE", "A_ID");
+                Databas.getDatabas().insert("INSERT INTO ANVANDARE VALUES (" + nextID + ", '" + forn + "', '" + lastn + "', '" + usern + "', '" + password + "', 'F', '" + mail + "');");
+            } catch (Exception e) {
+                System.out.println(e.getMessage()); 
             }
-        });
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTillbaka;
+    private javax.swing.JCheckBox chbAdmin;
     private javax.swing.JTextField email;
     private javax.swing.JTextField forname;
     private javax.swing.JLabel jLabel1;
@@ -224,12 +212,9 @@ public class Laggtill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField lastname;
-    private javax.swing.JCheckBox nobox;
     private javax.swing.JTextField pword;
     private javax.swing.JButton savenew;
     private javax.swing.JTextField username;
-    private javax.swing.JCheckBox yesbox;
     // End of variables declaration//GEN-END:variables
 }

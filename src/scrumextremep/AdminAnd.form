@@ -29,77 +29,115 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextField3" max="32767" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="saver" max="32767" attributes="0"/>
-                          <Component id="upadm" max="32767" attributes="0"/>
-                          <Component id="deleteadm" max="32767" attributes="0"/>
-                          <Component id="deleteu" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="282" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblAnvNamn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfAnvNamn" max="32767" attributes="0"/>
+                                  <Component id="tfEmail" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
-                              <Component id="visaprofiler" min="-2" pref="169" max="-2" attributes="0"/>
+                              <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cbAnv" pref="180" max="32767" attributes="0"/>
+                                  <Component id="tfFornamn" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblLosenord" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="tfEfternamn" max="32767" attributes="0"/>
+                                  <Component id="tfLosenord" pref="180" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="chbAdmin" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblAnv" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="saver" min="-2" pref="191" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                      <Component id="deleteu" min="-2" pref="191" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                              <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnSkapa" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextField3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextField4" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="saver" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="upadm" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="deleteadm" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="deleteu" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="427" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="visaprofiler" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblAnv" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbAnv" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblAnvNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfAnvNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chbAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="saver" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <Component id="btnSkapa" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="87" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,46 +151,6 @@
         <Property name="text" type="java.lang.String" value="Redigera Profil"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Anv&#xe4;ndarnamn"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Nytt l&#xf6;senord"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Redigera e-mail"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
-    </Component>
     <Component class="javax.swing.JButton" name="saver">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -160,22 +158,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Spara"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="upadm">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Uppdatera till admin"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="deleteadm">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Ta bort som admin"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saverActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="deleteu">
       <Properties>
@@ -184,39 +169,89 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ta bort anv&#xe4;ndare"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteuActionPerformed"/>
+      </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JList" name="profillista">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JButton" name="visaprofiler">
+    <Component class="javax.swing.JLabel" name="lblAnv">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Anv&#xe4;ndare"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFornamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F&#xf6;rnamn"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEfternamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Efternamn"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblAnvNamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Anv&#xe4;ndarnamn"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLosenord">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xf6;senord"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Email"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chbAdmin">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Administrat&#xf6;r"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTillbaka">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Visa alla profiler"/>
+        <Property name="text" type="java.lang.String" value="Tillbaka"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visaprofilerActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfFornamn">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfAnvNamn">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfEmail">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfEfternamn">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfLosenord">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSkapa">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Skapa anv&#xe4;ndare"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkapaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbAnv">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAnvActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

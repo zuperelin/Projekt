@@ -139,7 +139,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 125, 32);
+        admin.setBounds(130, 10, 151, 29);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +148,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 32);
+        btnLoggaUt.setBounds(20, 10, 90, 29);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -233,11 +233,20 @@ public class InloggadSida extends javax.swing.JFrame {
     }//GEN-LAST:event_BtNewBlogActionPerformed
 
     private void adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminActionPerformed
-
-        new AdminAnd().setVisible(true);
-        dispose();
-        
-        
+        String sqlfraga = "SELECT ADMINISTRATOR FROM ANVANDARE WHERE A_ID = " + anvID;
+        String admin = new String();
+        try {
+            admin = Databas.getDatabas().fetchSingle(sqlfraga);
+            if (admin.contains("T")) {
+                new AdminAnd(anvID).setVisible(true);
+                dispose();
+                } else {
+                new RedigeraAnv(anvID).setVisible(true);
+                dispose();
+            }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_adminActionPerformed
 
     private void fetchBlognamesUtbildning() {
