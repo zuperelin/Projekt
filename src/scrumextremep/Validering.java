@@ -10,8 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfException;
@@ -74,6 +72,24 @@ public class Validering {
         if(!mailen.matches(EMAIL_REGEX)){
         JOptionPane.showMessageDialog(null, "Du har angivit en felaktig mailadress!");
             return false;
+        }
+        return true;
+    }
+    
+        static public Boolean mailUnik(String mailen)
+    {
+        try{
+            String sql = "SELECT EMAIL FROM ANVANDARE";
+            ArrayList<HashMap<String, String>> sqllista = Databas.getDatabas().fetchRows(sql);
+            for(int i = 0; i < sqllista.size(); i++){
+                if(mailen.equals(sqllista.get(i).get("EMAIL"))){
+                    JOptionPane.showMessageDialog(null, "Denna email används redan av en annan användare");
+                    return false;
+                }
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
         }
         return true;
     }
