@@ -23,7 +23,8 @@ public class InloggadSida extends javax.swing.JFrame {
         initComponents();
         fetchBlognamesForskning();
         anvID = anvandarID;
-        //hej
+        btnRadera.setVisible(false);
+        isAdmin();
     }
 
     /**
@@ -45,6 +46,7 @@ public class InloggadSida extends javax.swing.JFrame {
         taUtbildning = new javax.swing.JTextArea();
         spInformell = new javax.swing.JScrollPane();
         taInformell = new javax.swing.JTextArea();
+        btnRadera = new javax.swing.JButton();
         admin = new javax.swing.JButton();
         btnLoggaUt = new javax.swing.JButton();
         BtCalendar = new javax.swing.JButton();
@@ -130,6 +132,15 @@ public class InloggadSida extends javax.swing.JFrame {
 
         getContentPane().add(tpBloggar);
         tpBloggar.setBounds(20, 190, 490, 440);
+
+        btnRadera.setText("Radera inlägg");
+        btnRadera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRaderaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRadera);
+        btnRadera.setBounds(310, 10, 140, 29);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -249,6 +260,11 @@ public class InloggadSida extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_adminActionPerformed
 
+    private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed
+        new RaderaBlogg(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRaderaActionPerformed
+
     private void fetchBlognamesUtbildning() {
         String sqlquery = "select blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning')";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
@@ -306,6 +322,19 @@ public class InloggadSida extends javax.swing.JFrame {
         }
     }
     
+    private void isAdmin() {
+        String sqlfraga = "SELECT ADMINISTRATOR FROM ANVANDARE WHERE A_ID = " + anvID;
+        String admin = new String();
+        try {
+            admin = Databas.getDatabas().fetchSingle(sqlfraga);
+            if (admin.contains("T")) {
+                btnRadera.setVisible(true);
+            }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+        }
+    }
+    
     public String id(String anvID) {
         String dettaID = anvID;
         return dettaID;
@@ -316,6 +345,7 @@ public class InloggadSida extends javax.swing.JFrame {
     private javax.swing.JButton BtNewBlog;
     private javax.swing.JButton admin;
     private javax.swing.JButton btnLoggaUt;
+    private javax.swing.JButton btnRadera;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
     private javax.swing.JScrollPane spBlogtitlar;
