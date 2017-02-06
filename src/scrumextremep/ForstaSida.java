@@ -5,6 +5,7 @@
  */
 package scrumextremep;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class ForstaSida extends javax.swing.JFrame {
     public ForstaSida() {
         initComponents();
         fetchBlognamesInformell();
+        lbl_anvnamn.setForeground(Color.BLACK);
+        lbl_losenord.setForeground(Color.BLACK);
         
     }
 
@@ -37,8 +40,10 @@ public class ForstaSida extends javax.swing.JFrame {
     private void initComponents() {
 
         lblRubrik = new java.awt.Label();
-        tfAnvNamn = new javax.swing.JTextField();
-        pfLosenord = new javax.swing.JPasswordField();
+        lbl_anvnamn = new javax.swing.JLabel();
+        lbl_losenord = new javax.swing.JLabel();
+        txt_anvnamn = new javax.swing.JTextField();
+        txt_losenord = new javax.swing.JPasswordField();
         btnLoggaIn = new javax.swing.JButton();
         spBlogFlow = new javax.swing.JScrollPane();
         taBlogFlow = new javax.swing.JTextArea();
@@ -47,7 +52,6 @@ public class ForstaSida extends javax.swing.JFrame {
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(790, 623));
         setMinimumSize(new java.awt.Dimension(790, 623));
         getContentPane().setLayout(null);
 
@@ -58,24 +62,32 @@ public class ForstaSida extends javax.swing.JFrame {
         getContentPane().add(lblRubrik);
         lblRubrik.setBounds(100, 20, 480, 120);
 
-        tfAnvNamn.setText("Användarnamn");
-        tfAnvNamn.setRequestFocusEnabled(true);
-        tfAnvNamn.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfAnvNamnFocusGained(evt);
-            }
-        });
-        getContentPane().add(tfAnvNamn);
-        tfAnvNamn.setBounds(600, 50, 160, 30);
+        lbl_anvnamn.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
+        lbl_anvnamn.setText("Användarnamn");
+        getContentPane().add(lbl_anvnamn);
+        lbl_anvnamn.setBounds(600, 30, 150, 22);
 
-        pfLosenord.setText("vdsvsvvsvd");
-        pfLosenord.addFocusListener(new java.awt.event.FocusAdapter() {
+        lbl_losenord.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
+        lbl_losenord.setText("Lösenord");
+        getContentPane().add(lbl_losenord);
+        lbl_losenord.setBounds(600, 80, 120, 22);
+
+        txt_anvnamn.setRequestFocusEnabled(true);
+        txt_anvnamn.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                pfLosenordFocusGained(evt);
+                txt_anvnamnFocusGained(evt);
             }
         });
-        getContentPane().add(pfLosenord);
-        pfLosenord.setBounds(600, 100, 160, 30);
+        getContentPane().add(txt_anvnamn);
+        txt_anvnamn.setBounds(600, 50, 160, 30);
+
+        txt_losenord.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_losenordFocusGained(evt);
+            }
+        });
+        getContentPane().add(txt_losenord);
+        txt_losenord.setBounds(600, 100, 160, 30);
 
         btnLoggaIn.setText("Logga in");
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +96,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(680, 140, 93, 29);
+        btnLoggaIn.setBounds(670, 140, 90, 32);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
@@ -135,11 +147,15 @@ public class ForstaSida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        logInCheck();
+
+        if(Validering.tomtTextfalt(txt_anvnamn) && Validering.tomtTextfalt(txt_losenord)){
+            logInCheck();
+        }
+        
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void anvandarID() {
-        String anvNamn = tfAnvNamn.getText();
+        String anvNamn = txt_anvnamn.getText();
         String sqlFragaHamtaId = "select a_id from anvandare where anvnamn =  '" + anvNamn + "'";
         try
         {
@@ -169,13 +185,13 @@ public class ForstaSida extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
-    private void tfAnvNamnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfAnvNamnFocusGained
-        tfAnvNamn.setText("");
-    }//GEN-LAST:event_tfAnvNamnFocusGained
+    private void txt_anvnamnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_anvnamnFocusGained
+        txt_anvnamn.setText("");
+    }//GEN-LAST:event_txt_anvnamnFocusGained
 
-    private void pfLosenordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pfLosenordFocusGained
-        pfLosenord.setText("");
-    }//GEN-LAST:event_pfLosenordFocusGained
+    private void txt_losenordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_losenordFocusGained
+        txt_losenord.setText("");
+    }//GEN-LAST:event_txt_losenordFocusGained
   
     private void fetchBlognamesInformell() {
         String sqlquery = "select blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Informell')";
@@ -197,12 +213,12 @@ public class ForstaSida extends javax.swing.JFrame {
     
      private void logInCheck() {
         try { // Code below gets the username and password from the database.
-            String anvName = tfAnvNamn.getText();
+            String anvName = txt_anvnamn.getText();
             String sqlqueryAID = "Select A_ID FROM ANVANDARE WHERE ANVNAMN = '" + anvName + "'";
             anvID = Databas.getDatabas().fetchSingle(sqlqueryAID);
             String sqlqueryPass = "SELECT LOSENORD FROM ANVANDARE WHERE A_ID = " + anvID;
             String passwordUser = Databas.getDatabas().fetchSingle(sqlqueryPass);
-            char[] triedPassword = pfLosenord.getPassword();
+            char[] triedPassword = txt_losenord.getPassword();
             String matchPassword = new String(triedPassword);
 
             if (passwordUser != null) { // If password exists
@@ -227,11 +243,13 @@ public class ForstaSida extends javax.swing.JFrame {
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
-    private javax.swing.JPasswordField pfLosenord;
+    private javax.swing.JLabel lbl_anvnamn;
+    private javax.swing.JLabel lbl_losenord;
     private javax.swing.JScrollPane spBlogFlow;
     private javax.swing.JScrollPane spBlogTitlar;
     private javax.swing.JTextArea taBlogFlow;
     private javax.swing.JTable tblBlogTitlar;
-    private javax.swing.JTextField tfAnvNamn;
+    private javax.swing.JTextField txt_anvnamn;
+    private javax.swing.JPasswordField txt_losenord;
     // End of variables declaration//GEN-END:variables
 }
