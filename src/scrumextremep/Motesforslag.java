@@ -198,7 +198,7 @@ public class Motesforslag extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSkickaForslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkickaForslagActionPerformed
-   
+        SkickaMail.skickaEttMail();
         DefaultTableModel dmt = (DefaultTableModel)tbl_forslag.getModel();
         
         if(dmt.getRowCount() == 0){
