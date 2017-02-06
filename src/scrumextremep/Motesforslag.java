@@ -19,6 +19,9 @@ public class Motesforslag extends javax.swing.JFrame {
     private String anvID;
     private String mfID = "";
     int index = 0;
+    boolean motesForslagSkickat = false;
+    boolean mfIDInteFinns = true;
+    String nyttID = "";
 
     /**
      * Creates new form Motesforslag
@@ -205,6 +208,25 @@ public class Motesforslag extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkickaForslagActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        String sqlQueryDeleteTidDatumNyttID = "delete from mftiddatum where mf_id = " +nyttID;
+        String sqlQueryDeleteTidDatumGammaltID = "delete from mftiddatum where mf_id = " +mfID;
+        String sqlQueryDeleteMFNyttID = "delete from motesforslag where mf_id = " +nyttID;
+        String sqlQueryDeleteMFGammaltID = "delete from motesforslag where mf_id = " +mfID;
+        try
+        {
+            if(!motesForslagSkickat) {
+                if(mfIDInteFinns) {
+                    Databas.getDatabas().delete(sqlQueryDeleteTidDatumNyttID);
+                    Databas.getDatabas().delete(sqlQueryDeleteMFNyttID);
+                } else {
+                    Databas.getDatabas().delete(sqlQueryDeleteTidDatumGammaltID);
+                    Databas.getDatabas().delete(sqlQueryDeleteMFGammaltID);
+                } 
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
         new Calendar(anvID).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
