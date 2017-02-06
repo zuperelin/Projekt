@@ -22,6 +22,7 @@ public class Calendar extends javax.swing.JFrame {
         initComponents();
         anvID = anvandarID;
         fillTblMoten2();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -203,16 +204,21 @@ public class Calendar extends javax.swing.JFrame {
     private void btnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDateActionPerformed
 
         clearTblMoten1();
+        SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-         try {
-            SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if(dateChooser.getDate() == null) { 
+            Validering.emptyDateChooser(dateChooser);
+        }else if (Validering.ingaMoten(dateChooser)){
+            JOptionPane.showMessageDialog(null, "Det finns inga möten detta datum");
+        
+        } else {
+      
+        try {
             String date = dFormat.format(dateChooser.getDate());
-           
-            // Showing all meetings on a specific date
             String sql = "SELECT MOTE.NAMN, MOTE.DATUM, MOTE.STARTTID \n" +
                          "from MOTE where MOTE.DATUM = '"+date+"'";
-                     
-
+            // Showing all meetings on a specific date
+            
            ArrayList<HashMap<String, String>> Database = Database = Databas.getDatabas().fetchRows(sql);
                 for(int i = 0; i < Database.size(); i++) {
                 String name = Database.get(i).get("NAMN");
@@ -225,6 +231,7 @@ public class Calendar extends javax.swing.JFrame {
                
          }catch (Exception e) {
             System.out.println(e.getMessage());
+        }
         }
     }//GEN-LAST:event_btnDateActionPerformed
 
@@ -291,7 +298,7 @@ public class Calendar extends javax.swing.JFrame {
                        "on mote.M_ID = ANVINBJUDENMOTE.M_ID\n" +
                        "join ANVANDARE\n" +
                        "on ANVINBJUDENMOTE.A_ID = ANVANDARE.A_ID\n" +
-                       "where ANVANDARE.a_ID = '" + anvID + "'";
+                       "where ANVANDARE.a_ID =" +anvID;
                 
                 ArrayList<HashMap<String, String>> meetings = Databas.getDatabas().fetchRows(mSql);
                 
