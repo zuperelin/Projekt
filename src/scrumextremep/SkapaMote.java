@@ -26,7 +26,7 @@ public class SkapaMote extends javax.swing.JFrame {
     public SkapaMote(String anvandarID) {
         initComponents();
         anvID = anvandarID;
-        fillCbMotesForslag();
+        fillComboBoxes();
     }
 
     /**
@@ -45,7 +45,6 @@ public class SkapaMote extends javax.swing.JFrame {
         lblDatumForslag = new javax.swing.JLabel();
         dcDatum = new com.toedter.calendar.JDateChooser();
         lblTidForslag = new javax.swing.JLabel();
-        tfTid = new javax.swing.JTextField();
         btnSkapaMote = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
         cbMotesForslag = new javax.swing.JComboBox<>();
@@ -53,6 +52,8 @@ public class SkapaMote extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAnvandare = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        cbTimmar = new javax.swing.JComboBox<>();
+        cbMinuter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,13 +68,6 @@ public class SkapaMote extends javax.swing.JFrame {
         lblDatumForslag.setText("Välj datum");
 
         lblTidForslag.setText("Välj tid");
-
-        tfTid.setText("t.ex 14:30");
-        tfTid.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfTidFocusGained(evt);
-            }
-        });
 
         btnSkapaMote.setText("Skapa Möte");
         btnSkapaMote.addActionListener(new java.awt.event.ActionListener() {
@@ -133,12 +127,12 @@ public class SkapaMote extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spMotesText, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(155, 155, 155)
+                                .addComponent(cbTimmar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbMinuter, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblMoteSkapat, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnSkapaMote, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(tfTid, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(dcDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,17 +160,19 @@ public class SkapaMote extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spMotesText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblText))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dcDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDatumForslag))
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblMoteSkapat)
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblMoteSkapat)
+                                .addComponent(lblTidForslag))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(tfTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblTidForslag)))
-                        .addGap(31, 31, 31)
+                                .addComponent(cbTimmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbMinuter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(21, 21, 21)
                         .addComponent(btnSkapaMote, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
                     .addGroup(layout.createSequentialGroup()
@@ -187,10 +183,6 @@ public class SkapaMote extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfTidFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTidFocusGained
-        tfTid.setText("");
-    }//GEN-LAST:event_tfTidFocusGained
-
     
     private void btnSkapaMoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaMoteActionPerformed
         DefaultTableModel dm = (DefaultTableModel)tblAnvandare.getModel();
@@ -200,8 +192,9 @@ public class SkapaMote extends javax.swing.JFrame {
         String text = taMotesText.getText();
         Date datumet = dcDatum.getDate();
         String valtDatum = String.format("%1$td.%1$tm.%1$tY", datumet);
-        String tiden = tfTid.getText();
-        String valdTid = tiden.replaceAll("[^0-9]", "");
+        int valdTimme = (int)cbTimmar.getSelectedItem();
+        int valdMinut = (int)cbMinuter.getSelectedItem();
+        int valdTid = valdTimme + valdMinut;
         String sqlQueryMotesForslagsID = "select mf_id from motesforslag where titel = '" +titel+ "'";
         String sqlQueryHamtaMotesID = "select m_id from mote";
         
@@ -231,11 +224,10 @@ public class SkapaMote extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         
-        fillCbMotesForslag();
+        fillComboBoxes();
         taMotesText.setText("");
         dcDatum = new JDateChooser();
         dcDatum.setCalendar(null);
-        tfTid.setText("t.ex 14:30");
         lblMoteSkapat.setText("Möte Skapat!");
         dm.fireTableDataChanged();
     }//GEN-LAST:event_btnSkapaMoteActionPerformed
@@ -283,10 +275,37 @@ public class SkapaMote extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbMotesForslagActionPerformed
 
+    private void fillComboBoxes()
+    {
+        fillCbTimmar();
+        fillCbMinuter();
+        fillCbMotesForslag();
+    }
+    
+    private void fillCbTimmar()
+    {
+        DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
+        for(int i = 0; i<24; i++) {
+            cbModel.addElement(i);
+        }
+        cbTimmar.setModel(cbModel);
+    }
+    
+    private void fillCbMinuter()
+    {
+        DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
+        for(int i = 0; i<60; i++) {
+            cbModel.addElement(i);
+        }
+        cbMinuter.setModel(cbModel);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkapaMote;
     private javax.swing.JButton btnTillbaka;
+    private javax.swing.JComboBox<String> cbMinuter;
     private javax.swing.JComboBox<String> cbMotesForslag;
+    private javax.swing.JComboBox<String> cbTimmar;
     private com.toedter.calendar.JDateChooser dcDatum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -298,6 +317,5 @@ public class SkapaMote extends javax.swing.JFrame {
     private javax.swing.JScrollPane spMotesText;
     private javax.swing.JTextArea taMotesText;
     private javax.swing.JTable tblAnvandare;
-    private javax.swing.JTextField tfTid;
     // End of variables declaration//GEN-END:variables
 }

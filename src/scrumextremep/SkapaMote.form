@@ -51,14 +51,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="spMotesText" alignment="0" min="-2" pref="307" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                              <Component id="cbTimmar" min="-2" pref="65" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="cbMinuter" min="-2" pref="65" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblMoteSkapat" min="-2" pref="152" max="-2" attributes="0"/>
                           </Group>
                           <Component id="btnSkapaMote" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="tfTid" min="-2" pref="98" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="dcDatum" min="-2" pref="186" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -97,20 +96,23 @@
                           <Component id="spMotesText" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
                           <Component id="lblText" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="dcDatum" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDatumForslag" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblMoteSkapat" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lblMoteSkapat" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTidForslag" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tfTid" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTidForslag" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbTimmar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbMinuter" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="btnSkapaMote" min="-2" pref="63" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
@@ -161,14 +163,6 @@
         <Property name="text" type="java.lang.String" value="V&#xe4;lj tid"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfTid">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="t.ex 14:30"/>
-      </Properties>
-      <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfTidFocusGained"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnSkapaMote">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skapa M&#xf6;te"/>
@@ -217,6 +211,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="M&#xf6;tesdeltagare"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbTimmar">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbMinuter">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
