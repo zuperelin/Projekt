@@ -34,15 +34,15 @@ public class Laggtill extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        forname = new javax.swing.JTextField();
+        txt_fornamn = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        lastname = new javax.swing.JTextField();
+        txt_efternamn = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
+        txt_anvnamn = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        email = new javax.swing.JTextField();
+        txt_email = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        pword = new javax.swing.JTextField();
+        txt_losenord = new javax.swing.JTextField();
         savenew = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
         chbAdmin = new javax.swing.JCheckBox();
@@ -55,27 +55,27 @@ public class Laggtill extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Förnamn");
 
-        forname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_fornamn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Efternamn");
 
-        lastname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_efternamn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Användarnamn");
 
-        username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_anvnamn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("E-mail");
 
-        email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Lösenord");
 
-        pword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_losenord.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         savenew.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         savenew.setText("Spara");
@@ -110,18 +110,18 @@ public class Laggtill extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
-                            .addComponent(forname)
+                            .addComponent(txt_fornamn)
                             .addComponent(jLabel3)
-                            .addComponent(lastname)
-                            .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                            .addComponent(txt_efternamn)
+                            .addComponent(txt_anvnamn, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                         .addGap(188, 188, 188)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnTillbaka)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                .addComponent(txt_email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pword, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(txt_losenord, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(chbAdmin))))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
@@ -136,21 +136,21 @@ public class Laggtill extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(forname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_fornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lastname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_losenord, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_efternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_anvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbAdmin))
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -163,13 +163,18 @@ public class Laggtill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void savenewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savenewActionPerformed
+       if(Validering.tomtTextfalt(txt_fornamn) && Validering.valideraNamn(txt_fornamn)
+               && Validering.tomtTextfalt(txt_efternamn) && Validering.valideraNamn(txt_efternamn)
+               && Validering.tomtTextfalt(txt_email) && Validering.giltigMail(txt_email) && Validering.mailUnik(txt_email)
+               && Validering.tomtTextfalt(txt_losenord) && Validering.valideraLosenLangd(txt_losenord)
+               && Validering.tomtTextfalt(txt_anvnamn))
+           
+       { 
+        
+        
         addUser();
         JOptionPane.showMessageDialog(null, "Användare skapad!");
-        forname.setText("");
-        lastname.setText("");
-        username.setText("");
-        email.setText("");
-        pword.setText("");
+       }
     }//GEN-LAST:event_savenewActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -178,15 +183,17 @@ public class Laggtill extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void addUser() {
-        String forn = forname.getText();
-        String lastn = lastname.getText();
-        String usern = username.getText();
-        String mail = email.getText();
-        String password = pword.getText();
+        String forn = txt_fornamn.getText();
+        String lastn = txt_efternamn.getText();
+        String usern = txt_anvnamn.getText();
+        String mail = txt_email.getText();
+        String password = txt_losenord.getText();
         if (chbAdmin.isSelected()) {
             try {
                 String nextID = Databas.getDatabas().getAutoIncrement("ANVANDARE", "A_ID");
-                Databas.getDatabas().insert("INSERT INTO ANVANDARE VALUES (" + nextID + ", '" + forn + "', '" + lastn + "', '" + usern + "', '" + password + "', 'T', '" + mail + "');");
+                Databas.getDatabas().insert("INSERT INTO ANVANDARE VALUES\n"+
+                                            "("+ nextID +",'" + forn + "', '" + lastn + "', '" + usern + "',\n"+
+                                            "'" + password + "', 'T', '" + mail + "');");
            
         } catch (Exception e) {
             System.out.println(e.getMessage());         
@@ -204,17 +211,17 @@ public class Laggtill extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JCheckBox chbAdmin;
-    private javax.swing.JTextField email;
-    private javax.swing.JTextField forname;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField lastname;
-    private javax.swing.JTextField pword;
     private javax.swing.JButton savenew;
-    private javax.swing.JTextField username;
+    private javax.swing.JTextField txt_anvnamn;
+    private javax.swing.JTextField txt_efternamn;
+    private javax.swing.JTextField txt_email;
+    private javax.swing.JTextField txt_fornamn;
+    private javax.swing.JTextField txt_losenord;
     // End of variables declaration//GEN-END:variables
 }
