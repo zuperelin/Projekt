@@ -29,6 +29,16 @@ public class Validering {
         
         return true;
     }
+        static public Boolean tomtTextArea(String tf)
+    {
+        if(tf.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ett eller flera textfält är tomma");
+            
+            return false;
+        }
+        
+        return true;
+    }
     
     static public Boolean anvandareUnik(JTextField anvnamn)
     {
@@ -126,8 +136,13 @@ public class Validering {
          static public boolean emptyDateChooser(JDateChooser dt) {
          
             if (dt.getDate() == null) 
+            {
                 JOptionPane.showMessageDialog(null, "Var vänlig välj ett datum");
             return false;
+         }
+            else{
+                    return true;
+                    }
      }
      
      
@@ -174,4 +189,5 @@ public class Validering {
             }
             return forkort;
         }
+    
 }

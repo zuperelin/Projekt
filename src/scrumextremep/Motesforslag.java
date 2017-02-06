@@ -5,6 +5,8 @@
  */
 package scrumextremep;
 
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -29,6 +31,7 @@ public class Motesforslag extends javax.swing.JFrame {
     public Motesforslag(String anvandarID) {
         initComponents();
         anvID = "1";
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,18 +45,18 @@ public class Motesforslag extends javax.swing.JFrame {
 
         lblMotesTitel = new javax.swing.JLabel();
         lblText = new javax.swing.JLabel();
-        tfMotesTitel = new javax.swing.JTextField();
-        dcDatum = new com.toedter.calendar.JDateChooser();
+        txt_motestitel = new javax.swing.JTextField();
+        datechooser = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        taMotesText = new javax.swing.JTextArea();
+        txt_text = new javax.swing.JTextArea();
         btnSkickaForslag = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblForslag = new javax.swing.JTable();
+        tbl_forslag = new javax.swing.JTable();
         lblDatumForslag = new javax.swing.JLabel();
         btnLaggTillForslag = new javax.swing.JButton();
         lblTidOchDatum = new javax.swing.JLabel();
-        tfTid = new javax.swing.JTextField();
+        txt_tid = new javax.swing.JTextField();
         lblTidForslag = new javax.swing.JLabel();
         lblForslagSkickat = new javax.swing.JLabel();
 
@@ -63,9 +66,9 @@ public class Motesforslag extends javax.swing.JFrame {
 
         lblText.setText("Text");
 
-        taMotesText.setColumns(20);
-        taMotesText.setRows(5);
-        jScrollPane1.setViewportView(taMotesText);
+        txt_text.setColumns(20);
+        txt_text.setRows(5);
+        jScrollPane1.setViewportView(txt_text);
 
         btnSkickaForslag.setText("Skicka förslag");
         btnSkickaForslag.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +84,7 @@ public class Motesforslag extends javax.swing.JFrame {
             }
         });
 
-        tblForslag.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_forslag.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -89,7 +92,7 @@ public class Motesforslag extends javax.swing.JFrame {
                 "Datum", "Tid"
             }
         ));
-        jScrollPane2.setViewportView(tblForslag);
+        jScrollPane2.setViewportView(tbl_forslag);
 
         lblDatumForslag.setText("Datumsförslag");
 
@@ -102,10 +105,9 @@ public class Motesforslag extends javax.swing.JFrame {
 
         lblTidOchDatum.setText("Dina datum- & tidsförslag");
 
-        tfTid.setText("t.ex 14:30");
-        tfTid.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_tid.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                tfTidFocusGained(evt);
+                txt_tidFocusGained(evt);
             }
         });
 
@@ -131,12 +133,12 @@ public class Motesforslag extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfMotesTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_motestitel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(dcDatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(datechooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(tfTid, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_tid, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(btnLaggTillForslag))))
                         .addGap(18, 18, 18)
@@ -161,7 +163,7 @@ public class Motesforslag extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(85, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfMotesTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_motestitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMotesTitel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +171,11 @@ public class Motesforslag extends javax.swing.JFrame {
                     .addComponent(lblText))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dcDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDatumForslag))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTidForslag)
                     .addComponent(btnLaggTillForslag))
                 .addGap(26, 26, 26)
@@ -196,15 +198,22 @@ public class Motesforslag extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSkickaForslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkickaForslagActionPerformed
-        DefaultTableModel dmt = (DefaultTableModel)tblForslag.getModel();
+   
+        DefaultTableModel dmt = (DefaultTableModel)tbl_forslag.getModel();
+        
+        if(dmt.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Det finns inga möteförslag att välja");
+        } else {
         dmt.getDataVector().removeAllElements();
         revalidate();
-        tfMotesTitel.setText("");
-        taMotesText.setText("");
-        dcDatum.cleanup();
-        tfTid.setText("t.ex 14:30");
+        txt_motestitel.setText("");
+        txt_text.setText("");
+        datechooser = new JDateChooser();
+        datechooser.setCalendar(null);
+        txt_tid.setText("t.ex 14:30");
         lblForslagSkickat.setText("Mötesförslag skickat!");
         dmt.fireTableDataChanged();
+        }
     }//GEN-LAST:event_btnSkickaForslagActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -232,14 +241,27 @@ public class Motesforslag extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnLaggTillForslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillForslagActionPerformed
-        DefaultTableModel dmt = (DefaultTableModel)tblForslag.getModel();
-        String titel = tfMotesTitel.getText();
-        String text = taMotesText.getText();
-        Date datumet = dcDatum.getDate();
-        String valtDatum = String.format("%1$td.%1$tm.%1$tY", datumet);
-        String tiden = tfTid.getText();
+        SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String info = txt_text.getText();
+        DefaultTableModel dmt = (DefaultTableModel)tbl_forslag.getModel();
+        String titel = txt_motestitel.getText();
+        String text = txt_text.getText();
+        String valtDatum = dFormat.format(datechooser.getDate());
+        String tiden = txt_tid.getText();
         String valdTid = tiden.replaceAll("[^0-9]", "");
         String nyttID = "";
+        
+        if(datechooser.getDate() == null) {
+            Validering.emptyDateChooser(datechooser);
+        } else if(Validering.tomtTextfalt(txt_motestitel)
+               && Validering.tomtTextArea(info)
+                && Validering.emptyDateChooser(datechooser)
+                && Validering.datumKorrekt(datechooser)
+                && Validering.tomtTextfalt(txt_tid))
+               
+        {
+        
+        
         boolean mfIDInteFinns = true;
         try
         {
@@ -278,26 +300,29 @@ public class Motesforslag extends javax.swing.JFrame {
         try
         {
             dmt.addRow(new Object[] {});
-            tblForslag.setValueAt(valtDatum, index, 0);
-            tblForslag.setValueAt(valdTid, index, 1);
+            tbl_forslag.setValueAt(valtDatum, index, 0);
+            tbl_forslag.setValueAt(valdTid, index, 1);
             
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
         index++;
         dmt.fireTableDataChanged();
+        }
+        txt_tid.setText("");
+        
     }//GEN-LAST:event_btnLaggTillForslagActionPerformed
 
-    private void tfTidFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTidFocusGained
-        tfTid.setText("");
-    }//GEN-LAST:event_tfTidFocusGained
+    private void txt_tidFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_tidFocusGained
+        txt_tid.setText("");
+    }//GEN-LAST:event_txt_tidFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTillForslag;
     private javax.swing.JButton btnSkickaForslag;
     private javax.swing.JButton btnTillbaka;
-    private com.toedter.calendar.JDateChooser dcDatum;
+    private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDatumForslag;
@@ -306,9 +331,9 @@ public class Motesforslag extends javax.swing.JFrame {
     private javax.swing.JLabel lblText;
     private javax.swing.JLabel lblTidForslag;
     private javax.swing.JLabel lblTidOchDatum;
-    private javax.swing.JTextArea taMotesText;
-    private javax.swing.JTable tblForslag;
-    private javax.swing.JTextField tfMotesTitel;
-    private javax.swing.JTextField tfTid;
+    private javax.swing.JTable tbl_forslag;
+    private javax.swing.JTextField txt_motestitel;
+    private javax.swing.JTextArea txt_text;
+    private javax.swing.JTextField txt_tid;
     // End of variables declaration//GEN-END:variables
 }
