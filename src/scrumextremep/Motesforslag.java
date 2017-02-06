@@ -267,7 +267,6 @@ public class Motesforslag extends javax.swing.JFrame {
             Validering.emptyDateChooser(datechooser);
         } else if(Validering.tomtTextfalt(txt_motestitel)
                && Validering.tomtTextArea(info)
-                && Validering.emptyDateChooser(datechooser)
                 && Validering.datumKorrekt(datechooser))
                
         {

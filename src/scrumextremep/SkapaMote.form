@@ -58,7 +58,7 @@
                               <Component id="lblMoteSkapat" min="-2" pref="152" max="-2" attributes="0"/>
                           </Group>
                           <Component id="btnSkapaMote" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Component id="dcDatum" min="-2" pref="186" max="-2" attributes="0"/>
+                          <Component id="datechooser" min="-2" pref="186" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -98,7 +98,7 @@
                       </Group>
                       <EmptySpace pref="23" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dcDatum" min="-2" max="-2" attributes="0"/>
+                          <Component id="datechooser" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDatumForslag" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -143,7 +143,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="taMotesText">
+        <Component class="javax.swing.JTextArea" name="txt_text">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -156,7 +156,7 @@
         <Property name="text" type="java.lang.String" value="V&#xe4;lj datum"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dcDatum">
+    <Component class="com.toedter.calendar.JDateChooser" name="datechooser">
     </Component>
     <Component class="javax.swing.JLabel" name="lblTidForslag">
       <Properties>
@@ -200,8 +200,20 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="1" rowCount="0">
-                <Column editable="true" title="Anv&#xe4;ndare" type="java.lang.Object"/>
+                <Column editable="false" title="Anv&#xe4;ndare" type="java.lang.Object"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
         </Component>
@@ -213,6 +225,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTimmar">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTimmarActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
