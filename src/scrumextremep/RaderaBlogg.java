@@ -23,6 +23,7 @@ public class RaderaBlogg extends javax.swing.JFrame {
     public RaderaBlogg(String anvandarID) {
         initComponents();
         anvID = anvandarID;
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -45,6 +46,11 @@ public class RaderaBlogg extends javax.swing.JFrame {
         tblBlogTitlar = new javax.swing.JTable();
         btnTillbaka = new javax.swing.JButton();
         btnRadera = new javax.swing.JButton();
+        btnRedigera = new javax.swing.JButton();
+        tf_nyText = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        tf_nyTitel = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,36 +136,73 @@ public class RaderaBlogg extends javax.swing.JFrame {
             }
         });
 
+        btnRedigera.setText("Redigera inlägg");
+        btnRedigera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedigeraActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Ändra Titel");
+
+        jLabel2.setText("Ändra Text");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(tpBloggar, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRadera, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addContainerGap(278, Short.MAX_VALUE)
+                        .addComponent(btnRedigera, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRadera, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTillbaka)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tpBloggar, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tf_nyTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_nyText)))))
+                .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tpBloggar, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 47, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
+                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(btnRadera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(tpBloggar, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_nyTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_nyText, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRedigera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRadera, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -186,16 +229,25 @@ public class RaderaBlogg extends javax.swing.JFrame {
         String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
         
         String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
+        String text = new String();
+        String sqlfraga = "Select TITEL from BLOGGINLAGG where TITEL = '" + tableValue + "'";
         String titel = new String();
         
         try {
-            titel = Databas.getDatabas().fetchSingle(sqlquery);
+            text = Databas.getDatabas().fetchSingle(sqlquery);
+            titel = Databas.getDatabas().fetchSingle(sqlfraga);
             if(tpBloggar.getSelectedIndex() == 0) {
-                taForskning.setText(titel);
+                taForskning.setText(text);
+                tf_nyText.setText(text);
+                tf_nyTitel.setText(titel);
             } else if(tpBloggar.getSelectedIndex() == 1) {
-                taUtbildning.setText(titel);
+                taUtbildning.setText(text);
+                tf_nyText.setText(text);
+                tf_nyTitel.setText(titel);
             } else if(tpBloggar.getSelectedIndex() == 2) {
-                taInformell.setText(titel);
+                taInformell.setText(text);
+                tf_nyText.setText(text);
+                tf_nyTitel.setText(titel);
             }
             
         } catch (Exception e) {
@@ -210,8 +262,23 @@ public class RaderaBlogg extends javax.swing.JFrame {
 
     private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed
         raderaInlagg();
+        clearTbl();
         JOptionPane.showMessageDialog(null, "Blogginlägget är raderat!");
     }//GEN-LAST:event_btnRaderaActionPerformed
+
+    private void btnRedigeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraActionPerformed
+        redigeraInlagg();
+        clearTbl();
+        tf_nyText.setText("");
+        tf_nyTitel.setText("");
+        taForskning.setText("");
+        taUtbildning.setText("");
+        taInformell.setText("");  
+        fetchBlognamesUtbildning();
+        fetchBlognamesForskning();
+        fetchBlognamesInformell();
+        JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+    }//GEN-LAST:event_btnRedigeraActionPerformed
 
     private void fetchBlognamesUtbildning() {
         String sqlquery = "select blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning')";
@@ -281,11 +348,41 @@ public class RaderaBlogg extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
+    
+    private void redigeraInlagg() {
+        int a = tblBlogTitlar.getSelectedRow();
+        int b = tblBlogTitlar.getSelectedColumn();
+        String textValue = tf_nyText.getText();
+        String tableValör = tf_nyTitel.getText();
+        String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+        
+        try {
+            String biid = Databas.getDatabas().fetchSingle("Select BI_ID from BLOGGINLAGG where TITEL = '" + tableValue + "';");
+            Databas.getDatabas().update("UPDATE BLOGGINLAGG SET TEXT = '" + textValue + "', TITEL = '" + tableValör + "' WHERE BI_ID = " + biid + ";");
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private void clearTbl() {
+ 
+        DefaultTableModel dm = (DefaultTableModel) tblBlogTitlar.getModel();
+
+        for (int i = 0; i < dm.getRowCount(); i++) {
+            for (int j = 0; j < dm.getColumnCount(); j++) {
+                dm.setRowCount(0);
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRadera;
+    private javax.swing.JButton btnRedigera;
     private javax.swing.JButton btnTillbaka;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane spForskning;
     private javax.swing.JScrollPane spInformell;
@@ -294,6 +391,8 @@ public class RaderaBlogg extends javax.swing.JFrame {
     private javax.swing.JTextArea taInformell;
     private javax.swing.JTextArea taUtbildning;
     private javax.swing.JTable tblBlogTitlar;
+    private javax.swing.JTextField tf_nyText;
+    private javax.swing.JTextField tf_nyTitel;
     private javax.swing.JTabbedPane tpBloggar;
     // End of variables declaration//GEN-END:variables
 }

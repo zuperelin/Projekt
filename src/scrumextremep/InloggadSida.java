@@ -23,8 +23,6 @@ public class InloggadSida extends javax.swing.JFrame {
         initComponents();
         fetchBlognamesForskning();
         anvID = anvandarID;
-        btnRadera.setVisible(false);
-        isAdmin();
     }
 
     /**
@@ -131,16 +129,16 @@ public class InloggadSida extends javax.swing.JFrame {
         tpBloggar.addTab("Informell", spInformell);
 
         getContentPane().add(tpBloggar);
-        tpBloggar.setBounds(20, 190, 490, 440);
+        tpBloggar.setBounds(20, 190, 490, 380);
 
-        btnRadera.setText("Radera inlägg");
+        btnRadera.setText("Redigera inlägg");
         btnRadera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRaderaActionPerformed(evt);
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(310, 10, 140, 29);
+        btnRadera.setBounds(270, 10, 140, 25);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -150,7 +148,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 151, 29);
+        admin.setBounds(130, 10, 114, 25);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +157,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 29);
+        btnLoggaUt.setBounds(20, 10, 90, 25);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -261,8 +259,21 @@ public class InloggadSida extends javax.swing.JFrame {
     }//GEN-LAST:event_adminActionPerformed
 
     private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed
-        new RaderaBlogg(anvID).setVisible(true);
-        dispose();
+        String sqlfraga = "SELECT ADMINISTRATOR FROM ANVANDARE WHERE A_ID = " + anvID;
+        String admin = new String();
+        try {
+            admin = Databas.getDatabas().fetchSingle(sqlfraga);
+            if(admin.contains("T")) {
+                new RaderaBlogg(anvID).setVisible(true);
+                dispose();
+            }
+            else {
+                new EjAdminRaderaBlogg(anvID).setVisible(true);
+                dispose();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnRaderaActionPerformed
 
     private void fetchBlognamesUtbildning() {
@@ -319,19 +330,6 @@ public class InloggadSida extends javax.swing.JFrame {
                  }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
-    }
-    
-    private void isAdmin() {
-        String sqlfraga = "SELECT ADMINISTRATOR FROM ANVANDARE WHERE A_ID = " + anvID;
-        String admin = new String();
-        try {
-            admin = Databas.getDatabas().fetchSingle(sqlfraga);
-            if (admin.contains("T")) {
-                btnRadera.setVisible(true);
-            }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
         }
     }
     
