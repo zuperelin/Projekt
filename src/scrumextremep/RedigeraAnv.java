@@ -18,6 +18,7 @@ public class RedigeraAnv extends javax.swing.JFrame {
     public RedigeraAnv(String anvandarID) {
         initComponents();
         anvID = anvandarID;
+        setLocationRelativeTo(null);
     }
 
     /**

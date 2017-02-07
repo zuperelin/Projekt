@@ -27,6 +27,7 @@ public class SkapaMote extends javax.swing.JFrame {
         initComponents();
         anvID = anvandarID;
         fillComboBoxes();
+        setLocationRelativeTo(null);
     }
 
     /**

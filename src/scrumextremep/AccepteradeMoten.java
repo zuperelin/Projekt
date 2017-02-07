@@ -23,6 +23,7 @@ public class AccepteradeMoten extends javax.swing.JFrame {
         initComponents();
         anvID = anvandarID;
         fyllMotesforslag();
+        setLocationRelativeTo(null);
     }
 
     /**
