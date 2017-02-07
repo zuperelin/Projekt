@@ -60,8 +60,8 @@ public class Motesforslag extends javax.swing.JFrame {
         lblForslagSkickat = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_text = new javax.swing.JTextArea();
-        cbTimmar = new javax.swing.JComboBox<>();
-        cbMinuter = new javax.swing.JComboBox<>();
+        cb_timmar = new javax.swing.JComboBox<>();
+        cb_minuter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,8 +90,20 @@ public class Motesforslag extends javax.swing.JFrame {
             new String [] {
                 "Datum", "Tid"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbl_forslag);
+        if (tbl_forslag.getColumnModel().getColumnCount() > 0) {
+            tbl_forslag.getColumnModel().getColumn(0).setResizable(false);
+            tbl_forslag.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         lblDatumForslag.setText("Datumsförslag");
 
@@ -110,23 +122,29 @@ public class Motesforslag extends javax.swing.JFrame {
         txt_text.setRows(5);
         jScrollPane1.setViewportView(txt_text);
 
+        cb_timmar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+
+        cb_minuter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblText)
-                            .addComponent(lblMotesTitel))
-                        .addGap(28, 28, 28))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblMotesTitel)
+                                .addComponent(lblText))
+                            .addGap(28, 28, 28))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblDatumForslag)
+                            .addGap(18, 18, 18)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTidForslag)
-                            .addComponent(lblDatumForslag))
-                        .addGap(18, 18, 18)))
+                        .addComponent(lblTidForslag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSkickaForslag, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,71 +155,69 @@ public class Motesforslag extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_motestitel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbTimmar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbMinuter, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cb_timmar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)
+                                        .addComponent(cb_minuter, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
                                         .addComponent(btnLaggTillForslag)))
-                                .addGap(18, 18, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_motestitel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 133, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblTidOchDatum)
-                                        .addGap(46, 98, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(6, 6, 6))))))
+                                .addComponent(lblTidOchDatum)
+                                .addContainerGap(74, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMotesTitel)
-                    .addComponent(txt_motestitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTidOchDatum)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLaggTillForslag)
-                            .addComponent(cbMinuter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblText)
-                        .addGap(182, 182, 182)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDatumForslag))
+                            .addComponent(lblMotesTitel)
+                            .addComponent(txt_motestitel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblText)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDatumForslag)
+                            .addComponent(datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTidForslag)
-                            .addComponent(cbTimmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSkickaForslag, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblForslagSkickat))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cb_timmar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cb_minuter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnLaggTillForslag)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(lblForslagSkickat))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(btnSkickaForslag, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(lblTidOchDatum)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 74, Short.MAX_VALUE))
         );
 
         pack();
@@ -257,67 +273,71 @@ public class Motesforslag extends javax.swing.JFrame {
         DefaultTableModel dmt = (DefaultTableModel)tbl_forslag.getModel();
         String titel = txt_motestitel.getText();
         String text = txt_text.getText();
-        String valtDatum = dFormat.format(datechooser.getDate());
-        int valdTimme = (int)cbTimmar.getSelectedItem();
-        int valdMinut = (int)cbMinuter.getSelectedItem();
-        int valdTid = valdTimme + valdMinut;
+        
+        String valdTimme = (String)cb_timmar.getSelectedItem();
+        String valdMinut = (String)cb_minuter.getSelectedItem();
+        String valdTid = valdTimme + valdMinut;
         String nyttID = "";
         
         if(datechooser.getDate() == null) {
             Validering.emptyDateChooser(datechooser);
-        } else if(Validering.tomtTextfalt(txt_motestitel)
+            } else if(Validering.tomtTextfalt(txt_motestitel)
                && Validering.tomtTextArea(info)
-                && Validering.datumKorrekt(datechooser))
+                && Validering.datumKorrekt(datechooser)
+                && Validering.tomCombo(cb_timmar)
+                && Validering.tomCombo(cb_minuter))
                
         {
+        String valtDatum = dFormat.format(datechooser.getDate());
         
-        
-        boolean mfIDInteFinns = true;
-        try
-        {
-            String finnsID = Databas.getDatabas().fetchSingle("Select mf_id from motesforslag where titel = '" +titel+ "'");
-            String mfNyttID = Databas.getDatabas().getAutoIncrement("MOTESFORSLAG", "MF_ID");
-            String sqlQueryInsertMF = "Insert into motesforslag values (" +mfNyttID+ ", '" +titel+ "', '" +text+ "', " +anvID+ ")";
-            String sqlQueryHamtaNyttID = "select mf_id from motesforslag where titel = '" +titel+ "'";
-                if(finnsID != null) {
-                    mfIDInteFinns = false;
-                    mfID = finnsID;
-                }
-                
-            if(mfIDInteFinns) {
-                Databas.getDatabas().insert(sqlQueryInsertMF);
-                nyttID = Databas.getDatabas().fetchSingle(sqlQueryHamtaNyttID);
-            } 
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
-        try
-        {
-            String tidDatumNyttID = Databas.getDatabas().getAutoIncrement("MFTIDDATUM", "TIDDATUM_ID");
-            String sqlQueryInsertTidDatumNyttMF = "insert into mftiddatum values (" +tidDatumNyttID+ ", '" +valtDatum+ "', " +valdTid+ ", " +nyttID+ ")";
-            String sqlQueryInsertTidDatum = "insert into mftiddatum values (" +tidDatumNyttID+ ", '"+valtDatum+ "', " +valdTid+ ", " +mfID+ ")";
-            if(mfIDInteFinns) {
-                Databas.getDatabas().insert(sqlQueryInsertTidDatumNyttMF);
-                System.out.println("Ett nytt datumförslag har registrerats med ett nytt mötesförslag!");
-            } else {
-                Databas.getDatabas().insert(sqlQueryInsertTidDatum);
-                System.out.println("Ett nytt datumförslag har registrerats!");
+            boolean mfIDInteFinns = true;
+            try
+            {
+
+                String finnsID = Databas.getDatabas().fetchSingle("Select mf_id from motesforslag where titel = '" +titel+ "'");
+                String mfNyttID = Databas.getDatabas().getAutoIncrement("MOTESFORSLAG", "MF_ID");
+                String sqlQueryInsertMF = "Insert into motesforslag values (" +mfNyttID+ ", '" +titel+ "', '" +text+ "', " +anvID+ ")";
+                String sqlQueryHamtaNyttID = "select mf_id from motesforslag where titel = '" +titel+ "'";
+                    if(finnsID != null) {
+                        mfIDInteFinns = false;
+                        mfID = finnsID;
+                    }
+
+                if(mfIDInteFinns) {
+                    Databas.getDatabas().insert(sqlQueryInsertMF);
+                    nyttID = Databas.getDatabas().fetchSingle(sqlQueryHamtaNyttID);
+                } 
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
             }
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try
-        {
-            dmt.addRow(new Object[] {});
-            tbl_forslag.setValueAt(valtDatum, index, 0);
-            tbl_forslag.setValueAt(valdTid, index, 1);
-            
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        index++;
-        dmt.fireTableDataChanged();
+
+            try
+            {
+                
+                String tidDatumNyttID = Databas.getDatabas().getAutoIncrement("MFTIDDATUM", "TIDDATUM_ID");
+                String sqlQueryInsertTidDatumNyttMF = "insert into mftiddatum values (" +tidDatumNyttID+ ", '" +valtDatum+ "', " +valdTid+ ", " +nyttID+ ")";
+                String sqlQueryInsertTidDatum = "insert into mftiddatum values (" +tidDatumNyttID+ ", '"+valtDatum+ "', " +valdTid+ ", " +mfID+ ")";
+                if(mfIDInteFinns) {
+                    Databas.getDatabas().insert(sqlQueryInsertTidDatumNyttMF);
+                    System.out.println("Ett nytt datumförslag har registrerats med ett nytt mötesförslag!");
+                } else {
+                    Databas.getDatabas().insert(sqlQueryInsertTidDatum);
+                    System.out.println("Ett nytt datumförslag har registrerats!");
+                }
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+            try
+            {
+                dmt.addRow(new Object[] {});
+                tbl_forslag.setValueAt(valtDatum, index, 0);
+                tbl_forslag.setValueAt(valdTimme + ":" + valdMinut, index, 1);
+
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+            index++;
+            dmt.fireTableDataChanged();
         }
         fillComboBoxes();
     }
@@ -331,18 +351,26 @@ public class Motesforslag extends javax.swing.JFrame {
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<24; i++) {
-            cbModel.addElement(i);
+            if(i<=9) {
+                cbModel.addElement("0"+i);
+            } else {
+                cbModel.addElement(i);
+            }
         }
-        cbTimmar.setModel(cbModel);
+        cb_timmar.setModel(cbModel);
     }
     
     private void fillCbMinuter()
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<60; i++) {
-            cbModel.addElement(i);
+            if(i<9) {
+            cbModel.addElement("0"+i);
+            } else {
+                cbModel.addElement(i);
+            }
         }
-        cbMinuter.setModel(cbModel);
+        cb_minuter.setModel(cbModel);
     
     }//GEN-LAST:event_btnLaggTillForslagActionPerformed
 
@@ -351,8 +379,8 @@ public class Motesforslag extends javax.swing.JFrame {
     private javax.swing.JButton btnLaggTillForslag;
     private javax.swing.JButton btnSkickaForslag;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JComboBox<String> cbMinuter;
-    private javax.swing.JComboBox<String> cbTimmar;
+    private javax.swing.JComboBox<String> cb_minuter;
+    private javax.swing.JComboBox<String> cb_timmar;
     private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

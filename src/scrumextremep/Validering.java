@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfException;
@@ -189,5 +190,13 @@ public class Validering {
             }
             return forkort;
         }
-    
+    static public boolean tomCombo(JComboBox cb){
+        boolean forkort = true;
+        if(cb.getSelectedItem() == null){
+            forkort = false;
+            JOptionPane.showMessageDialog(null, "Var vänlig en tid");
+            cb.requestFocus();
+        }
+        return forkort;
+    }
 }
