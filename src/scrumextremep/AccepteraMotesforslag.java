@@ -198,6 +198,11 @@ public class AccepteraMotesforslag extends javax.swing.JFrame {
             String getDatum = cbValjDatum.getSelectedItem().toString();
             String getTitel = cbValjMotesforslag.getSelectedItem().toString();
             
+            if(Validering.matchString(getTitel)
+                && Validering.tomCombo(cbValjDatum)
+                     && Validering.tomCombo(cbValjMotesforslag))
+            {
+            
             try {
                 String tiddatum_ID = "SELECT TIDDATUM_ID FROM MFTIDDATUM \n" +
                         "WHERE MF_ID = (SELECT MF_ID FROM MOTESFORSLAG \n" + 
@@ -222,6 +227,7 @@ public class AccepteraMotesforslag extends javax.swing.JFrame {
             }
             catch (Exception ex) {
                 System.out.println(ex.getMessage());
+            }
             }
             
             

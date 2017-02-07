@@ -66,8 +66,21 @@ public class AccepteradeMoten extends javax.swing.JFrame {
             new String [] {
                 "Förnamn", "Efternamn", "Email"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblAccepteratMote);
+        if (tblAccepteratMote.getColumnModel().getColumnCount() > 0) {
+            tblAccepteratMote.getColumnModel().getColumn(0).setResizable(false);
+            tblAccepteratMote.getColumnModel().getColumn(1).setResizable(false);
+            tblAccepteratMote.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         lblTotal.setText("Totalt Anmälda");
 
@@ -125,7 +138,7 @@ public class AccepteradeMoten extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTotal)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();

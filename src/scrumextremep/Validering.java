@@ -211,4 +211,12 @@ public class Validering {
         }
      return tom;
     }
+      static public boolean matchString(String string){
+        boolean fel = true;
+        if(string.equals("Välj Mötesförslag")){
+            JOptionPane.showMessageDialog(null, "Var vänlig välj ett mötesförslag");
+            fel = false;
+        }
+        return fel;
+    }
 }
