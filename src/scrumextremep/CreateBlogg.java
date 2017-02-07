@@ -54,7 +54,6 @@ public class CreateBlogg extends javax.swing.JFrame {
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1227, 774));
         setMinimumSize(new java.awt.Dimension(1227, 774));
         getContentPane().setLayout(null);
 
@@ -114,7 +113,7 @@ public class CreateBlogg extends javax.swing.JFrame {
 
         BtAddFile.setText("Bifoga fil");
         getContentPane().add(BtAddFile);
-        BtAddFile.setBounds(800, 430, 76, 25);
+        BtAddFile.setBounds(800, 430, 79, 32);
 
         BtCreateBlog.setText("Skapa blogginlägg");
         BtCreateBlog.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +122,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtCreateBlog);
-        BtCreateBlog.setBounds(780, 510, 121, 40);
+        BtCreateBlog.setBounds(780, 510, 134, 40);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
         lblRubrik.setBackground(new java.awt.Color(255, 255, 255));
