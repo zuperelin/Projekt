@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import oru.inf.InfException;
 /**
@@ -198,5 +199,16 @@ public class Validering {
             cb.requestFocus();
         }
         return forkort;
+    }
+    
+        static public boolean tomttable(JTable jt) {
+        boolean tom = true;
+        int rows = jt.getRowCount();
+        
+        if(rows == 0){
+            tom = false;
+            JOptionPane.showMessageDialog(null, "Välj ett förslag med kollegor som kan, tack");
+        }
+     return tom;
     }
 }

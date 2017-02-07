@@ -51,9 +51,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="spMotesText" alignment="0" min="-2" pref="307" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="cbTimmar" min="-2" pref="65" max="-2" attributes="0"/>
+                              <Component id="cb_timmar" min="-2" pref="65" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="cbMinuter" min="-2" pref="65" max="-2" attributes="0"/>
+                              <Component id="cb_minuter" min="-2" pref="65" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblMoteSkapat" min="-2" pref="152" max="-2" attributes="0"/>
                           </Group>
@@ -108,8 +108,8 @@
                               <Component id="lblTidForslag" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cbTimmar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbMinuter" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cb_timmar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cb_minuter" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -196,7 +196,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblAnvandare">
+        <Component class="javax.swing.JTable" name="tbl_anvandare">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="1" rowCount="0">
@@ -224,20 +224,20 @@
         <Property name="text" type="java.lang.String" value="M&#xf6;tesdeltagare"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbTimmar">
+    <Component class="javax.swing.JComboBox" name="cb_timmar">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTimmarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_timmarActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbMinuter">
+    <Component class="javax.swing.JComboBox" name="cb_minuter">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

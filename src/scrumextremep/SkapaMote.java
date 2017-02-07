@@ -6,6 +6,7 @@
 package scrumextremep;
 
 import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
@@ -51,10 +52,10 @@ public class SkapaMote extends javax.swing.JFrame {
         cbMotesForslag = new javax.swing.JComboBox<>();
         lblMoteSkapat = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblAnvandare = new javax.swing.JTable();
+        tbl_anvandare = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        cbTimmar = new javax.swing.JComboBox<>();
-        cbMinuter = new javax.swing.JComboBox<>();
+        cb_timmar = new javax.swing.JComboBox<>();
+        cb_minuter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,7 +91,7 @@ public class SkapaMote extends javax.swing.JFrame {
             }
         });
 
-        tblAnvandare.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_anvandare.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -106,16 +107,16 @@ public class SkapaMote extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblAnvandare);
-        if (tblAnvandare.getColumnModel().getColumnCount() > 0) {
-            tblAnvandare.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane1.setViewportView(tbl_anvandare);
+        if (tbl_anvandare.getColumnModel().getColumnCount() > 0) {
+            tbl_anvandare.getColumnModel().getColumn(0).setResizable(false);
         }
 
         jLabel1.setText("Mötesdeltagare");
 
-        cbTimmar.addActionListener(new java.awt.event.ActionListener() {
+        cb_timmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTimmarActionPerformed(evt);
+                cb_timmarActionPerformed(evt);
             }
         });
 
@@ -145,9 +146,9 @@ public class SkapaMote extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spMotesText, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbTimmar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cb_timmar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbMinuter, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cb_minuter, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblMoteSkapat, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnSkapaMote, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,8 +189,8 @@ public class SkapaMote extends javax.swing.JFrame {
                                 .addComponent(lblMoteSkapat)
                                 .addComponent(lblTidForslag))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cbTimmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbMinuter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cb_timmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cb_minuter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(21, 21, 21)
                         .addComponent(btnSkapaMote, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
@@ -203,16 +204,16 @@ public class SkapaMote extends javax.swing.JFrame {
 
     
     private void btnSkapaMoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaMoteActionPerformed
-        DefaultTableModel dm = (DefaultTableModel)tblAnvandare.getModel();
+        SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DefaultTableModel dm = (DefaultTableModel)tbl_anvandare.getModel();
         dm.getDataVector().removeAllElements();
         revalidate();
         String titel = (String)cbMotesForslag.getSelectedItem();
         String text = txt_text.getText();
-        Date datumet = datechooser.getDate();
-        String valtDatum = String.format("%1$td.%1$tm.%1$tY", datumet);
-        int valdTimme = (int)cbTimmar.getSelectedItem();
-        int valdMinut = (int)cbMinuter.getSelectedItem();
-        int valdTid = valdTimme + valdMinut;
+        String valdTimme = (String)cb_timmar.getSelectedItem();
+        String valdMinut = (String)cb_minuter.getSelectedItem();
+        String tidTillsammans = valdTimme + valdMinut;
+        int valdTid = Integer.parseInt(tidTillsammans);
         String sqlQueryMotesForslagsID = "select mf_id from motesforslag where titel = '" +titel+ "'";
         String sqlQueryHamtaMotesID = "select m_id from mote";
         String textArea = txt_text.getText();
@@ -220,7 +221,12 @@ public class SkapaMote extends javax.swing.JFrame {
         if(datechooser.getDate() == null) {
             Validering.emptyDateChooser(datechooser);
         } else if(Validering.tomtTextArea(textArea)
-                && Validering.datumKorrekt(datechooser)){
+                && Validering.datumKorrekt(datechooser)
+                 && Validering.tomCombo(cb_timmar)
+                    && Validering.tomCombo(cb_minuter)
+                        && Validering.tomttable(tbl_anvandare)){
+            
+        String valtDatum = dFormat.format(datechooser.getDate());
         try
         {
             String moteIdIncrement = Databas.getDatabas().getAutoIncrement("MOTE", "M_ID");
@@ -277,7 +283,7 @@ public class SkapaMote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void cbMotesForslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMotesForslagActionPerformed
-        DefaultTableModel dm = (DefaultTableModel)tblAnvandare.getModel();
+        DefaultTableModel dm = (DefaultTableModel)tbl_anvandare.getModel();
         dm.getDataVector().removeAllElements();
         revalidate();
         String motesForslag = (String)cbMotesForslag.getSelectedItem();
@@ -298,9 +304,9 @@ public class SkapaMote extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbMotesForslagActionPerformed
 
-    private void cbTimmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimmarActionPerformed
+    private void cb_timmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_timmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbTimmarActionPerformed
+    }//GEN-LAST:event_cb_timmarActionPerformed
 
     private void fillComboBoxes()
     {
@@ -313,26 +319,34 @@ public class SkapaMote extends javax.swing.JFrame {
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<24; i++) {
-            cbModel.addElement(i);
+            if(i<=9) {
+                cbModel.addElement("0"+i);
+            } else {
+                cbModel.addElement(i);
+            }
         }
-        cbTimmar.setModel(cbModel);
+        cb_timmar.setModel(cbModel);
     }
     
     private void fillCbMinuter()
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<60; i++) {
-            cbModel.addElement(i);
+            if(i<9) {
+            cbModel.addElement("0"+i);
+            } else {
+                cbModel.addElement(i);
+            }
         }
-        cbMinuter.setModel(cbModel);
+        cb_minuter.setModel(cbModel);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkapaMote;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JComboBox<String> cbMinuter;
     private javax.swing.JComboBox<String> cbMotesForslag;
-    private javax.swing.JComboBox<String> cbTimmar;
+    private javax.swing.JComboBox<String> cb_minuter;
+    private javax.swing.JComboBox<String> cb_timmar;
     private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -342,7 +356,7 @@ public class SkapaMote extends javax.swing.JFrame {
     private javax.swing.JLabel lblText;
     private javax.swing.JLabel lblTidForslag;
     private javax.swing.JScrollPane spMotesText;
-    private javax.swing.JTable tblAnvandare;
+    private javax.swing.JTable tbl_anvandare;
     private javax.swing.JTextArea txt_text;
     // End of variables declaration//GEN-END:variables
 }
