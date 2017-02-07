@@ -21,6 +21,7 @@ public class Laggtill extends javax.swing.JFrame {
     public Laggtill(String anvandarID) {
         initComponents();
         anvID = anvandarID;
+        setLocationRelativeTo(null);
     }
 
     /**

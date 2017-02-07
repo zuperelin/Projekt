@@ -25,6 +25,7 @@ public class AdminAnd extends javax.swing.JFrame {
         initComponents();
         anvID = anvandarID;
         fillAnvCB();
+        setLocationRelativeTo(null);
     }
 
 
