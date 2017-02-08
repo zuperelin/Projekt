@@ -7,6 +7,7 @@ package scrumextremep;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -138,7 +139,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 140, 25);
+        btnRadera.setBounds(270, 10, 140, 32);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -148,7 +149,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 114, 25);
+        admin.setBounds(130, 10, 125, 32);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +158,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 25);
+        btnLoggaUt.setBounds(20, 10, 90, 32);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -223,8 +224,11 @@ public class InloggadSida extends javax.swing.JFrame {
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-        new ForstaSida().setVisible(true);
-        dispose();
+        int a = JOptionPane.showConfirmDialog(null, "Vill du logga ut?", "Logga ut", JOptionPane.YES_NO_OPTION);
+        if (a==0){
+            new ForstaSida().setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     private void spInformellComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_spInformellComponentShown
@@ -247,7 +251,7 @@ public class InloggadSida extends javax.swing.JFrame {
         try {
             admin = Databas.getDatabas().fetchSingle(sqlfraga);
             if (admin.contains("T")) {
-                new AdminAnd(anvID).setVisible(true);
+                new RedigeraAnv(anvID).setVisible(true);
                 dispose();
                 } else {
                 new RedigeraAnv(anvID).setVisible(true);

@@ -179,7 +179,7 @@ public class Laggtill extends javax.swing.JFrame {
     }//GEN-LAST:event_savenewActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        new AdminAnd(anvID).setVisible(true);
+        new RedigeraAnv(anvID).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 

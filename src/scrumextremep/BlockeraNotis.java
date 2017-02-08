@@ -141,7 +141,7 @@ public class BlockeraNotis extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_AnvandareActionPerformed
 
     private void btn_TillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TillbakaActionPerformed
-        new AdminAnd(anvID).setVisible(true);
+        new RedigeraAnv(anvID).setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_TillbakaActionPerformed
 

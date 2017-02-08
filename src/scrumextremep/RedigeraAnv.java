@@ -5,21 +5,32 @@
  */
 package scrumextremep;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Timmy
+ * @author elin-
  */
 public class RedigeraAnv extends javax.swing.JFrame {
 
     private String anvID;
+    private String selectedAID;
+    private boolean chbAdminChanged;
     /**
-     * Creates new form RedigeraAnv
+     * Creates new form AdminAnd
      */
     public RedigeraAnv(String anvandarID) {
         initComponents();
         anvID = anvandarID;
+        fillAnvCB();
+        fillCbAnvandare();
         setLocationRelativeTo(null);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,24 +41,370 @@ public class RedigeraAnv extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        saver = new javax.swing.JButton();
+        deleteu = new javax.swing.JButton();
+        lblAnv = new javax.swing.JLabel();
+        lblFornamn = new javax.swing.JLabel();
+        lblEfternamn = new javax.swing.JLabel();
+        lblAnvNamn = new javax.swing.JLabel();
+        lblLosenord = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        chbAdmin = new javax.swing.JCheckBox();
+        btnTillbaka = new javax.swing.JButton();
+        tfFornamn = new javax.swing.JTextField();
+        tfAnvNamn = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
+        tfEfternamn = new javax.swing.JTextField();
+        tfLosenord = new javax.swing.JTextField();
+        btnSkapa = new javax.swing.JButton();
+        cbAnv = new javax.swing.JComboBox<>();
+        cb_Anvandare = new javax.swing.JComboBox<>();
+        chb_Blockera = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(790, 623));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setText("Redigera Profil");
+
+        saver.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        saver.setText("Spara");
+        saver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saverActionPerformed(evt);
+            }
+        });
+
+        deleteu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        deleteu.setText("Ta bort användare");
+        deleteu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteuActionPerformed(evt);
+            }
+        });
+
+        lblAnv.setText("Användare");
+
+        lblFornamn.setText("Förnamn");
+
+        lblEfternamn.setText("Efternamn");
+
+        lblAnvNamn.setText("Användarnamn");
+
+        lblLosenord.setText("Lösenord");
+
+        lblEmail.setText("Email");
+
+        chbAdmin.setText("Administratör");
+
+        btnTillbaka.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
+        btnSkapa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSkapa.setText("Skapa användare");
+        btnSkapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkapaActionPerformed(evt);
+            }
+        });
+
+        cbAnv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAnvActionPerformed(evt);
+            }
+        });
+
+        cb_Anvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_AnvandareActionPerformed(evt);
+            }
+        });
+
+        chb_Blockera.setText("Blockera");
+
+        jLabel2.setText("Blockera en användare");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAnv)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSkapa, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(deleteu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(chbAdmin)))
+                        .addGap(0, 163, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblFornamn)
+                                .addGap(48, 48, 48)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfFornamn)
+                                    .addComponent(cbAnv, 0, 192, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAnvNamn)
+                                    .addComponent(lblEmail))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfAnvNamn)
+                                    .addComponent(tfEmail))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblLosenord)
+                                    .addComponent(jLabel2)
+                                    .addComponent(lblEfternamn))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cb_Anvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfEfternamn)
+                                    .addComponent(tfLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                            .addComponent(chb_Blockera, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(72, 72, 72))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnTillbaka)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(saver, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(259, 259, 259))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(btnTillbaka)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAnv)
+                    .addComponent(cbAnv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFornamn)
+                    .addComponent(lblEfternamn)
+                    .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAnvNamn)
+                    .addComponent(lblLosenord)
+                    .addComponent(tfAnvNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(saver)
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSkapa)
+                            .addComponent(deleteu)
+                            .addComponent(chbAdmin)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cb_Anvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmail))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chb_Blockera)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        new InloggadSida(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void btnSkapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaActionPerformed
+        new Laggtill(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnSkapaActionPerformed
+
+    private void cbAnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnvActionPerformed
+        fillUserValues();
+    }//GEN-LAST:event_cbAnvActionPerformed
+
+    private void saverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saverActionPerformed
+        updateValuesDB();
+        JOptionPane.showMessageDialog(null, "Användare har uppdaterats!");
+        cbAnv.removeAllItems();
+        blockera();
+        fillAnvCB();
+    }//GEN-LAST:event_saverActionPerformed
+
+    private void deleteuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteuActionPerformed
+        deleteUser();
+        JOptionPane.showMessageDialog(null, "Användare borttagen!");
+        cbAnv.removeAllItems();
+        fillAnvCB();
+    }//GEN-LAST:event_deleteuActionPerformed
+
+    private void cb_AnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_AnvandareActionPerformed
+        String anvandare = (String)cb_Anvandare.getSelectedItem();
+        String anvandareID= anvandare.replaceAll("[^0-9]", "");
+        String sqlQueryKollaBlock = "select a_id, blockad_id from anvandareblock where a_id = " +anvID+ " and blockad_id = " +anvandareID;
+
+        try
+        {
+            if(Databas.getDatabas().fetchSingle(sqlQueryKollaBlock) == null) {
+                chb_Blockera.setSelected(false);
+            } else {
+                chb_Blockera.setSelected(true);
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_cb_AnvandareActionPerformed
+
+    private void fillAnvCB() {
+        String sqlfraga = "Select email from ANVANDARE";
+        try {
+            ArrayList<String> email = Databas.getDatabas().fetchColumn(sqlfraga);
+
+                for (int i = 0; i < email.size(); i++)
+                    cbAnv.addItem(email.get(i)); 
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+        
+    private void fillUserValues() {
+        String admin;
+        chbAdmin.setSelected(false);
+        if (cbAnv.getSelectedItem() != null) {
+            String email = cbAnv.getSelectedItem().toString();
+            try {
+                selectedAID = Databas.getDatabas().fetchSingle("select A_ID from anvandare where email = '" + email + "';");
+                tfFornamn.setText(Databas.getDatabas().fetchSingle("select fornamn from anvandare where A_ID = " + selectedAID + ";"));
+                tfEfternamn.setText(Databas.getDatabas().fetchSingle("select efternamn from anvandare where A_ID = " + selectedAID + ";"));
+                tfAnvNamn.setText(Databas.getDatabas().fetchSingle("select anvnamn from anvandare where A_ID = " + selectedAID + ";"));
+                tfEmail.setText(email);
+                tfLosenord.setText(Databas.getDatabas().fetchSingle("select losenord from anvandare where A_ID = " + selectedAID + ";"));
+                admin = Databas.getDatabas().fetchSingle("select administrator from anvandare where A_ID = " + selectedAID + ";");
+                if (admin.contains("T")) {
+                    chbAdmin.setSelected(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
+    private void updateValuesDB() {
+        String sqlfragaT = "update anvandare set fornamn ='" + tfFornamn.getText() + "', efternamn ='" + tfEfternamn.getText() + "', anvnamn ='" + tfAnvNamn.getText() + "', losenord ='" + tfLosenord.getText() + "', administrator ='T', email ='" + tfEmail.getText() + "' where a_id =" + selectedAID + ";";
+        String sqlfragaF = "update anvandare set fornamn ='" + tfFornamn.getText() + "', efternamn ='" + tfEfternamn.getText() + "', anvnamn ='" + tfAnvNamn.getText() + "', losenord ='" + tfLosenord.getText() + "', administrator ='F', email ='" + tfEmail.getText() + "' where a_id =" + selectedAID + ";";
+        try {
+            if (chbAdmin.isSelected()) {
+                Databas.getDatabas().update(sqlfragaT);
+                } else {
+                Databas.getDatabas().update(sqlfragaF);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private void deleteUser() {
+        String sqlfraga = "delete from anvandare where A_ID =" + selectedAID + ";";
+        try {
+            Databas.getDatabas().delete(sqlfraga);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private void blockera()
+    {
+        boolean villBlockera = chb_Blockera.isSelected();
+        String anvandare = (String)cb_Anvandare.getSelectedItem();
+        String anvandareID= anvandare.replaceAll("[^0-9]", "");
+        String sqlQueryBlockera = "insert into anvandareblock values (" +anvID+ ", " +anvandareID+ ")";
+        String sqlQueryAvblockera = "delete from anvandareblock where a_id = " +anvID+ " and blockad_id = " +anvandareID;
+        
+        try
+        {
+            if(villBlockera) {
+                Databas.getDatabas().insert(sqlQueryBlockera);
+            } else {
+                Databas.getDatabas().delete(sqlQueryAvblockera);
+            }
+            fillCbAnvandare();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private void fillCbAnvandare()
+    {
+        DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
+        String sqlQueryHamtaAnvandare = "select a_id, fornamn, efternamn from anvandare";
+        
+        try
+        {
+            ArrayList<HashMap<String, String>> anvFornamnEfternamn = Databas.getDatabas().fetchRows(sqlQueryHamtaAnvandare);
+            for(int i = 0; i<anvFornamnEfternamn.size(); i++) {
+                String fornamn = anvFornamnEfternamn.get(i).get("FORNAMN");
+                String efternamn = anvFornamnEfternamn.get(i).get("EFTERNAMN");
+                String a_id = anvFornamnEfternamn.get(i).get("A_ID");
+                cbModel.addElement(fornamn + " " +efternamn+ " " +a_id);
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        cb_Anvandare.setModel(cbModel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSkapa;
+    private javax.swing.JButton btnTillbaka;
+    private javax.swing.JComboBox<String> cbAnv;
+    private javax.swing.JComboBox<String> cb_Anvandare;
+    private javax.swing.JCheckBox chbAdmin;
+    private javax.swing.JCheckBox chb_Blockera;
+    private javax.swing.JButton deleteu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblAnv;
+    private javax.swing.JLabel lblAnvNamn;
+    private javax.swing.JLabel lblEfternamn;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFornamn;
+    private javax.swing.JLabel lblLosenord;
+    private javax.swing.JButton saver;
+    private javax.swing.JTextField tfAnvNamn;
+    private javax.swing.JTextField tfEfternamn;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfFornamn;
+    private javax.swing.JTextField tfLosenord;
     // End of variables declaration//GEN-END:variables
 }
