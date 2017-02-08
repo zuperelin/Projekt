@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMessage;
  * @author Timmy
  */
 public class SkickaMail {
-    	public static void skickaEttMail() {
+    	public static void skickaEttMail(String anvID) {
 
 		final String username = "grupp6projekt@gmail.com";
 		final String password = "axeduvan";
@@ -39,11 +39,11 @@ public class SkickaMail {
 		  });
 
 		try {
-                    String sqlfraga = "select email from anvandare";
-            ArrayList<HashMap<String, String>> email = Databas.getDatabas().fetchRows(sqlfraga);
+                    String sqlfraga = "select email from anvandare where anvandare.a_id not in ( select anvandareblock.a_id from anvandareblock  where anvandareblock.blockad_id = " +anvID+ ")";
+                    ArrayList<HashMap<String, String>> email = Databas.getDatabas().fetchRows(sqlfraga);
 
-                for (int i = 0; i < email.size(); i++) {
-                    String lista = email.get(i).get("EMAIL");
+                    for (int i = 0; i < email.size(); i++) {
+                        String lista = email.get(i).get("EMAIL");
                 
                      
 
@@ -56,7 +56,7 @@ public class SkickaMail {
 				+ "\n\n Det finns ett nytt mötesförslag att svara på.");
 
 			Transport.send(message);
-                }
+                        }
 
 			System.out.println("Done");
 
