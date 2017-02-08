@@ -215,10 +215,12 @@ public class RaderaBlogg extends javax.swing.JFrame {
 
     private void spUtbildningComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_spUtbildningComponentShown
         fetchBlognamesUtbildning();
+        hamtaSenasteUtbildning();
     }//GEN-LAST:event_spUtbildningComponentShown
 
     private void spInformellComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_spInformellComponentShown
         fetchBlognamesInformell();
+        hamtaSenasteInformell();
     }//GEN-LAST:event_spInformellComponentShown
 
     private void tblBlogTitlarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBlogTitlarMouseClicked
@@ -387,6 +389,28 @@ public class RaderaBlogg extends javax.swing.JFrame {
              System.out.println(e.getMessage());
          }
      }
+    
+    private void hamtaSenasteUtbildning() {
+         String sqlfraga = "SELECT BLOGGINLAGG.TEXT from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Utbildning') order by BI_ID DESC";
+         String text = new String();
+         try {
+             text = Databas.getDatabas().fetchSingle(sqlfraga);
+             taUtbildning.setText(text);
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+    }
+    
+    private void hamtaSenasteInformell() {
+         String sqlfraga = "SELECT BLOGGINLAGG.TEXT from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Informell') order by BI_ID DESC";
+         String text = new String();
+         try {
+             text = Databas.getDatabas().fetchSingle(sqlfraga);
+             taInformell.setText(text);
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
