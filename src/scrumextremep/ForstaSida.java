@@ -27,6 +27,7 @@ public class ForstaSida extends javax.swing.JFrame {
         fetchBlognamesInformell();
         lbl_anvnamn.setForeground(Color.BLACK);
         lbl_losenord.setForeground(Color.BLACK);
+        hamtaSenaste();
         
     }
 
@@ -153,36 +154,9 @@ public class ForstaSida extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnLoggaInActionPerformed
-
-    private void anvandarID() {
-        String anvNamn = txt_anvnamn.getText();
-        String sqlFragaHamtaId = "select a_id from anvandare where anvnamn =  '" + anvNamn + "'";
-        try
-        {
-            anvID = Databas.getDatabas().fetchSingle(sqlFragaHamtaId);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
     
     private void tblBlogTitlarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBlogTitlarMouseClicked
-        taBlogFlow.removeAll();
-        int a = tblBlogTitlar.getSelectedRow();
-        int b = tblBlogTitlar.getSelectedColumn();
-        String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
-        
-        String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
-        String titel = new String();
-        
-        try {
-            titel = Databas.getDatabas().fetchSingle(sqlquery);
-            
-            
-                taBlogFlow.setText(titel);
-            
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        hamtaVarden();
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
     private void txt_anvnamnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_anvnamnFocusGained
@@ -194,7 +168,7 @@ public class ForstaSida extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_losenordFocusGained
   
     private void fetchBlognamesInformell() {
-        String sqlquery = "select blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Informell')";
+        String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Informell') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         try {
          blognames = Databas.getDatabas().fetchRows(sqlquery);
@@ -236,6 +210,37 @@ public class ForstaSida extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+     
+    private void hamtaVarden() {
+        taBlogFlow.removeAll();
+        int a = tblBlogTitlar.getSelectedRow();
+        int b = tblBlogTitlar.getSelectedColumn();
+        String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+        
+        String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
+        String titel = new String();
+        
+        try {
+            titel = Databas.getDatabas().fetchSingle(sqlquery);
+            
+            
+                taBlogFlow.setText(titel);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+     }
+     
+     private void hamtaSenaste() {
+         String sqlfraga = "SELECT TEXT FROM BLOGGINLAGG ORDER BY BI_ID DESC";
+         String text = new String();
+         try {
+             text = Databas.getDatabas().fetchSingle(sqlfraga);
+             taBlogFlow.setText(text);
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+     }
 
     
 

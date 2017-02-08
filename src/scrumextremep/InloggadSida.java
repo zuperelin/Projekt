@@ -24,6 +24,7 @@ public class InloggadSida extends javax.swing.JFrame {
         initComponents();
         fetchBlognamesForskning();
         anvID = anvandarID;
+        hamtaSenaste();
     }
 
     /**
@@ -139,7 +140,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 140, 32);
+        btnRadera.setBounds(270, 10, 140, 29);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -149,7 +150,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 125, 32);
+        admin.setBounds(130, 10, 151, 29);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +159,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 32);
+        btnLoggaUt.setBounds(20, 10, 90, 29);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -281,7 +282,7 @@ public class InloggadSida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRaderaActionPerformed
 
     private void fetchBlognamesUtbildning() {
-        String sqlquery = "select blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning')";
+        String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         DefaultTableModel dmt = (DefaultTableModel)tblBlogTitlar.getModel();
         dmt.getDataVector().removeAllElements();
@@ -300,7 +301,7 @@ public class InloggadSida extends javax.swing.JFrame {
     }
     
     private void fetchBlognamesForskning() {
-        String sqlquery = "select BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Forskning')";
+        String sqlquery = "select BI_ID, BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Forskning') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         DefaultTableModel dmt = (DefaultTableModel)tblBlogTitlar.getModel();
         dmt.getDataVector().removeAllElements();
@@ -319,7 +320,7 @@ public class InloggadSida extends javax.swing.JFrame {
     }
     
     private void fetchBlognamesInformell() {
-        String sqlquery = "select BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Informell')";
+        String sqlquery = "select BI_ID, BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Informell') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         DefaultTableModel dmt = (DefaultTableModel)tblBlogTitlar.getModel();
         dmt.getDataVector().removeAllElements();
@@ -341,6 +342,17 @@ public class InloggadSida extends javax.swing.JFrame {
         String dettaID = anvID;
         return dettaID;
     }
+    
+    private void hamtaSenaste() {
+         String sqlfraga = "SELECT BLOGGINLAGG.TEXT from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Forskning') order by BI_ID DESC";
+         String text = new String();
+         try {
+             text = Databas.getDatabas().fetchSingle(sqlfraga);
+             taForskning.setText(text);
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCalendar;

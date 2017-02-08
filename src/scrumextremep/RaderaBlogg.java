@@ -24,6 +24,7 @@ public class RaderaBlogg extends javax.swing.JFrame {
         initComponents();
         anvID = anvandarID;
         setLocationRelativeTo(null);
+        hamtaSenaste();
     }
 
     /**
@@ -281,7 +282,7 @@ public class RaderaBlogg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRedigeraActionPerformed
 
     private void fetchBlognamesUtbildning() {
-        String sqlquery = "select blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning')";
+        String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         DefaultTableModel dmt = (DefaultTableModel)tblBlogTitlar.getModel();
         dmt.getDataVector().removeAllElements();
@@ -300,7 +301,7 @@ public class RaderaBlogg extends javax.swing.JFrame {
     }
     
     private void fetchBlognamesForskning() {
-        String sqlquery = "select BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Forskning')";
+        String sqlquery = "select BI_ID, BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Forskning') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         DefaultTableModel dmt = (DefaultTableModel)tblBlogTitlar.getModel();
         dmt.getDataVector().removeAllElements();
@@ -319,7 +320,7 @@ public class RaderaBlogg extends javax.swing.JFrame {
     }
     
     private void fetchBlognamesInformell() {
-        String sqlquery = "select BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Informell')";
+        String sqlquery = "select BI_ID, BLOGGINLAGG.TITEL from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Informell') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         DefaultTableModel dmt = (DefaultTableModel)tblBlogTitlar.getModel();
         dmt.getDataVector().removeAllElements();
@@ -375,6 +376,17 @@ public class RaderaBlogg extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void hamtaSenaste() {
+         String sqlfraga = "SELECT BLOGGINLAGG.TEXT from BLOGGINLAGG where b_id = (select b_id from blogg where bloggnamn = 'Forskning') order by BI_ID DESC";
+         String text = new String();
+         try {
+             text = Databas.getDatabas().fetchSingle(sqlfraga);
+             taForskning.setText(text);
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -196,7 +196,7 @@ public class EjAdminRaderaBlogg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRaderaActionPerformed
 
     private void fetchTitlar() {
-        String sqlquery = "select BLOGGINLAGG.TITEL from BLOGGINLAGG where a_ID = " + anvID;
+        String sqlquery = "select BI_ID, BLOGGINLAGG.TITEL from BLOGGINLAGG where a_ID = " + anvID + " order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
         DefaultTableModel dmt = (DefaultTableModel)tblBlogTitlar.getModel();
         dmt.getDataVector().removeAllElements();
