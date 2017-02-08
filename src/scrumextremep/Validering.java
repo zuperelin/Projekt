@@ -42,6 +42,25 @@ public class Validering {
         return true;
     }
     
+    static public boolean adminCheck(String anvID)
+    {
+        boolean admin = false;
+        
+        String sqlQueryArAdmin = "select administrator from anvandare where a_id = " +anvID;
+        
+        try
+        {
+            String resultat = Databas.getDatabas().fetchSingle(sqlQueryArAdmin);
+            if(resultat.equals("T")) {
+                admin = true;
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return admin;
+    }
+        
     static public Boolean anvandareUnik(JTextField anvnamn)
     {
         try{

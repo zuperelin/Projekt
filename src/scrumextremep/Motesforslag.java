@@ -230,7 +230,7 @@ public class Motesforslag extends javax.swing.JFrame {
         if(dmt.getRowCount() == 0){
             JOptionPane.showMessageDialog(null, "Det finns inga möteförslag att välja");
         } else {
-        SkickaMail.skickaEttMail(anvID);
+        SkickaMail.skickaEttMail(anvID, nyttID);
         dmt.getDataVector().removeAllElements();
         revalidate();
         txt_motestitel.setText("");

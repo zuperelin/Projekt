@@ -26,9 +26,12 @@ public class RedigeraAnv extends javax.swing.JFrame {
     public RedigeraAnv(String anvandarID) {
         initComponents();
         anvID = anvandarID;
-        fillAnvCB();
+        selectedAID = anvID;
         fillCbAnvandare();
+        adminHide();
+        fillUserValues();
         setLocationRelativeTo(null);
+        System.out.println("inne på klassen med aid:" +anvID);
     }
 
 
@@ -136,7 +139,7 @@ public class RedigeraAnv extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,31 +147,38 @@ public class RedigeraAnv extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSkapa, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)
-                                .addComponent(deleteu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(chbAdmin)))
-                        .addGap(0, 163, Short.MAX_VALUE))
+                                .addComponent(deleteu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 299, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblFornamn)
                                 .addGap(48, 48, 48)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfFornamn)
-                                    .addComponent(cbAnv, 0, 192, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfFornamn)
+                                        .addGap(31, 31, 31))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbAnv, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblAnvNamn)
                                     .addComponent(lblEmail))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfAnvNamn)
-                                    .addComponent(tfEmail))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(chbAdmin)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                            .addComponent(tfAnvNamn))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -222,8 +232,7 @@ public class RedigeraAnv extends javax.swing.JFrame {
                         .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSkapa)
-                            .addComponent(deleteu)
-                            .addComponent(chbAdmin)))
+                            .addComponent(deleteu)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,7 +241,9 @@ public class RedigeraAnv extends javax.swing.JFrame {
                             .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEmail))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chb_Blockera)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chb_Blockera)
+                            .addComponent(chbAdmin))))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
 
@@ -250,10 +261,20 @@ public class RedigeraAnv extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkapaActionPerformed
 
     private void cbAnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnvActionPerformed
+        
+        String valdAnv = (String)cbAnv.getSelectedItem();
+        String sqlQueryHamtaAid = "select a_id from anvandare where email = '" +valdAnv+ "'";
+        try
+        {
+            selectedAID = Databas.getDatabas().fetchSingle(sqlQueryHamtaAid);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
         fillUserValues();
     }//GEN-LAST:event_cbAnvActionPerformed
 
     private void saverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saverActionPerformed
+        chb_Blockera.setSelected(false);
         updateValuesDB();
         JOptionPane.showMessageDialog(null, "Användare har uppdaterats!");
         cbAnv.removeAllItems();
@@ -299,24 +320,29 @@ public class RedigeraAnv extends javax.swing.JFrame {
     }
         
     private void fillUserValues() {
-        String admin;
-        chbAdmin.setSelected(false);
-        if (cbAnv.getSelectedItem() != null) {
-            String email = cbAnv.getSelectedItem().toString();
-            try {
-                selectedAID = Databas.getDatabas().fetchSingle("select A_ID from anvandare where email = '" + email + "';");
-                tfFornamn.setText(Databas.getDatabas().fetchSingle("select fornamn from anvandare where A_ID = " + selectedAID + ";"));
-                tfEfternamn.setText(Databas.getDatabas().fetchSingle("select efternamn from anvandare where A_ID = " + selectedAID + ";"));
-                tfAnvNamn.setText(Databas.getDatabas().fetchSingle("select anvnamn from anvandare where A_ID = " + selectedAID + ";"));
-                tfEmail.setText(email);
-                tfLosenord.setText(Databas.getDatabas().fetchSingle("select losenord from anvandare where A_ID = " + selectedAID + ";"));
-                admin = Databas.getDatabas().fetchSingle("select administrator from anvandare where A_ID = " + selectedAID + ";");
-                if (admin.contains("T")) {
-                    chbAdmin.setSelected(true);
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+        
+        try {
+            if(Validering.adminCheck(anvID)) {
+                String valdAnv = (String)cbAnv.getSelectedItem();
+                String sqlQueryHamtaAnvInfo = "Select fornamn, efternamn, anvnamn, losenord, administrator, email from anvandare where email = '" +valdAnv+ "'";
+                HashMap<String, String> anvandarInfo = Databas.getDatabas().fetchRow(sqlQueryHamtaAnvInfo);
+                tfFornamn.setText(anvandarInfo.get("FORNAMN"));
+                tfAnvNamn.setText(anvandarInfo.get("ANVNAMN"));
+                tfEmail.setText(anvandarInfo.get("EMAIL"));
+                tfEfternamn.setText(anvandarInfo.get("EFTERNAMN"));
+                tfLosenord.setText(anvandarInfo.get("LOSENORD"));
+                
+            } else {
+                String sqlQueryHamtaAnvInfo = "Select fornamn, efternamn, anvnamn, losenord, email from anvandare where a_id = " +anvID;
+                HashMap<String, String> anvandarInfo = Databas.getDatabas().fetchRow(sqlQueryHamtaAnvInfo);
+                tfFornamn.setText(anvandarInfo.get("FORNAMN"));
+                tfAnvNamn.setText(anvandarInfo.get("ANVNAMN"));
+                tfEmail.setText(anvandarInfo.get("EMAIL"));
+                tfEfternamn.setText(anvandarInfo.get("EFTERNAMN"));
+                tfLosenord.setText(anvandarInfo.get("LOSENORD"));
             }
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
         }
     }
     
@@ -382,6 +408,19 @@ public class RedigeraAnv extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         cb_Anvandare.setModel(cbModel);
+    }
+    
+    private void adminHide()
+    {
+        if(!Validering.adminCheck(anvID)) {
+            cbAnv.setVisible(false);
+            btnSkapa.setVisible(false);
+            deleteu.setVisible(false);
+            chbAdmin.setVisible(false);
+            lblAnv.setVisible(false);
+        } else {
+            fillAnvCB();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
