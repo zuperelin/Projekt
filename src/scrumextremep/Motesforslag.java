@@ -277,6 +277,7 @@ public class Motesforslag extends javax.swing.JFrame {
         String valdTimme = (String)cb_timmar.getSelectedItem();
         String valdMinut = (String)cb_minuter.getSelectedItem();
         String valdTid = valdTimme + valdMinut;
+//        int valdTid = Integer.parseInt(tidTillsammans);
         String nyttID = "";
         
         if(datechooser.getDate() == null) {
@@ -351,10 +352,11 @@ public class Motesforslag extends javax.swing.JFrame {
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<24; i++) {
+            String a = Integer.toString(i);
             if(i<=9) {
-                cbModel.addElement("0"+i);
+                cbModel.addElement("0"+a);
             } else {
-                cbModel.addElement(i);
+                cbModel.addElement(a);
             }
         }
         cb_timmar.setModel(cbModel);
@@ -364,10 +366,11 @@ public class Motesforslag extends javax.swing.JFrame {
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<60; i++) {
-            if(i<9) {
-            cbModel.addElement("0"+i);
+            String a = Integer.toString(i);
+            if(i<=9) {
+            cbModel.addElement("0"+a);
             } else {
-                cbModel.addElement(i);
+                cbModel.addElement(a);
             }
         }
         cb_minuter.setModel(cbModel);

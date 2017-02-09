@@ -212,8 +212,7 @@ public class SkapaMote extends javax.swing.JFrame {
         String text = txt_text.getText();
         String valdTimme = (String)cb_timmar.getSelectedItem();
         String valdMinut = (String)cb_minuter.getSelectedItem();
-        String tidTillsammans = valdTimme + valdMinut;
-        int valdTid = Integer.parseInt(tidTillsammans);
+        String valdTid = valdTimme + valdMinut;
         String sqlQueryMotesForslagsID = "select mf_id from motesforslag where titel = '" +titel+ "'";
         String sqlQueryHamtaMotesID = "select m_id from mote";
         String textArea = txt_text.getText();
@@ -319,10 +318,11 @@ public class SkapaMote extends javax.swing.JFrame {
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<24; i++) {
+            String a = Integer.toString(i);
             if(i<=9) {
-                cbModel.addElement("0"+i);
+                cbModel.addElement("0"+a);
             } else {
-                cbModel.addElement(i);
+                cbModel.addElement(a);
             }
         }
         cb_timmar.setModel(cbModel);
@@ -332,10 +332,11 @@ public class SkapaMote extends javax.swing.JFrame {
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
         for(int i = 0; i<60; i++) {
+            String a = Integer.toString(i);
             if(i<9) {
-            cbModel.addElement("0"+i);
+            cbModel.addElement("0"+a);
             } else {
-                cbModel.addElement(i);
+                cbModel.addElement(a);
             }
         }
         cb_minuter.setModel(cbModel);
