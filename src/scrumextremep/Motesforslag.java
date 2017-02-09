@@ -25,6 +25,7 @@ public class Motesforslag extends javax.swing.JFrame {
     boolean motesForslagSkickat = false;
     boolean mfIDInteFinns = true;
     String nyttID = "";
+    private String selectedMFID;
 
     /**
      * Creates new form Motesforslag
@@ -230,7 +231,8 @@ public class Motesforslag extends javax.swing.JFrame {
         if(dmt.getRowCount() == 0){
             JOptionPane.showMessageDialog(null, "Det finns inga möteförslag att välja");
         } else {
-        SkickaMail.skickaEttMail(anvID, nyttID);
+        hamtaMFID();
+        SkickaMail.skickaEttMail(anvID, selectedMFID);
         dmt.getDataVector().removeAllElements();
         revalidate();
         txt_motestitel.setText("");
@@ -377,6 +379,14 @@ public class Motesforslag extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnLaggTillForslagActionPerformed
 
+    private void hamtaMFID() {
+        String sqlMFID = "SELECT MF_ID from MOTESFORSLAG WHERE TITEL = '" + txt_motestitel.getText() + "'";
+        try { 
+            selectedMFID = Databas.getDatabas().fetchSingle(sqlMFID);
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
+                }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTillForslag;

@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMessage;
  * @author Timmy
  */
 public class SkickaMail {
-    	public static void skickaEttMail(String anvID, String mfID) {
+    	public static void skickaEttMail(String anvID, String selectedMFID) {
 
 		final String username = "grupp6projekt@gmail.com";
 		final String password = "axeduvan";
@@ -39,12 +39,44 @@ public class SkickaMail {
 		  });
 
 		try {
+                    
+                    String datumvald = new String();
+                    String tidvald = new String();
                     String sqlfraga = "select email from anvandare where anvandare.a_id not in ( select anvandareblock.a_id from anvandareblock  where anvandareblock.blockad_id = " +anvID+ ")";
-                    String sqlQueryTidDatum = "select Datum, tid from mftiddatum where mf_id = " +mfID;
                     ArrayList<HashMap<String, String>> email = Databas.getDatabas().fetchRows(sqlfraga);
-                    ArrayList<HashMap<String, String>> tidDatum = Databas.getDatabas().fetchRows(sqlQueryTidDatum);
+                            String sqldatum = "select MFTIDDATUM.DATUM from MFTIDDATUM\n" +
+                                "join MOTESFORSLAG\n" +
+                                "on MOTESFORSLAG.MF_ID = MFTIDDATUM.MF_ID\n" +
+                                "join ANVANDARE\n" +
+                                "on ANVANDARE.A_ID = MOTESFORSLAG.A_ID\n" +
+                                "where ANVANDARE.A_ID = " + anvID + "\n" +
+                                "and MOTESFORSLAG.MF_ID = " + selectedMFID;
+                                String sqltid = "select MFTIDDATUM.TID from MFTIDDATUM\n" +
+                                "join MOTESFORSLAG\n" +
+                                "on MOTESFORSLAG.MF_ID = MFTIDDATUM.MF_ID\n" +
+                                "join ANVANDARE\n" +
+                                "on ANVANDARE.A_ID = MOTESFORSLAG.A_ID\n" +
+                                "where ANVANDARE.A_ID = " + anvID + "\n" +
+                                "and MOTESFORSLAG.MF_ID = " + selectedMFID;
+                                ArrayList<HashMap<String, String>> datum = Databas.getDatabas().fetchRows(sqldatum);
+                                ArrayList<HashMap<String, String>> tid = Databas.getDatabas().fetchRows(sqltid);
 
-                    System.out.println(tidDatum);
+                           
+                                
+                                String datumOchTider = "";
+                                for (int i = 0; i < tid.size(); i++) {
+                                    if(Integer.parseInt(tid.get(i).get("TID")) >10) {
+                                        tidvald = "0" + tid.get(i).get("TID");
+                                    } else {
+                                        tidvald = tid.get(i).get("TID");
+                                    }
+                                    String timmar = tidvald.substring(0, 2);
+                                    String minuter = tidvald.substring(2, 4);
+                                    datumvald = datum.get(i).get("DATUM");
+                                    datumOchTider += "\n\n Datum " +datumvald + " Tid " + timmar + ":" +minuter;
+                                }
+                                
+                                
                     for (int i = 0; i < email.size(); i++) {
                         String lista = email.get(i).get("EMAIL");
                 
@@ -57,12 +89,13 @@ public class SkickaMail {
 			message.setSubject("Testing Subject");
 			message.setText("Hej!"
 				+ "\n\n Det finns ett nytt mötesförslag att svara på."
-                                + "\n\n "+tidDatum);
+                                + "\n\n Dessa datum och tider har föreslagits:"
+                                + datumOchTider);
 
 			Transport.send(message);
                         }
 
-			System.out.println("Done");
+			System.out.println("Skickat!");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
