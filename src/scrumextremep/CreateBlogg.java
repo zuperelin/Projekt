@@ -6,6 +6,7 @@
 package scrumextremep;
 
 import java.awt.Desktop;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -137,7 +138,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtAddFile);
-        BtAddFile.setBounds(779, 420, 130, 25);
+        BtAddFile.setBounds(779, 420, 130, 32);
 
         BtCreateBlog.setText("Skapa blogginlägg");
         BtCreateBlog.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +147,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtCreateBlog);
-        BtCreateBlog.setBounds(780, 510, 121, 40);
+        BtCreateBlog.setBounds(780, 510, 134, 40);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
         lblRubrik.setBackground(new java.awt.Color(255, 255, 255));
@@ -164,7 +165,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_Bild);
-        btn_Bild.setBounds(780, 480, 110, 25);
+        btn_Bild.setBounds(780, 480, 110, 32);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -260,8 +261,8 @@ public class CreateBlogg extends javax.swing.JFrame {
         JFileChooser jfc = new JFileChooser(); 
         if(jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
             String bildVag = jfc.getSelectedFile().getAbsolutePath();
-            ImageIcon iconLogo = new ImageIcon(bildVag);
-            lblBild.setIcon(iconLogo);
+            ImageIcon bilden = new ImageIcon(new ImageIcon(bildVag).getImage().getScaledInstance(680, 240, Image.SCALE_DEFAULT));
+            lblBild.setIcon(bilden);
             
             File mappen = new File("bilder");
             sokvag = mappen.getAbsolutePath();
