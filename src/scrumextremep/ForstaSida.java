@@ -194,14 +194,20 @@ public class ForstaSida extends javax.swing.JFrame {
             int b = tblBlogTitlar.getSelectedColumn();
             String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
 
-            String sql = "SELECT FIL FROM BLOGGINLAGG WHERE TITEL ='" + tableValue + "'";
+            String sql = "SELECT FIL FROM BLOGGINLAGG WHERE FIL ='" + tableValue + "'";
 
             try
             {
+                
                 String hej = Databas.getDatabas().fetchSingle(sql);
+                if(hej =="" || hej == null){
+                    JOptionPane.showMessageDialog(null, "Det här inlägget har ingen bifogad fil");
+                }
+                else{
                 String path = sokvag + "//" + hej;
                 File myFile = new File(path);
                 Desktop.getDesktop().open(myFile);
+                }
             }
 
             catch(IOException ex)
