@@ -151,8 +151,21 @@ public class EjAdminRaderaBlogg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        new InloggadSida(anvID).setVisible(true);
-        dispose();
+        String sqlfraga = "SELECT ADMINISTRATOR FROM ANVANDARE WHERE A_ID = " + anvID;
+        String admin = new String();
+        try {
+            admin = Databas.getDatabas().fetchSingle(sqlfraga);
+            if(admin.contains("T")) {
+                new RaderaBlogg(anvID).setVisible(true);
+                dispose();
+            }
+            else {
+                new InloggadSida(anvID).setVisible(true);
+                dispose();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void tblBlogTitlarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBlogTitlarMouseClicked

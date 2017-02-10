@@ -133,14 +133,14 @@ public class InloggadSida extends javax.swing.JFrame {
         getContentPane().add(tpBloggar);
         tpBloggar.setBounds(20, 190, 490, 380);
 
-        btnRadera.setText("Redigera inlägg");
+        btnRadera.setText("Arkiv / Redigera inlägg");
         btnRadera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRaderaActionPerformed(evt);
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 140, 29);
+        btnRadera.setBounds(270, 10, 160, 25);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -150,7 +150,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 151, 29);
+        admin.setBounds(130, 10, 114, 25);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +159,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 29);
+        btnLoggaUt.setBounds(20, 10, 90, 25);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {

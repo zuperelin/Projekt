@@ -29,8 +29,12 @@
                       <EmptySpace pref="278" max="32767" attributes="0"/>
                       <Component id="btnRedigera" min="-2" pref="137" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnRadera" min="-2" pref="147" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnRadera" min="-2" pref="147" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btn_ArkivAdmin" min="-2" pref="102" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jScrollPane1" min="-2" pref="368" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -87,8 +91,11 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnRedigera" max="32767" attributes="0"/>
-                  <Component id="btnRadera" pref="48" max="32767" attributes="0"/>
+                  <Component id="btn_ArkivAdmin" pref="48" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnRedigera" max="32767" attributes="0"/>
+                      <Component id="btnRadera" pref="48" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -244,6 +251,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra Text"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_ArkivAdmin">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Arkiv"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ArkivAdminActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

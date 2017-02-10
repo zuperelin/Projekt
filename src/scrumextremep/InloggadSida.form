@@ -168,14 +168,14 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnRadera">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Redigera inl&#xe4;gg"/>
+        <Property name="text" type="java.lang.String" value="Arkiv / Redigera inl&#xe4;gg"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRaderaActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="270" y="10" width="140" height="-1"/>
+          <AbsoluteConstraints x="270" y="10" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
