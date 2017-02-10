@@ -33,6 +33,7 @@ public class ForstaSida extends javax.swing.JFrame {
         lbl_anvnamn.setForeground(Color.BLACK);
         lbl_losenord.setForeground(Color.BLACK);
         informellFlode();  
+        btnTillbaka.setVisible(false);
     }
 
     /**
@@ -50,6 +51,7 @@ public class ForstaSida extends javax.swing.JFrame {
         txt_anvnamn = new javax.swing.JTextField();
         txt_losenord = new javax.swing.JPasswordField();
         btnLoggaIn = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
         spBlogFlow = new javax.swing.JScrollPane();
         taBlogFlow = new javax.swing.JTextArea();
         spBlogTitlar = new javax.swing.JScrollPane();
@@ -105,7 +107,16 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(670, 140, 90, 32);
+        btnLoggaIn.setBounds(670, 140, 90, 29);
+
+        btnTillbaka.setText("Tillbaka till bloggflöde");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTillbaka);
+        btnTillbaka.setBounds(150, 170, 190, 29);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
@@ -153,7 +164,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_oppnaFil);
-        btn_oppnaFil.setBounds(20, 170, 100, 32);
+        btn_oppnaFil.setBounds(20, 170, 100, 29);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(590, 310, 320, 190);
 
@@ -180,6 +191,7 @@ public class ForstaSida extends javax.swing.JFrame {
     
     private void tblBlogTitlarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBlogTitlarMouseClicked
         hamtaVarden();
+        btnTillbaka.setVisible(true);
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
     private void txt_anvnamnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_anvnamnFocusGained
@@ -227,6 +239,13 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_oppnaFilActionPerformed
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        taBlogFlow.setText("");
+        informellFlode();
+        taBlogFlow.setCaretPosition(0);
+        btnTillbaka.setVisible(false);
+    }//GEN-LAST:event_btnTillbakaActionPerformed
   
     private void fetchBlognamesInformell() {
         String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Informell') order by BI_ID DESC";
@@ -306,14 +325,15 @@ public class ForstaSida extends javax.swing.JFrame {
      
      private void informellFlode() 
      {
-        String sqlquery = "SELECT BLOGGINLAGG.TITEL, BLOGGINLAGG.TEXT FROM BLOGG JOIN BLOGGINLAGG ON BLOGG.B_ID = BLOGGINLAGG.B_ID WHERE BLOGG.BLOGGNAMN = 'Informell'";
+        String sqlquery = "SELECT BLOGGINLAGG.TITEL, BLOGGINLAGG.TEXT FROM BLOGG JOIN BLOGGINLAGG ON BLOGG.B_ID = BLOGGINLAGG.B_ID WHERE BLOGG.BLOGGNAMN = 'Informell' ORDER BY BI_ID DESC";
         ArrayList<HashMap<String, String>> informell = new ArrayList<>();
         try {
          informell = Databas.getDatabas().fetchRows(sqlquery);
          
          for(int i = 0; i < informell.size(); i++) {
              String text = informell.get(i).get("TEXT");
-             taBlogFlow.append(text +"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n ");
+             String titel = informell.get(i).get("TITEL");
+             taBlogFlow.append("Titel: " + titel + "\n" + text +"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                               }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -324,6 +344,7 @@ public class ForstaSida extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btn_oppnaFil;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
