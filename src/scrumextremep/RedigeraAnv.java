@@ -283,10 +283,13 @@ public class RedigeraAnv extends javax.swing.JFrame {
     }//GEN-LAST:event_saverActionPerformed
 
     private void deleteuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteuActionPerformed
-        deleteUser();
-        JOptionPane.showMessageDialog(null, "Användare borttagen!");
-        cbAnv.removeAllItems();
-        fillAnvCB();
+        int a = JOptionPane.showConfirmDialog(null, "Vill du ta bort denna användare?", "Ta bort", JOptionPane.YES_NO_OPTION);
+        if (a==0){
+            deleteUser();
+            JOptionPane.showMessageDialog(null, "Användare borttagen!");
+            cbAnv.removeAllItems();
+            fillAnvCB();
+        }
     }//GEN-LAST:event_deleteuActionPerformed
 
     private void cb_AnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_AnvandareActionPerformed
