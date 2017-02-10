@@ -32,8 +32,7 @@ public class ForstaSida extends javax.swing.JFrame {
         fetchBlognamesInformell();
         lbl_anvnamn.setForeground(Color.BLACK);
         lbl_losenord.setForeground(Color.BLACK);
-        hamtaSenaste();
-        
+        informellFlode();  
     }
 
     /**
@@ -103,11 +102,13 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(670, 140, 90, 25);
+        btnLoggaIn.setBounds(670, 140, 90, 23);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
+        taBlogFlow.setLineWrap(true);
         taBlogFlow.setRows(5);
+        taBlogFlow.setWrapStyleWord(true);
         spBlogFlow.setViewportView(taBlogFlow);
 
         getContentPane().add(spBlogFlow);
@@ -149,7 +150,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_oppnaFil);
-        btn_oppnaFil.setBounds(20, 170, 100, 25);
+        btn_oppnaFil.setBounds(20, 170, 100, 23);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -288,6 +289,22 @@ public class ForstaSida extends javax.swing.JFrame {
              System.out.println(e.getMessage());
          }
      }
+     
+     private void informellFlode() 
+     {
+        String sqlquery = "SELECT BLOGGINLAGG.TITEL, BLOGGINLAGG.TEXT FROM BLOGG JOIN BLOGGINLAGG ON BLOGG.B_ID = BLOGGINLAGG.B_ID WHERE BLOGG.BLOGGNAMN = 'Informell'";
+        ArrayList<HashMap<String, String>> informell = new ArrayList<>();
+        try {
+         informell = Databas.getDatabas().fetchRows(sqlquery);
+         
+         for(int i = 0; i < informell.size(); i++) {
+             String text = informell.get(i).get("TEXT");
+             taBlogFlow.append(text +"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n ");
+                              }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     
 
