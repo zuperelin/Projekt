@@ -6,11 +6,16 @@
 package scrumextremep;
 
 import java.awt.Color;
-import java.awt.event.MouseEvent;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import oru.inf.InfException;
 
 /**
  *
@@ -50,6 +55,7 @@ public class ForstaSida extends javax.swing.JFrame {
         taBlogFlow = new javax.swing.JTextArea();
         spBlogTitlar = new javax.swing.JScrollPane();
         tblBlogTitlar = new javax.swing.JTable();
+        btn_oppnaFil = new javax.swing.JButton();
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,7 +103,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(670, 140, 90, 32);
+        btnLoggaIn.setBounds(670, 140, 90, 25);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
@@ -136,6 +142,15 @@ public class ForstaSida extends javax.swing.JFrame {
         getContentPane().add(spBlogTitlar);
         spBlogTitlar.setBounds(560, 210, 210, 360);
 
+        btn_oppnaFil.setText("Öppna fil");
+        btn_oppnaFil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_oppnaFilActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_oppnaFil);
+        btn_oppnaFil.setBounds(20, 170, 100, 25);
+
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
         lblBakgrundVit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/Namnlös.jpg"))); // NOI18N
@@ -166,6 +181,38 @@ public class ForstaSida extends javax.swing.JFrame {
     private void txt_losenordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_losenordFocusGained
         txt_losenord.setText("");
     }//GEN-LAST:event_txt_losenordFocusGained
+
+    private void btn_oppnaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_oppnaFilActionPerformed
+        if(Desktop.isDesktopSupported())
+        {
+
+            File mappen = new File("src\\scrumextremep\\resources");
+            String sokvag = mappen.getAbsolutePath();
+
+            int a = tblBlogTitlar.getSelectedRow();
+            int b = tblBlogTitlar.getSelectedColumn();
+            String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+
+            String sql = "SELECT FIL FROM BLOGGINLAGG WHERE TITEL ='" + tableValue + "'";
+
+            try
+            {
+                String hej = Databas.getDatabas().fetchSingle(sql);
+                String path = sokvag + "//" + hej;
+                File myFile = new File(path);
+                Desktop.getDesktop().open(myFile);
+            }
+
+            catch(IOException ex)
+            {
+                System.out.println(ex);
+            }
+            catch (InfException ex)
+            {
+                Logger.getLogger(ForstaSida.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn_oppnaFilActionPerformed
   
     private void fetchBlognamesInformell() {
         String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Informell') order by BI_ID DESC";
@@ -246,6 +293,7 @@ public class ForstaSida extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
+    private javax.swing.JButton btn_oppnaFil;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
     private javax.swing.JLabel lbl_anvnamn;

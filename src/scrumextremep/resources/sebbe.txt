@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Joakim</title>
+  </head>
+  
+<body>
+<h1>Joakim</h1>
+<p>Joakim</p>
+<img src="\bilder\sebbe.jpg" />
+</body>
+
+</html>

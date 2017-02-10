@@ -51,10 +51,10 @@ public class InloggadSida extends javax.swing.JFrame {
         btnLoggaUt = new javax.swing.JButton();
         BtCalendar = new javax.swing.JButton();
         BtNewBlog = new javax.swing.JButton();
+        btn_tillSorteraFiler = new javax.swing.JButton();
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(790, 623));
         setMinimumSize(new java.awt.Dimension(790, 623));
         getContentPane().setLayout(null);
 
@@ -179,6 +179,15 @@ public class InloggadSida extends javax.swing.JFrame {
         getContentPane().add(BtNewBlog);
         BtNewBlog.setBounds(593, 173, 140, 30);
 
+        btn_tillSorteraFiler.setText("Se bifogade filer");
+        btn_tillSorteraFiler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tillSorteraFilerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_tillSorteraFiler);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 25);
+
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
         lblBakgrundVit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/Namnlös.jpg"))); // NOI18N
@@ -283,6 +292,11 @@ public class InloggadSida extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRaderaActionPerformed
 
+    private void btn_tillSorteraFilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tillSorteraFilerActionPerformed
+        new SorteraFiler(anvID).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_tillSorteraFilerActionPerformed
+
     private void fetchBlognamesUtbildning() {
         String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
@@ -384,6 +398,7 @@ public class InloggadSida extends javax.swing.JFrame {
     private javax.swing.JButton admin;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnRadera;
+    private javax.swing.JButton btn_tillSorteraFiler;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
     private javax.swing.JScrollPane spBlogtitlar;

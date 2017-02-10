@@ -5,13 +5,18 @@
  */
 package scrumextremep;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -28,7 +33,7 @@ public class CreateBlogg extends javax.swing.JFrame {
      */
     private String anvID;
     File filnamn;        
-    String file;
+    String bild;
     String filpath;
     String sokvag;
     public CreateBlogg(String anvandarID) {
@@ -53,6 +58,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         spBlogFlow = new javax.swing.JScrollPane();
         TaCreateBlog = new javax.swing.JTextArea();
         cbBlog = new javax.swing.JComboBox<>();
+        lbl_fil = new javax.swing.JLabel();
         BtnBack = new javax.swing.JButton();
         CbCategory = new javax.swing.JComboBox<>();
         LbCreateCategory = new javax.swing.JLabel();
@@ -93,6 +99,10 @@ public class CreateBlogg extends javax.swing.JFrame {
         getContentPane().add(cbBlog);
         cbBlog.setBounds(780, 190, 130, 30);
 
+        lbl_fil.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(lbl_fil);
+        lbl_fil.setBounds(780, 450, 70, 20);
+
         BtnBack.setText("Tillbaka ");
         BtnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,8 +131,13 @@ public class CreateBlogg extends javax.swing.JFrame {
         BtNewCategory.setBounds(780, 390, 130, 20);
 
         BtAddFile.setText("Bifoga fil");
+        BtAddFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtAddFileActionPerformed(evt);
+            }
+        });
         getContentPane().add(BtAddFile);
-        BtAddFile.setBounds(779, 420, 130, 32);
+        BtAddFile.setBounds(779, 420, 130, 25);
 
         BtCreateBlog.setText("Skapa blogginlägg");
         BtCreateBlog.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +146,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtCreateBlog);
-        BtCreateBlog.setBounds(780, 510, 134, 40);
+        BtCreateBlog.setBounds(780, 510, 121, 40);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
         lblRubrik.setBackground(new java.awt.Color(255, 255, 255));
@@ -149,7 +164,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_Bild);
-        btn_Bild.setBounds(790, 460, 110, 32);
+        btn_Bild.setBounds(780, 480, 110, 25);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,14 +202,21 @@ public class CreateBlogg extends javax.swing.JFrame {
         String BiID = Databas.getDatabas().getAutoIncrement("BLOGGINLAGG" , "BI_ID");
         
         FileInputStream stream = new FileInputStream(filpath);
-        FileOutputStream to = new FileOutputStream(sokvag + "//" +  file);
+        FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
                          
         byte [] buffer = new byte[81920];
         int byteRead;
         while((byteRead = stream.read(buffer)) != -1) {
         to.write(buffer,0,byteRead);
         }                
-        String sql = "INSERT INTO BLOGGINLAGG values (" + BiID +  ", '" + titel + "' , '" + blogText + "', " + "'fil'" + ", "+ userC +", "+ subC +" ," + CbBlog + ", " + null + ", '" +file+"')";
+        
+        String filen = lbl_fil.getText();
+        
+        if(filen == null){
+            filen = "";
+        }
+        
+        String sql = "INSERT INTO BLOGGINLAGG values (" + BiID +  ", '" + titel + "' , '" + blogText + "', '" + filen + "' , "+ userC +", "+ subC +" ," + CbBlog + ", '" + hamtaDatum() + "' , '" +bild+"')";
         Databas.getDatabas().insert(sql);
                 
         JOptionPane.showMessageDialog(null, "Blogginlägget har skapats");
@@ -244,12 +266,64 @@ public class CreateBlogg extends javax.swing.JFrame {
             File mappen = new File("bilder");
             sokvag = mappen.getAbsolutePath();
             filnamn = jfc.getSelectedFile();
-            file = jfc.getName(filnamn);
+            bild = jfc.getName(filnamn);
             filpath = filnamn.getAbsolutePath();
         } 
     }//GEN-LAST:event_btn_BildActionPerformed
 
+    private void BtAddFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAddFileActionPerformed
+        oppnaChooser();
+    }//GEN-LAST:event_BtAddFileActionPerformed
+
     
+    public String hamtaDatum()
+    {
+        Date tobias = java.util.Calendar.getInstance().getTime();
+        SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dFormat.format(tobias);
+    }
+    
+    public String oppnaChooser()
+    {
+        String stringfil = "";
+        final JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(CreateBlogg.this);
+    
+        if(Desktop.isDesktopSupported())
+        {
+                 File mappen = new File("src\\scrumextremep\\resources");
+                 String mappensPath = mappen.getAbsolutePath();
+            
+                 File filnamnet = fc.getSelectedFile();
+                 String filpathen = filnamnet.getAbsolutePath();
+        
+                  File filen = fc.getSelectedFile();
+                 stringfil = filen.getName();
+         try
+         {
+                    FileInputStream stream = new FileInputStream(filpathen);
+                    FileOutputStream to = new FileOutputStream(mappensPath + "//" +  stringfil);
+                         
+                            byte [] buffer = new byte[24576000];
+                            int byteRead;
+                            while((byteRead = stream.read(buffer)) != -1) {
+                            to.write(buffer,0,byteRead);
+                            System.out.println(mappensPath + stringfil);
+                            lbl_fil.setText(stringfil);
+         return stringfil;
+            }
+            }       
+         catch (FileNotFoundException ex) 
+         {
+                Logger.getLogger(CreateBlogg.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+         catch (IOException ex) 
+         {
+                Logger.getLogger(CreateBlogg.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return stringfil;
+    }
   
 
 
@@ -303,6 +377,7 @@ public class CreateBlogg extends javax.swing.JFrame {
     private javax.swing.JLabel lblBakgrundVit;
     private javax.swing.JLabel lblBild;
     private java.awt.Label lblRubrik;
+    private javax.swing.JLabel lbl_fil;
     private javax.swing.JScrollPane spBlogFlow;
     // End of variables declaration//GEN-END:variables
 }
