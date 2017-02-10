@@ -31,10 +31,11 @@
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="392" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cb_valjManad" alignment="1" min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="cb_period" alignment="1" min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="cb_valjAr" alignment="1" min="-2" pref="162" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="cb_valjManad" alignment="0" pref="162" max="32767" attributes="0"/>
+                          <Component id="cb_period" alignment="0" pref="162" max="32767" attributes="0"/>
+                          <Component id="cb_valjAr" alignment="0" pref="162" max="32767" attributes="0"/>
+                          <Component id="btn_oppna" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -55,6 +56,8 @@
                       <Component id="cb_period" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cb_valjManad" min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btn_oppna" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -154,12 +157,12 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="1" rowCount="0">
-                <Column editable="true" title="Filer f&#xf6;r vald period" type="java.lang.Object"/>
+                <Column editable="false" title="Filer f&#xf6;r vald period" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -173,5 +176,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btn_oppna">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xd6;ppna vald fil"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_oppnaActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

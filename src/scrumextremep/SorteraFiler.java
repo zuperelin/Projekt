@@ -5,9 +5,15 @@
  */
 package scrumextremep;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import oru.inf.InfException;
 
 /**
  *
@@ -37,6 +43,7 @@ public class SorteraFiler extends javax.swing.JFrame {
         cb_valjManad = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_filer = new javax.swing.JTable();
+        btn_oppna = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,8 +87,26 @@ public class SorteraFiler extends javax.swing.JFrame {
             new String [] {
                 "Filer för vald period"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbl_filer);
+        if (tbl_filer.getColumnModel().getColumnCount() > 0) {
+            tbl_filer.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        btn_oppna.setText("Öppna vald fil");
+        btn_oppna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_oppnaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,10 +120,11 @@ public class SorteraFiler extends javax.swing.JFrame {
                         .addGap(100, 100, 100)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_valjManad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_period, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_valjAr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_valjManad, 0, 162, Short.MAX_VALUE)
+                            .addComponent(cb_period, 0, 162, Short.MAX_VALUE)
+                            .addComponent(cb_valjAr, 0, 162, Short.MAX_VALUE)
+                            .addComponent(btn_oppna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(99, 116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,7 +139,9 @@ public class SorteraFiler extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(cb_period, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cb_valjManad, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cb_valjManad, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_oppna))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -229,6 +257,38 @@ public class SorteraFiler extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cb_periodActionPerformed
 
+    private void btn_oppnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_oppnaActionPerformed
+        if(Desktop.isDesktopSupported())
+        {
+
+            File mappen = new File("src\\scrumextremep\\resources");
+            String sokvag = mappen.getAbsolutePath();
+
+            int a = tbl_filer.getSelectedRow();
+            int b = tbl_filer.getSelectedColumn();
+            String tableValue = (String) tbl_filer.getModel().getValueAt(a, b);
+
+            String sql = "SELECT FIL FROM BLOGGINLAGG WHERE FIL ='" + tableValue + "'";
+
+            try
+            {
+                String hej = Databas.getDatabas().fetchSingle(sql);
+                String path = sokvag + "//" + hej;
+                File myFile = new File(path);
+                Desktop.getDesktop().open(myFile);
+            }
+
+            catch(IOException ex)
+            {
+                System.out.println(ex);
+            }
+            catch (InfException ex)
+            {
+                Logger.getLogger(ForstaSida.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn_oppnaActionPerformed
+
     private void clearTbl() {
  
         DefaultTableModel dm = (DefaultTableModel) tbl_filer.getModel();
@@ -244,6 +304,7 @@ public class SorteraFiler extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbaka;
+    private javax.swing.JButton btn_oppna;
     private javax.swing.JComboBox<String> cb_period;
     private javax.swing.JComboBox<String> cb_valjAr;
     private javax.swing.JComboBox<String> cb_valjManad;
