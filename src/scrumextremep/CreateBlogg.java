@@ -5,8 +5,15 @@
  */
 package scrumextremep;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import oru.inf.InfException;
 
@@ -20,12 +27,17 @@ public class CreateBlogg extends javax.swing.JFrame {
      * Creates new form CreateBlogg
      */
     private String anvID;
+    File filnamn;        
+    String file;
+    String filpath;
+    String sokvag;
     public CreateBlogg(String anvandarID) {
         initComponents();
         setLocationRelativeTo(null);
         fyllBloggar(); 
         fyllSubkategori();
         anvID = anvandarID;
+        
     }
 
     /**
@@ -49,10 +61,11 @@ public class CreateBlogg extends javax.swing.JFrame {
         BtAddFile = new javax.swing.JButton();
         BtCreateBlog = new javax.swing.JButton();
         lblRubrik = new java.awt.Label();
+        lblBild = new javax.swing.JLabel();
+        btn_Bild = new javax.swing.JButton();
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1227, 774));
         setMinimumSize(new java.awt.Dimension(1227, 774));
         getContentPane().setLayout(null);
 
@@ -63,14 +76,14 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(TFTitle);
-        TFTitle.setBounds(240, 130, 220, 30);
+        TFTitle.setBounds(80, 120, 220, 30);
 
         TaCreateBlog.setColumns(20);
         TaCreateBlog.setRows(5);
         spBlogFlow.setViewportView(TaCreateBlog);
 
         getContentPane().add(spBlogFlow);
-        spBlogFlow.setBounds(240, 170, 510, 390);
+        spBlogFlow.setBounds(80, 160, 680, 180);
 
         cbBlog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,11 +118,11 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtNewCategory);
-        BtNewCategory.setBounds(780, 390, 110, 20);
+        BtNewCategory.setBounds(780, 390, 130, 20);
 
         BtAddFile.setText("Bifoga fil");
         getContentPane().add(BtAddFile);
-        BtAddFile.setBounds(800, 430, 76, 25);
+        BtAddFile.setBounds(779, 420, 130, 32);
 
         BtCreateBlog.setText("Skapa blogginlägg");
         BtCreateBlog.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +131,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtCreateBlog);
-        BtCreateBlog.setBounds(780, 510, 121, 40);
+        BtCreateBlog.setBounds(780, 510, 134, 40);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
         lblRubrik.setBackground(new java.awt.Color(255, 255, 255));
@@ -126,6 +139,17 @@ public class CreateBlogg extends javax.swing.JFrame {
         lblRubrik.setText("Informatikblogg");
         getContentPane().add(lblRubrik);
         lblRubrik.setBounds(260, 0, 480, 120);
+        getContentPane().add(lblBild);
+        lblBild.setBounds(80, 350, 680, 240);
+
+        btn_Bild.setText("Bild");
+        btn_Bild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BildActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Bild);
+        btn_Bild.setBounds(790, 460, 110, 32);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,6 +175,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         String sub = CbCategory.getSelectedItem().toString();
         String titel = TFTitle.getText();
         
+        
         // skriva ComboBox för subKategorier, skriva kod för att lägga till kategori samt uppdatera och rensa textfield  
       
         String CbBlog = "SELECT B_ID FROM BLOGG WHERE BLOGGNAMN = '"+ blogType +"'";
@@ -159,16 +184,32 @@ public class CreateBlogg extends javax.swing.JFrame {
         subC = Databas.getDatabas().fetchSingle(subC);
         String userC = "SELECT A_ID FROM ANVANDARE WHERE A_ID = '" + user + "'";
         userC = Databas.getDatabas().fetchSingle(userC);
-        String BiID = Databas.getDatabas().getAutoIncrement("Blogginlagg" , "BI_ID");
+        String BiID = Databas.getDatabas().getAutoIncrement("BLOGGINLAGG" , "BI_ID");
         
-        String sql = "INSERT INTO BLOGGINLAGG values ('" + BiID +  "', '" + titel + "' , '" + blogText + "','"+"fil"+"', "+ userC +", "+ subC +" ," + CbBlog + ")";
+        FileInputStream stream = new FileInputStream(filpath);
+        FileOutputStream to = new FileOutputStream(sokvag + "//" +  file);
+                         
+        byte [] buffer = new byte[81920];
+        int byteRead;
+        while((byteRead = stream.read(buffer)) != -1) {
+        to.write(buffer,0,byteRead);
+        }                
+        String sql = "INSERT INTO BLOGGINLAGG values (" + BiID +  ", '" + titel + "' , '" + blogText + "', " + "'fil'" + ", "+ userC +", "+ subC +" ," + CbBlog + ", " + null + ", '" +file+"')";
         Databas.getDatabas().insert(sql);
                 
-        JOptionPane.showMessageDialog(null, "Blogg inlägget har skapats");
-        
-      } catch (InfException ex) {
-                JOptionPane.showMessageDialog(null, "Något gick visst fel: " + ex);
-            }
+        JOptionPane.showMessageDialog(null, "Blogginlägget har skapats");
+             
+        } catch (FileNotFoundException ex) 
+        {
+            JOptionPane.showMessageDialog(null, "Välj en fil att visa" +ex.getMessage());   
+        } 
+        catch (IOException ex) 
+        { 
+            JOptionPane.showMessageDialog(null, "Välj en fil att visa");   
+        }
+        catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick visst fel: " + ex);
+        }
       
     }//GEN-LAST:event_BtCreateBlogActionPerformed
 
@@ -192,6 +233,21 @@ public class CreateBlogg extends javax.swing.JFrame {
     private void TFTitleFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TFTitleFocusGained
         TFTitle.setText("");
     }//GEN-LAST:event_TFTitleFocusGained
+
+    private void btn_BildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BildActionPerformed
+        JFileChooser jfc = new JFileChooser(); 
+        if(jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
+            String bildVag = jfc.getSelectedFile().getAbsolutePath();
+            ImageIcon iconLogo = new ImageIcon(bildVag);
+            lblBild.setIcon(iconLogo);
+            
+            File mappen = new File("bilder");
+            sokvag = mappen.getAbsolutePath();
+            filnamn = jfc.getSelectedFile();
+            file = jfc.getName(filnamn);
+            filpath = filnamn.getAbsolutePath();
+        } 
+    }//GEN-LAST:event_btn_BildActionPerformed
 
     
   
@@ -228,25 +284,6 @@ public class CreateBlogg extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
-    private void skapaInlagg(String text, String titel, String bloggid, String subkategori, String inloggad){
-        try{
-            titel = TFTitle.getText();
-            text = TaCreateBlog.getText();
-            String bloggNamn = cbBlog.getSelectedItem().toString();
-            bloggid = "SELECT B_ID FROM BLOGGNAMN WHERE BLOGGNAMN = '" + bloggNamn + "'";
-            String subkategoriNamn = CbCategory.getSelectedItem().toString();
-            subkategori = "SELECT SK_ID FROM SUBKATEGORI WHERE NAMN = '" + subkategoriNamn + "'";
-        String increment = Databas.getDatabas().getAutoIncrement("BLOGGINLAGG","B_ID");
-        String sql = "INSERT INTO BLOGGINLAGG VALUES('" + increment + "' , '" + titel + "' , '" + text + "' , " + inloggad + " , " + subkategori + " , " + bloggid + ")";
-        Databas.getDatabas().insert(sql);
-        JOptionPane.showMessageDialog(null, titel + " har nu lagts in!");
-           }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
-    }
 
     
     
@@ -261,8 +298,10 @@ public class CreateBlogg extends javax.swing.JFrame {
     private javax.swing.JTextField TFTitle;
     private javax.swing.JTextArea TaCreateBlog;
     private javax.swing.JTextField TfNewCategory;
+    private javax.swing.JButton btn_Bild;
     private javax.swing.JComboBox<String> cbBlog;
     private javax.swing.JLabel lblBakgrundVit;
+    private javax.swing.JLabel lblBild;
     private java.awt.Label lblRubrik;
     private javax.swing.JScrollPane spBlogFlow;
     // End of variables declaration//GEN-END:variables
