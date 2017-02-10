@@ -5,8 +5,13 @@
  */
 package scrumextremep;
 
+import java.awt.Desktop;
+import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -52,10 +57,14 @@ public class InloggadSida extends javax.swing.JFrame {
         BtCalendar = new javax.swing.JButton();
         BtNewBlog = new javax.swing.JButton();
         btn_tillSorteraFiler = new javax.swing.JButton();
+        lbl_bild = new javax.swing.JLabel();
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(790, 623));
+        setMaximumSize(new java.awt.Dimension(910, 690));
+        setMinimumSize(new java.awt.Dimension(910, 690));
+        setPreferredSize(new java.awt.Dimension(910, 690));
+        setSize(new java.awt.Dimension(910, 690));
         getContentPane().setLayout(null);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
@@ -63,7 +72,7 @@ public class InloggadSida extends javax.swing.JFrame {
         lblRubrik.setFont(new java.awt.Font("Impact", 0, 52)); // NOI18N
         lblRubrik.setText("Informatikblogg");
         getContentPane().add(lblRubrik);
-        lblRubrik.setBounds(140, 40, 480, 120);
+        lblRubrik.setBounds(140, 50, 480, 120);
 
         tblBlogTitlar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,7 +98,7 @@ public class InloggadSida extends javax.swing.JFrame {
         spBlogtitlar.setViewportView(tblBlogTitlar);
 
         getContentPane().add(spBlogtitlar);
-        spBlogtitlar.setBounds(530, 210, 210, 360);
+        spBlogtitlar.setBounds(390, 210, 160, 360);
 
         spForskning.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -137,7 +146,7 @@ public class InloggadSida extends javax.swing.JFrame {
         tpBloggar.addTab("Informell", spInformell);
 
         getContentPane().add(tpBloggar);
-        tpBloggar.setBounds(20, 190, 490, 380);
+        tpBloggar.setBounds(30, 190, 350, 380);
 
         btnRadera.setText("Arkiv / Redigera inlägg");
         btnRadera.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +155,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 160, 29);
+        btnRadera.setBounds(270, 10, 160, 32);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -156,7 +165,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 151, 29);
+        admin.setBounds(130, 10, 125, 32);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +174,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 29);
+        btnLoggaUt.setBounds(20, 10, 90, 32);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +192,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtNewBlog);
-        BtNewBlog.setBounds(593, 173, 140, 30);
+        BtNewBlog.setBounds(650, 210, 140, 30);
 
         btn_tillSorteraFiler.setText("Se bifogade filer");
         btn_tillSorteraFiler.addActionListener(new java.awt.event.ActionListener() {
@@ -192,14 +201,19 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_tillSorteraFiler);
-        btn_tillSorteraFiler.setBounds(460, 10, 130, 29);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 32);
+        getContentPane().add(lbl_bild);
+        lbl_bild.setBounds(570, 280, 320, 190);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
         lblBakgrundVit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/Namnlös.jpg"))); // NOI18N
         lblBakgrundVit.setText("jLabel1");
+        lblBakgrundVit.setMaximumSize(new java.awt.Dimension(910, 690));
+        lblBakgrundVit.setMinimumSize(new java.awt.Dimension(910, 690));
+        lblBakgrundVit.setPreferredSize(new java.awt.Dimension(910, 690));
         getContentPane().add(lblBakgrundVit);
-        lblBakgrundVit.setBounds(0, 0, 750, 630);
+        lblBakgrundVit.setBounds(0, 0, 910, 690);
 
         pack();
         setLocationRelativeTo(null);
@@ -224,6 +238,7 @@ public class InloggadSida extends javax.swing.JFrame {
         
         String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
         String titel = new String();
+        bild(tableValue, lbl_bild);
         
         try {
             titel = Databas.getDatabas().fetchSingle(sqlquery);
@@ -397,6 +412,27 @@ public class InloggadSida extends javax.swing.JFrame {
              System.out.println(e.getMessage());
          }
     }
+        public static void bild(String valtInlagg, JLabel l){
+     if(Desktop.isDesktopSupported())
+        {
+            
+            String sql = "SELECT BILD FROM BLOGGINLAGG WHERE BLOGGINLAGG.TITEL ='" + valtInlagg + "'";
+
+            try
+            {
+                String bildVag = Databas.getDatabas().fetchSingle(sql);
+                File bild = new File("bilder\\" +bildVag);
+                String b = bild.getAbsolutePath();
+                ImageIcon bilden = new ImageIcon(new ImageIcon(b).getImage().getScaledInstance(300, 180, Image.SCALE_DEFAULT));
+                l.setIcon(bilden);
+            }
+
+            catch(Exception ex)
+            {
+                System.out.println(ex);
+            }
+        }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCalendar;
@@ -407,6 +443,7 @@ public class InloggadSida extends javax.swing.JFrame {
     private javax.swing.JButton btn_tillSorteraFiler;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
+    private javax.swing.JLabel lbl_bild;
     private javax.swing.JScrollPane spBlogtitlar;
     private javax.swing.JScrollPane spForskning;
     private javax.swing.JScrollPane spInformell;

@@ -55,10 +55,13 @@ public class ForstaSida extends javax.swing.JFrame {
         spBlogTitlar = new javax.swing.JScrollPane();
         tblBlogTitlar = new javax.swing.JTable();
         btn_oppnaFil = new javax.swing.JButton();
+        lbl_bild = new javax.swing.JLabel();
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(790, 623));
+        setMaximumSize(new java.awt.Dimension(910, 690));
+        setMinimumSize(new java.awt.Dimension(910, 690));
+        setPreferredSize(new java.awt.Dimension(910, 690));
         getContentPane().setLayout(null);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
@@ -102,7 +105,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(670, 140, 90, 23);
+        btnLoggaIn.setBounds(670, 140, 90, 32);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
@@ -112,7 +115,7 @@ public class ForstaSida extends javax.swing.JFrame {
         spBlogFlow.setViewportView(taBlogFlow);
 
         getContentPane().add(spBlogFlow);
-        spBlogFlow.setBounds(20, 210, 510, 360);
+        spBlogFlow.setBounds(20, 210, 320, 360);
 
         tblBlogTitlar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,7 +144,7 @@ public class ForstaSida extends javax.swing.JFrame {
         }
 
         getContentPane().add(spBlogTitlar);
-        spBlogTitlar.setBounds(560, 210, 210, 360);
+        spBlogTitlar.setBounds(360, 210, 210, 360);
 
         btn_oppnaFil.setText("Öppna fil");
         btn_oppnaFil.addActionListener(new java.awt.event.ActionListener() {
@@ -150,14 +153,18 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_oppnaFil);
-        btn_oppnaFil.setBounds(20, 170, 100, 23);
+        btn_oppnaFil.setBounds(20, 170, 100, 32);
+        getContentPane().add(lbl_bild);
+        lbl_bild.setBounds(590, 310, 320, 190);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
         lblBakgrundVit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/Namnlös.jpg"))); // NOI18N
         lblBakgrundVit.setText("jLabel1");
+        lblBakgrundVit.setMaximumSize(new java.awt.Dimension(910, 690));
+        lblBakgrundVit.setMinimumSize(new java.awt.Dimension(910, 690));
         getContentPane().add(lblBakgrundVit);
-        lblBakgrundVit.setBounds(0, 0, 790, 630);
+        lblBakgrundVit.setBounds(0, 0, 930, 660);
 
         pack();
         setLocationRelativeTo(null);
@@ -273,6 +280,7 @@ public class ForstaSida extends javax.swing.JFrame {
         
         String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
         String titel = new String();
+        InloggadSida.bild(tableValue, lbl_bild);
         
         try {
             titel = Databas.getDatabas().fetchSingle(sqlquery);
@@ -320,6 +328,7 @@ public class ForstaSida extends javax.swing.JFrame {
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
     private javax.swing.JLabel lbl_anvnamn;
+    private javax.swing.JLabel lbl_bild;
     private javax.swing.JLabel lbl_losenord;
     private javax.swing.JScrollPane spBlogFlow;
     private javax.swing.JScrollPane spBlogTitlar;
