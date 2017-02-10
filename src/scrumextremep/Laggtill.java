@@ -38,12 +38,13 @@ public class Laggtill extends javax.swing.JFrame {
         txt_fornamn = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_efternamn = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txt_anvnamn = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txt_losenord = new javax.swing.JTextField();
         savenew = new javax.swing.JButton();
-        lbl_anvnamn = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
         chbAdmin = new javax.swing.JCheckBox();
 
@@ -62,6 +63,11 @@ public class Laggtill extends javax.swing.JFrame {
 
         txt_efternamn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Användarnamn");
+
+        txt_anvnamn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("E-mail");
 
@@ -79,9 +85,6 @@ public class Laggtill extends javax.swing.JFrame {
                 savenewActionPerformed(evt);
             }
         });
-
-        lbl_anvnamn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_anvnamn.setText("Användarnamn");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -105,13 +108,13 @@ public class Laggtill extends javax.swing.JFrame {
                             .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2)
-                                .addComponent(txt_fornamn, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addComponent(txt_efternamn))
-                            .addComponent(lbl_anvnamn))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_fornamn)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_efternamn)
+                            .addComponent(txt_anvnamn, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                         .addGap(188, 188, 188)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnTillbaka)
@@ -140,15 +143,17 @@ public class Laggtill extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_losenord, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_efternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chbAdmin)
-                    .addComponent(lbl_anvnamn))
-                .addGap(50, 50, 50)
+                    .addComponent(txt_anvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chbAdmin))
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(savenew, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -162,7 +167,8 @@ public class Laggtill extends javax.swing.JFrame {
        if(Validering.tomtTextfalt(txt_fornamn) && Validering.valideraNamn(txt_fornamn)
                && Validering.tomtTextfalt(txt_efternamn) && Validering.valideraNamn(txt_efternamn)
                && Validering.tomtTextfalt(txt_email) && Validering.giltigMail(txt_email) && Validering.mailUnik(txt_email)
-               && Validering.tomtTextfalt(txt_losenord) && Validering.valideraLosenLangd(txt_losenord))
+               && Validering.tomtTextfalt(txt_losenord) && Validering.valideraLosenLangd(txt_losenord)
+               && Validering.tomtTextfalt(txt_anvnamn))
            
        { 
         
@@ -180,18 +186,15 @@ public class Laggtill extends javax.swing.JFrame {
     private void addUser() {
         String forn = txt_fornamn.getText();
         String lastn = txt_efternamn.getText();
+        String usern = txt_anvnamn.getText();
         String mail = txt_email.getText();
         String password = txt_losenord.getText();
-        
-        
         if (chbAdmin.isSelected()) {
             try {
                 String nextID = Databas.getDatabas().getAutoIncrement("ANVANDARE", "A_ID");
-                String anvnamn = forn.substring(0,2) + lastn.substring(0,3) + nextID;
                 Databas.getDatabas().insert("INSERT INTO ANVANDARE VALUES\n"+
-                                            "("+ nextID +",'" + forn + "', '" + lastn + "', '" + anvnamn + "',\n"+
+                                            "("+ nextID +",'" + forn + "', '" + lastn + "', '" + usern + "',\n"+
                                             "'" + password + "', 'T', '" + mail + "');");
-                lbl_anvnamn.setText(anvnamn);
            
         } catch (Exception e) {
             System.out.println(e.getMessage());         
@@ -199,9 +202,7 @@ public class Laggtill extends javax.swing.JFrame {
         } else {
             try {
                 String nextID = Databas.getDatabas().getAutoIncrement("ANVANDARE", "A_ID");
-                String anvnamn = forn.substring(0,2) + lastn.substring(0,3) + nextID;
-                Databas.getDatabas().insert("INSERT INTO ANVANDARE VALUES (" + nextID + ", '" + forn + "', '" + lastn + "', '" + anvnamn + "', '" + password + "', 'F', '" + mail + "');");
-                lbl_anvnamn.setText(anvnamn);
+                Databas.getDatabas().insert("INSERT INTO ANVANDARE VALUES (" + nextID + ", '" + forn + "', '" + lastn + "', '" + usern + "', '" + password + "', 'F', '" + mail + "');");
             } catch (Exception e) {
                 System.out.println(e.getMessage()); 
             }
@@ -214,10 +215,11 @@ public class Laggtill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel lbl_anvnamn;
     private javax.swing.JButton savenew;
+    private javax.swing.JTextField txt_anvnamn;
     private javax.swing.JTextField txt_efternamn;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_fornamn;
