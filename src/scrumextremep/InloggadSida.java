@@ -99,7 +99,9 @@ public class InloggadSida extends javax.swing.JFrame {
 
         taForskning.setEditable(false);
         taForskning.setColumns(20);
+        taForskning.setLineWrap(true);
         taForskning.setRows(5);
+        taForskning.setWrapStyleWord(true);
         spForskning.setViewportView(taForskning);
 
         tpBloggar.addTab("Forskning", spForskning);
@@ -112,7 +114,9 @@ public class InloggadSida extends javax.swing.JFrame {
 
         taUtbildning.setEditable(false);
         taUtbildning.setColumns(20);
+        taUtbildning.setLineWrap(true);
         taUtbildning.setRows(5);
+        taUtbildning.setWrapStyleWord(true);
         spUtbildning.setViewportView(taUtbildning);
 
         tpBloggar.addTab("Utbildning", spUtbildning);
@@ -125,7 +129,9 @@ public class InloggadSida extends javax.swing.JFrame {
 
         taInformell.setEditable(false);
         taInformell.setColumns(20);
+        taInformell.setLineWrap(true);
         taInformell.setRows(5);
+        taInformell.setWrapStyleWord(true);
         spInformell.setViewportView(taInformell);
 
         tpBloggar.addTab("Informell", spInformell);
@@ -140,7 +146,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 160, 25);
+        btnRadera.setBounds(270, 10, 160, 29);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -150,7 +156,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 114, 25);
+        admin.setBounds(130, 10, 151, 29);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +165,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 25);
+        btnLoggaUt.setBounds(20, 10, 90, 29);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +192,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_tillSorteraFiler);
-        btn_tillSorteraFiler.setBounds(460, 10, 130, 25);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 29);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
