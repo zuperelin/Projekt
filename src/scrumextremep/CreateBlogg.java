@@ -35,7 +35,7 @@ public class CreateBlogg extends javax.swing.JFrame {
     private String anvID;
     File filnamn;        
     String bild;
-    String filpath;
+    String filpath = "";
     String sokvag;
     public CreateBlogg(String anvandarID) {
         initComponents();
@@ -55,9 +55,9 @@ public class CreateBlogg extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TFTitle = new javax.swing.JTextField();
+        tf_Titel = new javax.swing.JTextField();
         spBlogFlow = new javax.swing.JScrollPane();
-        TaCreateBlog = new javax.swing.JTextArea();
+        ta_Blogtext = new javax.swing.JTextArea();
         cbBlog = new javax.swing.JComboBox<>();
         lbl_fil = new javax.swing.JLabel();
         BtnBack = new javax.swing.JButton();
@@ -76,18 +76,18 @@ public class CreateBlogg extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1227, 774));
         getContentPane().setLayout(null);
 
-        TFTitle.setText("Titel");
-        TFTitle.addFocusListener(new java.awt.event.FocusAdapter() {
+        tf_Titel.setText("Titel");
+        tf_Titel.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                TFTitleFocusGained(evt);
+                tf_TitelFocusGained(evt);
             }
         });
-        getContentPane().add(TFTitle);
-        TFTitle.setBounds(80, 120, 220, 30);
+        getContentPane().add(tf_Titel);
+        tf_Titel.setBounds(80, 120, 220, 30);
 
-        TaCreateBlog.setColumns(20);
-        TaCreateBlog.setRows(5);
-        spBlogFlow.setViewportView(TaCreateBlog);
+        ta_Blogtext.setColumns(20);
+        ta_Blogtext.setRows(5);
+        spBlogFlow.setViewportView(ta_Blogtext);
 
         getContentPane().add(spBlogFlow);
         spBlogFlow.setBounds(80, 160, 680, 180);
@@ -99,8 +99,6 @@ public class CreateBlogg extends javax.swing.JFrame {
         });
         getContentPane().add(cbBlog);
         cbBlog.setBounds(780, 190, 130, 30);
-
-        lbl_fil.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lbl_fil);
         lbl_fil.setBounds(780, 450, 70, 20);
 
@@ -212,46 +210,49 @@ public class CreateBlogg extends javax.swing.JFrame {
     }//GEN-LAST:event_BtNewCategoryActionPerformed
 
     private void BtCreateBlogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCreateBlogActionPerformed
-     
-        
+       
         try {
-        String blogText = TaCreateBlog.getText();
+        String blogText = ta_Blogtext.getText();
         String blogType = cbBlog.getSelectedItem().toString();
         String user = anvID;
         String sub = CbCategory.getSelectedItem().toString();
-        String titel = TFTitle.getText();
+        String titel = tf_Titel.getText();
         
         
- 
-      
-        String CbBlog = "SELECT B_ID FROM BLOGG WHERE BLOGGNAMN = '"+ blogType +"'";
-        CbBlog = Databas.getDatabas().fetchSingle(CbBlog);
-        String subC = "SELECT SK_ID FROM SUBKATEGORI WHERE SUBKATEGORI.NAMN = '" + sub + "'";
-        subC = Databas.getDatabas().fetchSingle(subC);
-        String userC = "SELECT A_ID FROM ANVANDARE WHERE A_ID = '" + user + "'";
-        userC = Databas.getDatabas().fetchSingle(userC);
-        String BiID = Databas.getDatabas().getAutoIncrement("BLOGGINLAGG" , "BI_ID");
-        
-        FileInputStream stream = new FileInputStream(filpath);
-        FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
-                         
-        byte [] buffer = new byte[81920];
-        int byteRead;
-        while((byteRead = stream.read(buffer)) != -1) {
-        to.write(buffer,0,byteRead);
-        }                
-        
-        String filen = lbl_fil.getText();
-        
-        if(filen == null){
-            filen = "";
+        if(Validering.tomtTextfalt(tf_Titel) && Validering.tomtTextArea(blogText)) {
+            String CbBlog = "SELECT B_ID FROM BLOGG WHERE BLOGGNAMN = '"+ blogType +"'";
+            CbBlog = Databas.getDatabas().fetchSingle(CbBlog);
+            String subC = "SELECT SK_ID FROM SUBKATEGORI WHERE SUBKATEGORI.NAMN = '" + sub + "'";
+            subC = Databas.getDatabas().fetchSingle(subC);
+            String userC = "SELECT A_ID FROM ANVANDARE WHERE A_ID = '" + user + "'";
+            userC = Databas.getDatabas().fetchSingle(userC);
+            String BiID = Databas.getDatabas().getAutoIncrement("BLOGGINLAGG" , "BI_ID");
+
+            if(!filpath.equals("")) {
+                FileInputStream stream = new FileInputStream(filpath);
+                FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
+
+                byte [] buffer = new byte[81920];
+                int byteRead;
+                while((byteRead = stream.read(buffer)) != -1) {
+                    to.write(buffer,0,byteRead);
+                }                
+            }
+            String filen = lbl_fil.getText();   
+
+            if(filen == null){
+                filen = "";
+            }
+            if(bild == null) {
+                bild = "";
+            }
+            String sql = "INSERT INTO BLOGGINLAGG values (" + BiID +  ", '" + titel + "' , '" + blogText + "', '" + filen + "' , "+ userC +", "+ subC +" ," + CbBlog + ", '" + hamtaDatum() + "' , '" +bild+"')";
+            Databas.getDatabas().insert(sql);
+
+            JOptionPane.showMessageDialog(null, "Blogginlägget har skapats");
+            ta_Blogtext.setText("");
+            tf_Titel.setText("");
         }
-        
-        String sql = "INSERT INTO BLOGGINLAGG values (" + BiID +  ", '" + titel + "' , '" + blogText + "', '" + filen + "' , "+ userC +", "+ subC +" ," + CbBlog + ", '" + hamtaDatum() + "' , '" +bild+"')";
-        Databas.getDatabas().insert(sql);
-                
-        JOptionPane.showMessageDialog(null, "Blogginlägget har skapats");
-             
         } catch (FileNotFoundException ex) 
         {
             JOptionPane.showMessageDialog(null, "Välj en fil att visa" +ex.getMessage());   
@@ -283,9 +284,9 @@ public class CreateBlogg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbBlogActionPerformed
 
-    private void TFTitleFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TFTitleFocusGained
-        TFTitle.setText("");
-    }//GEN-LAST:event_TFTitleFocusGained
+    private void tf_TitelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_TitelFocusGained
+        tf_Titel.setText("");
+    }//GEN-LAST:event_tf_TitelFocusGained
 
     private void btn_BildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BildActionPerformed
         JFileChooser jfc = new JFileChooser(); 
@@ -400,8 +401,6 @@ public class CreateBlogg extends javax.swing.JFrame {
     private javax.swing.JButton BtnBack;
     private javax.swing.JComboBox<String> CbCategory;
     private javax.swing.JLabel LbCreateCategory;
-    private javax.swing.JTextField TFTitle;
-    private javax.swing.JTextArea TaCreateBlog;
     private javax.swing.JTextField TfNewCategory;
     private javax.swing.JButton btn_Bild;
     private javax.swing.JComboBox<String> cbBlog;
@@ -410,5 +409,7 @@ public class CreateBlogg extends javax.swing.JFrame {
     private java.awt.Label lblRubrik;
     private javax.swing.JLabel lbl_fil;
     private javax.swing.JScrollPane spBlogFlow;
+    private javax.swing.JTextArea ta_Blogtext;
+    private javax.swing.JTextField tf_Titel;
     // End of variables declaration//GEN-END:variables
 }
