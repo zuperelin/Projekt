@@ -284,15 +284,16 @@ public class SkapaMote extends javax.swing.JFrame {
     private void cbMotesForslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMotesForslagActionPerformed
         DefaultTableModel dm = (DefaultTableModel)tbl_anvandare.getModel();
         dm.getDataVector().removeAllElements();
-        revalidate();
         String motesForslag = (String)cbMotesForslag.getSelectedItem();
         String sqlQueryHamtaMotesForslagsText = "select text from motesforslag where titel = '" +motesForslag+ "'";
         String sqlQueryHamtaMotesDeltagare = "select fornamn from anvandare join ACCEPTERADEMOTEN on anvandare.a_id = ACCEPTERADEMOTEN.A_ID join MFTIDDATUM on ACCEPTERADEMOTEN.TIDDATUM_ID = MFTIDDATUM.TIDDATUM_ID join MOTESFORSLAG on MFTIDDATUM.MF_ID = MOTESFORSLAG.MF_ID where MOTESFORSLAG.TITEL = '" +motesForslag+ "'";
         try
         {
-            anvandareSomSkaDelta = Databas.getDatabas().fetchColumn(sqlQueryHamtaMotesDeltagare);
-            for(String enAnvandare : anvandareSomSkaDelta) {
-                dm.addRow(new Object[] {enAnvandare});
+            if(Databas.getDatabas().fetchColumn(sqlQueryHamtaMotesDeltagare) != null) {
+                anvandareSomSkaDelta = Databas.getDatabas().fetchColumn(sqlQueryHamtaMotesDeltagare);
+                for(String enAnvandare : anvandareSomSkaDelta) {
+                    dm.addRow(new Object[] {enAnvandare});
+                }
             }
             String text = Databas.getDatabas().fetchSingle(sqlQueryHamtaMotesForslagsText);
             txt_text.setText(text);
