@@ -258,5 +258,31 @@ public class Validering {
             System.out.println(ex);
         }
           return b;
+          
       }
+           
+           static public boolean ingenSubKategori (JTextField subk)
+           {
+               
+               try{
+            String sql = "SELECT NAMN FROM SUBKATEGORI";
+            ArrayList<HashMap<String, String>> sqllista = Databas.getDatabas().fetchRows(sql);
+            for(int i = 0; i < sqllista.size(); i++){
+                if(subk.equals(sqllista.get(i).get("NAMN"))){
+                    JOptionPane.showMessageDialog(null, "Denna kategori finns redan!");
+                    subk.setText("");
+                    subk.requestFocus();
+                    return false;
+                }
+               
+            }
+               }
+               catch(Exception e){
+            System.out.println(e);
+        }
+        return true;
+           }
+           
+               
+           
 }
