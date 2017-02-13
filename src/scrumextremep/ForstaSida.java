@@ -107,7 +107,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(670, 140, 90, 29);
+        btnLoggaIn.setBounds(670, 140, 90, 23);
 
         btnTillbaka.setText("Tillbaka till bloggflöde");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +116,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTillbaka);
-        btnTillbaka.setBounds(150, 170, 190, 29);
+        btnTillbaka.setBounds(150, 170, 190, 23);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
@@ -164,7 +164,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_oppnaFil);
-        btn_oppnaFil.setBounds(20, 170, 100, 29);
+        btn_oppnaFil.setBounds(20, 170, 100, 23);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(590, 310, 320, 190);
 
@@ -243,8 +243,10 @@ public class ForstaSida extends javax.swing.JFrame {
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         taBlogFlow.setText("");
         informellFlode();
-        taBlogFlow.setCaretPosition(0);
+        taBlogFlow.setCaretPosition(0); 
+          lbl_bild.setVisible(false);
         btnTillbaka.setVisible(false);
+         
     }//GEN-LAST:event_btnTillbakaActionPerformed
   
     private void fetchBlognamesInformell() {
@@ -299,6 +301,7 @@ public class ForstaSida extends javax.swing.JFrame {
         
         String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
         String titel = new String();
+          lbl_bild.setVisible(true);
         InloggadSida.bild(tableValue, lbl_bild);
         
         try {
@@ -333,7 +336,7 @@ public class ForstaSida extends javax.swing.JFrame {
          for(int i = 0; i < informell.size(); i++) {
              String text = informell.get(i).get("TEXT");
              String titel = informell.get(i).get("TITEL");
-             taBlogFlow.append("Titel: " + titel + "\n" + text +"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+             taBlogFlow.append("Titel: " + titel + "\n" + text +"\n\n\n\n\n\n\n");
                               }
         } catch (Exception e) {
             System.out.println(e.getMessage());
