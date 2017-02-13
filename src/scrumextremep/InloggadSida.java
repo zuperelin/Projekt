@@ -155,7 +155,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 160, 32);
+        btnRadera.setBounds(270, 10, 160, 23);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -165,7 +165,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 125, 32);
+        admin.setBounds(130, 10, 113, 23);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +174,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 32);
+        btnLoggaUt.setBounds(20, 10, 90, 23);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +201,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_tillSorteraFiler);
-        btn_tillSorteraFiler.setBounds(460, 10, 130, 32);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 23);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(570, 280, 320, 190);
 
