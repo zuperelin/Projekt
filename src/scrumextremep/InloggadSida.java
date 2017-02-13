@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import oru.inf.InfException;
 
 /**
  *
@@ -58,11 +59,16 @@ public class InloggadSida extends javax.swing.JFrame {
         BtNewBlog = new javax.swing.JButton();
         btn_tillSorteraFiler = new javax.swing.JButton();
         lbl_bild = new javax.swing.JLabel();
+        spKommentarsfällt = new javax.swing.JScrollPane();
+        TaKomentarsfällt = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TaKommentar = new javax.swing.JTextPane();
+        btnSend = new javax.swing.JButton();
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(910, 690));
-        setSize(new java.awt.Dimension(910, 690));
+        setMinimumSize(new java.awt.Dimension(911, 735));
+        setSize(new java.awt.Dimension(911, 735));
         getContentPane().setLayout(null);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
@@ -153,7 +159,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 160, 32);
+        btnRadera.setBounds(270, 10, 160, 23);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -163,7 +169,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 125, 32);
+        admin.setBounds(130, 10, 113, 23);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +178,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 32);
+        btnLoggaUt.setBounds(20, 10, 90, 23);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -199,9 +205,30 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_tillSorteraFiler);
-        btn_tillSorteraFiler.setBounds(460, 10, 130, 32);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 23);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(570, 280, 320, 190);
+
+        TaKomentarsfällt.setColumns(20);
+        TaKomentarsfällt.setRows(5);
+        spKommentarsfällt.setViewportView(TaKomentarsfällt);
+
+        getContentPane().add(spKommentarsfällt);
+        spKommentarsfällt.setBounds(30, 580, 490, 80);
+
+        jScrollPane2.setViewportView(TaKommentar);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(640, 580, 230, 70);
+
+        btnSend.setText("Skicka kommentar");
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSend);
+        btnSend.setBounds(740, 670, 140, 30);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,7 +238,7 @@ public class InloggadSida extends javax.swing.JFrame {
         lblBakgrundVit.setMinimumSize(new java.awt.Dimension(910, 690));
         lblBakgrundVit.setPreferredSize(new java.awt.Dimension(910, 690));
         getContentPane().add(lblBakgrundVit);
-        lblBakgrundVit.setBounds(0, 0, 910, 690);
+        lblBakgrundVit.setBounds(0, 0, 910, 740);
 
         pack();
         setLocationRelativeTo(null);
@@ -230,24 +257,43 @@ public class InloggadSida extends javax.swing.JFrame {
         taForskning.removeAll();
         taUtbildning.removeAll();
         taInformell.removeAll();
+        TaKomentarsfällt.removeAll();
+        
         int a = tblBlogTitlar.getSelectedRow();
         int b = tblBlogTitlar.getSelectedColumn();
         String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
         
         String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
+        String sqlKom = "SELECT TEXT FROM BLOGGKOMMENTAR where BI_ID = (SELECT BI_ID from Blogginlagg where titel = '" +tableValue+ "')";
+        
         String titel = new String();
-        bild(tableValue, lbl_bild);
+        String text  = new String(); 
         
         try {
+            text = Databas.getDatabas().fetchSingle(sqlKom);
             titel = Databas.getDatabas().fetchSingle(sqlquery);
+            
             if(tpBloggar.getSelectedIndex() == 0) {
                 taForskning.setText(titel);
+                TaKomentarsfällt.setText(text);
             } else if(tpBloggar.getSelectedIndex() == 1) {
                 taUtbildning.setText(titel);
+                TaKomentarsfällt.setText(text);
             } else if(tpBloggar.getSelectedIndex() == 2) {
                 taInformell.setText(titel);
+                TaKomentarsfällt.setText(text);
             }
-            
+           
+       
+        ArrayList<HashMap<String, String>> kommentar = new ArrayList<>();
+       
+        kommentar = Databas.getDatabas().fetchRows(text);
+         
+         for(int i = 0; i < kommentar.size(); i++) {
+             String kom = kommentar.get(i).get("TEXT");
+             TaKomentarsfällt.append(kom +"\n \n" );
+    
+         }    
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -315,6 +361,29 @@ public class InloggadSida extends javax.swing.JFrame {
         new SorteraFiler(anvID).setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_tillSorteraFilerActionPerformed
+
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+
+        TaKomentarsfällt.removeAll();
+        int a = tblBlogTitlar.getSelectedRow();
+        int b = tblBlogTitlar.getSelectedColumn();
+        String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+        String inlagg = TaKommentar.getText();
+
+        try{
+
+            String titel = "SELECT BI_ID from Blogginlagg where titel = '" +tableValue+ "'";
+            String inlaggsID = Databas.getDatabas().fetchSingle(titel);
+            String BkID = Databas.getDatabas().getAutoIncrement("BLOGGKOMMENTAR" , "BK_ID");
+
+            String sql = "INSERT INTO BLOGGKOMMENTAR Values ("+BkID+ " , '" +inlagg+ "' , " + anvID + ", "+inlaggsID+")";
+            Databas.getDatabas().insert(sql);
+
+        } catch (InfException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }//GEN-LAST:event_btnSendActionPerformed
 
     private void fetchBlognamesUtbildning() {
         String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning') order by BI_ID DESC";
@@ -435,16 +504,21 @@ public class InloggadSida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCalendar;
     private javax.swing.JButton BtNewBlog;
+    private javax.swing.JTextArea TaKomentarsfällt;
+    private javax.swing.JTextPane TaKommentar;
     private javax.swing.JButton admin;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnRadera;
+    private javax.swing.JButton btnSend;
     private javax.swing.JButton btn_tillSorteraFiler;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBakgrundVit;
     private java.awt.Label lblRubrik;
     private javax.swing.JLabel lbl_bild;
     private javax.swing.JScrollPane spBlogtitlar;
     private javax.swing.JScrollPane spForskning;
     private javax.swing.JScrollPane spInformell;
+    private javax.swing.JScrollPane spKommentarsfällt;
     private javax.swing.JScrollPane spUtbildning;
     private javax.swing.JTextArea taForskning;
     private javax.swing.JTextArea taInformell;
