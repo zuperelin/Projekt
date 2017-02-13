@@ -5,8 +5,19 @@
  */
 package scrumextremep;
 
+import java.awt.Desktop;
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,9 +28,10 @@ import javax.swing.table.DefaultTableModel;
 public class RaderaBlogg extends javax.swing.JFrame {
 
     private String anvID;
-    /**
-     * Creates new form RaderaBlogg
-     */
+    File filnamn;        
+    String bild = "";
+    String filpath;
+    String sokvag;
     public RaderaBlogg(String anvandarID) {
         initComponents();
         anvID = anvandarID;
@@ -53,7 +65,10 @@ public class RaderaBlogg extends javax.swing.JFrame {
         tf_nyTitel = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btn_ArkivAdmin = new javax.swing.JButton();
-        lbl_bild = new javax.swing.JLabel();
+        lbl_Bild = new javax.swing.JLabel();
+        btn_LaggTillBild = new javax.swing.JButton();
+        btn_LaggTillFil = new javax.swing.JButton();
+        lbl_Fil = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +172,20 @@ public class RaderaBlogg extends javax.swing.JFrame {
             }
         });
 
+        btn_LaggTillBild.setText("Lägg till bild");
+        btn_LaggTillBild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LaggTillBildActionPerformed(evt);
+            }
+        });
+
+        btn_LaggTillFil.setText("Lägg till fil");
+        btn_LaggTillFil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LaggTillFilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,14 +216,20 @@ public class RaderaBlogg extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tf_nyTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tf_nyTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btn_LaggTillBild)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btn_LaggTillFil)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_Fil, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(28, 28, 28)
                                         .addComponent(tpBloggar, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                                            .addComponent(lbl_bild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(lbl_Bild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(47, 47, 47))
         );
@@ -212,11 +247,14 @@ public class RaderaBlogg extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(lbl_bild, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(lbl_Bild, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_nyTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_LaggTillBild)
+                    .addComponent(btn_LaggTillFil)
+                    .addComponent(lbl_Fil))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_nyText, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,7 +298,7 @@ public class RaderaBlogg extends javax.swing.JFrame {
         String titel = new String();
         
         try {
-            InloggadSida.bild(tableValue, lbl_bild);
+            InloggadSida.bild(tableValue, lbl_Bild);
             text = Databas.getDatabas().fetchSingle(sqlquery);
             titel = Databas.getDatabas().fetchSingle(sqlfraga);
             if(tpBloggar.getSelectedIndex() == 0) {
@@ -314,6 +352,25 @@ public class RaderaBlogg extends javax.swing.JFrame {
         new EjAdminRaderaBlogg(anvID).setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_ArkivAdminActionPerformed
+
+    private void btn_LaggTillBildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LaggTillBildActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        if(jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            String bildVag = jfc.getSelectedFile().getAbsolutePath();
+            ImageIcon bilden = new ImageIcon(new ImageIcon(bildVag).getImage().getScaledInstance(300, 180, Image.SCALE_DEFAULT));
+            lbl_Bild.setIcon(bilden);
+
+            File mappen = new File("bilder");
+            sokvag = mappen.getAbsolutePath();
+            filnamn = jfc.getSelectedFile();
+            bild = jfc.getName(filnamn);
+            filpath = filnamn.getAbsolutePath();
+        }
+    }//GEN-LAST:event_btn_LaggTillBildActionPerformed
+
+    private void btn_LaggTillFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LaggTillFilActionPerformed
+        oppnaChooser();
+    }//GEN-LAST:event_btn_LaggTillFilActionPerformed
 
     private void fetchBlognamesUtbildning() {
         String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning') order by BI_ID DESC";
@@ -388,12 +445,36 @@ public class RaderaBlogg extends javax.swing.JFrame {
         int a = tblBlogTitlar.getSelectedRow();
         int b = tblBlogTitlar.getSelectedColumn();
         String textValue = tf_nyText.getText();
-        String tableValör = tf_nyTitel.getText();
+        String titel = tf_nyTitel.getText();
         String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+        String filen = lbl_Fil.getText();
         
         try {
+            
+            
+        
+            
             String biid = Databas.getDatabas().fetchSingle("Select BI_ID from BLOGGINLAGG where TITEL = '" + tableValue + "';");
-            Databas.getDatabas().update("UPDATE BLOGGINLAGG SET TEXT = '" + textValue + "', TITEL = '" + tableValör + "' WHERE BI_ID = " + biid + ";");
+            if(!textValue.equals("") || textValue != null) {
+                Databas.getDatabas().update("Update blogginlagg set text = '" +textValue+ "' where bi_id = " +biid);
+            }
+            if(!titel.equals("") || titel != null) {
+                Databas.getDatabas().update("Update blogginlagg set titel = '" +titel+ "' where bi_id = " +biid);
+            }
+            if(!filen.equals("") || filen != null) {
+                Databas.getDatabas().update("Update blogginlagg set fil = '" +filen+ "' where bi_id = " +biid);
+            }
+            if(!bild.equals("") || bild != null) {
+                FileInputStream stream = new FileInputStream(filpath);
+                FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
+
+                byte [] buffer = new byte[81920];
+                int byteRead;
+                while((byteRead = stream.read(buffer)) != -1) {
+                to.write(buffer,0,byteRead);
+                }
+                Databas.getDatabas().update("Update blogginlagg set bild = '" +bild+ "' where bi_id = " +biid);
+            }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -443,6 +524,49 @@ public class RaderaBlogg extends javax.swing.JFrame {
              System.out.println(e.getMessage());
          }
     }
+         
+         public String oppnaChooser()
+    {
+        String stringfil = "";
+        final JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(RaderaBlogg.this);
+    
+        if(Desktop.isDesktopSupported())
+        {
+                 File mappen = new File("src\\scrumextremep\\resources");
+                 String mappensPath = mappen.getAbsolutePath();
+            
+                 File filnamnet = fc.getSelectedFile();
+                 String filpathen = filnamnet.getAbsolutePath();
+        
+                  File filen = fc.getSelectedFile();
+                 stringfil = filen.getName();
+         try
+         {
+                    FileInputStream stream = new FileInputStream(filpathen);
+                    FileOutputStream to = new FileOutputStream(mappensPath + "//" +  stringfil);
+                         
+                            byte [] buffer = new byte[24576000];
+                            int byteRead;
+                            while((byteRead = stream.read(buffer)) != -1) {
+                            to.write(buffer,0,byteRead);
+                            System.out.println(mappensPath + stringfil);
+                            lbl_Fil.setText(stringfil);
+         return stringfil;
+            }
+            }       
+         catch (FileNotFoundException ex) 
+         {
+                Logger.getLogger(CreateBlogg.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+         catch (IOException ex) 
+         {
+                Logger.getLogger(CreateBlogg.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return stringfil;
+    
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -450,10 +574,13 @@ public class RaderaBlogg extends javax.swing.JFrame {
     private javax.swing.JButton btnRedigera;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btn_ArkivAdmin;
+    private javax.swing.JButton btn_LaggTillBild;
+    private javax.swing.JButton btn_LaggTillFil;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_bild;
+    private javax.swing.JLabel lbl_Bild;
+    private javax.swing.JLabel lbl_Fil;
     private javax.swing.JScrollPane spForskning;
     private javax.swing.JScrollPane spInformell;
     private javax.swing.JScrollPane spUtbildning;

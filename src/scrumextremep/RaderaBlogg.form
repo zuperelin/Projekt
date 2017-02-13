@@ -53,6 +53,12 @@
                                       <Component id="jLabel1" min="-2" pref="99" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tf_nyTitel" min="-2" pref="172" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btn_LaggTillBild" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btn_LaggTillFil" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lbl_Fil" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -60,7 +66,7 @@
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jScrollPane1" pref="368" max="32767" attributes="0"/>
-                                          <Component id="lbl_bild" max="32767" attributes="0"/>
+                                          <Component id="lbl_Bild" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -88,7 +94,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane1" min="-2" pref="112" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lbl_bild" min="-2" pref="185" max="-2" attributes="0"/>
+                              <Component id="lbl_Bild" min="-2" pref="185" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -97,6 +103,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tf_nyTitel" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="btn_LaggTillBild" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_LaggTillFil" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_Fil" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -272,7 +281,25 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ArkivAdminActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl_bild">
+    <Component class="javax.swing.JLabel" name="lbl_Bild">
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_LaggTillBild">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till bild"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LaggTillBildActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_LaggTillFil">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till fil"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LaggTillFilActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Fil">
     </Component>
   </SubComponents>
 </Form>
