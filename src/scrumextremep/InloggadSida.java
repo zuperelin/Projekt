@@ -61,9 +61,7 @@ public class InloggadSida extends javax.swing.JFrame {
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(910, 690));
         setMinimumSize(new java.awt.Dimension(910, 690));
-        setPreferredSize(new java.awt.Dimension(910, 690));
         setSize(new java.awt.Dimension(910, 690));
         getContentPane().setLayout(null);
 
@@ -155,7 +153,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 160, 23);
+        btnRadera.setBounds(270, 10, 160, 32);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -165,7 +163,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 113, 23);
+        admin.setBounds(130, 10, 125, 32);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +172,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 23);
+        btnLoggaUt.setBounds(20, 10, 90, 32);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +199,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_tillSorteraFiler);
-        btn_tillSorteraFiler.setBounds(460, 10, 130, 23);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 32);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(570, 280, 320, 190);
 
@@ -412,11 +410,11 @@ public class InloggadSida extends javax.swing.JFrame {
              System.out.println(e.getMessage());
          }
     }
-        public static void bild(String valtInlagg, JLabel l){
-     if(Desktop.isDesktopSupported())
-        {
-            
-            String sql = "SELECT BILD FROM BLOGGINLAGG WHERE BLOGGINLAGG.TITEL ='" + valtInlagg + "'";
+    
+    public static void bild(String valtInlagg, JLabel l){
+        if(Desktop.isDesktopSupported()) {
+
+            String sql = "SELECT BILD FROM BLOGGINLAGG WHERE TITEL ='" + valtInlagg + "'";
 
             try
             {

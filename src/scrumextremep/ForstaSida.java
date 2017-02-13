@@ -61,9 +61,7 @@ public class ForstaSida extends javax.swing.JFrame {
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(910, 690));
         setMinimumSize(new java.awt.Dimension(910, 690));
-        setPreferredSize(new java.awt.Dimension(910, 690));
         getContentPane().setLayout(null);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
@@ -107,7 +105,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaIn);
-        btnLoggaIn.setBounds(670, 140, 90, 23);
+        btnLoggaIn.setBounds(670, 140, 90, 32);
 
         btnTillbaka.setText("Tillbaka till bloggflöde");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +114,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTillbaka);
-        btnTillbaka.setBounds(150, 170, 190, 23);
+        btnTillbaka.setBounds(150, 170, 190, 32);
 
         taBlogFlow.setEditable(false);
         taBlogFlow.setColumns(20);
@@ -164,7 +162,7 @@ public class ForstaSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_oppnaFil);
-        btn_oppnaFil.setBounds(20, 170, 100, 23);
+        btn_oppnaFil.setBounds(20, 170, 100, 32);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(590, 310, 320, 190);
 
@@ -213,7 +211,7 @@ public class ForstaSida extends javax.swing.JFrame {
             int b = tblBlogTitlar.getSelectedColumn();
             String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
 
-            String sql = "SELECT FIL FROM BLOGGINLAGG WHERE FIL ='" + tableValue + "'";
+            String sql = "SELECT FIL FROM BLOGGINLAGG WHERE TITEL ='" + tableValue + "'";
 
             try
             {
@@ -243,10 +241,8 @@ public class ForstaSida extends javax.swing.JFrame {
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         taBlogFlow.setText("");
         informellFlode();
-        taBlogFlow.setCaretPosition(0); 
-          lbl_bild.setVisible(false);
+        taBlogFlow.setCaretPosition(0);
         btnTillbaka.setVisible(false);
-         
     }//GEN-LAST:event_btnTillbakaActionPerformed
   
     private void fetchBlognamesInformell() {
@@ -301,7 +297,6 @@ public class ForstaSida extends javax.swing.JFrame {
         
         String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
         String titel = new String();
-          lbl_bild.setVisible(true);
         InloggadSida.bild(tableValue, lbl_bild);
         
         try {
@@ -336,7 +331,7 @@ public class ForstaSida extends javax.swing.JFrame {
          for(int i = 0; i < informell.size(); i++) {
              String text = informell.get(i).get("TEXT");
              String titel = informell.get(i).get("TITEL");
-             taBlogFlow.append("Titel: " + titel + "\n" + text +"\n\n\n\n\n\n\n");
+             taBlogFlow.append("Titel: " + titel + "\n" + text +"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                               }
         } catch (Exception e) {
             System.out.println(e.getMessage());
