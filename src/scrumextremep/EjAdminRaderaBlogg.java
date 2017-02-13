@@ -247,7 +247,6 @@ public class EjAdminRaderaBlogg extends javax.swing.JFrame {
                 tf_nyText.setText("");
                 tf_nyTitel.setText("");
                 fetchTitlar();
-                JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
         }
     }//GEN-LAST:event_btnRedigeraActionPerformed
 
@@ -333,6 +332,10 @@ public class EjAdminRaderaBlogg extends javax.swing.JFrame {
             if(!filen.equals("") || filen != null) {
                 Databas.getDatabas().update("Update blogginlagg set fil = '" +filen+ "' where bi_id = " +biid);
             }
+            if(Validering.ingenBild(biid)){
+              int j = JOptionPane.showConfirmDialog(null, "Detta blogginlägg har redan en bild. Vill du byta?", "BILD", JOptionPane.YES_NO_OPTION);
+              if(j==0){
+              
             if(!bild.equals("") || bild != null) {
                 FileInputStream stream = new FileInputStream(filpath);
                 FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
@@ -343,6 +346,12 @@ public class EjAdminRaderaBlogg extends javax.swing.JFrame {
                 to.write(buffer,0,byteRead);
                 }
                 Databas.getDatabas().update("Update blogginlagg set bild = '" +bild+ "' where bi_id = " +biid);
+                
+                JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+            }
+              } else {
+                  JOptionPane.showMessageDialog(null,"Inlägget är ej uppdaterad");
+              }
             }
         }
         catch (Exception e) {

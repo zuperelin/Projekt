@@ -344,7 +344,6 @@ public class RaderaBlogg extends javax.swing.JFrame {
                     fetchBlognamesUtbildning();
                     fetchBlognamesForskning();
                     fetchBlognamesInformell();
-                    JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
                 }
     }//GEN-LAST:event_btnRedigeraActionPerformed
 
@@ -451,9 +450,6 @@ public class RaderaBlogg extends javax.swing.JFrame {
         
         try {
             
-            
-        
-            
             String biid = Databas.getDatabas().fetchSingle("Select BI_ID from BLOGGINLAGG where TITEL = '" + tableValue + "';");
             if(!textValue.equals("") || textValue != null) {
                 Databas.getDatabas().update("Update blogginlagg set text = '" +textValue+ "' where bi_id = " +biid);
@@ -464,6 +460,10 @@ public class RaderaBlogg extends javax.swing.JFrame {
             if(!filen.equals("") || filen != null) {
                 Databas.getDatabas().update("Update blogginlagg set fil = '" +filen+ "' where bi_id = " +biid);
             }
+            if(Validering.ingenBild(biid)){
+              int j = JOptionPane.showConfirmDialog(null, "Detta blogginlägg har redan en bild. Vill du byta?", "BILD", JOptionPane.YES_NO_OPTION);
+              if(j==0){
+              
             if(!bild.equals("") || bild != null) {
                 FileInputStream stream = new FileInputStream(filpath);
                 FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
@@ -474,6 +474,12 @@ public class RaderaBlogg extends javax.swing.JFrame {
                 to.write(buffer,0,byteRead);
                 }
                 Databas.getDatabas().update("Update blogginlagg set bild = '" +bild+ "' where bi_id = " +biid);
+                
+                JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+            }
+              } else {
+                  JOptionPane.showMessageDialog(null,"Inlägget är ej uppdaterad");
+              }
             }
         }
         catch (Exception e) {

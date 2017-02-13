@@ -238,4 +238,25 @@ public class Validering {
         }
         return fel;
     }
+      
+           static public boolean ingenBild(String jl) {
+          boolean b = false;
+          String sql = "Select blogginlagg.bild from blogginlagg where bi_id = '"+jl+"'";
+          try{
+              
+         if (Databas.getDatabas().fetchSingle(sql) != null){
+             b = true;
+             
+         }else{
+             int a = JOptionPane.showConfirmDialog(null, "Detta blogginlägg har redan en bild. Vill du byta?", "BILD", JOptionPane.YES_NO_OPTION);
+              if (a==0){
+                  b = true;
+              }
+         }
+         
+          } catch (InfException ex) {
+            System.out.println(ex);
+        }
+          return b;
+      }
 }
