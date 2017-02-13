@@ -8,8 +8,11 @@ package scrumextremep;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -64,6 +67,7 @@ public class InloggadSida extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TaKommentar = new javax.swing.JTextPane();
         btnSend = new javax.swing.JButton();
+        btn_oppnaFil = new javax.swing.JButton();
         lblBakgrundVit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -159,7 +163,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 160, 23);
+        btnRadera.setBounds(270, 10, 160, 25);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -169,7 +173,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 113, 23);
+        admin.setBounds(130, 10, 114, 25);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +182,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 23);
+        btnLoggaUt.setBounds(20, 10, 90, 25);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +209,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_tillSorteraFiler);
-        btn_tillSorteraFiler.setBounds(460, 10, 130, 23);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 25);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(570, 280, 320, 190);
 
@@ -229,6 +233,15 @@ public class InloggadSida extends javax.swing.JFrame {
         });
         getContentPane().add(btnSend);
         btnSend.setBounds(740, 670, 140, 30);
+
+        btn_oppnaFil.setText("Öppna fil");
+        btn_oppnaFil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_oppnaFilActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_oppnaFil);
+        btn_oppnaFil.setBounds(640, 550, 100, 25);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -385,6 +398,53 @@ public class InloggadSida extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSendActionPerformed
 
+    private void btn_oppnaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_oppnaFilActionPerformed
+        if(Desktop.isDesktopSupported())
+        {
+            File mappen = new File("src\\scrumextremep\\resources");
+            String sokvag = mappen.getAbsolutePath();
+
+            int a = tblBlogTitlar.getSelectedRow();
+            int b = tblBlogTitlar.getSelectedColumn();
+
+            if(a == -1 || b == -1){
+                JOptionPane.showMessageDialog(null, "Du måste välja ett inlägg!");
+            }
+            else{
+                String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+
+                if(tableValue == null || tableValue == "" || tableValue.equals(-1)){
+                    JOptionPane.showMessageDialog(null, "Du måste välja ett inlägg!");
+                }
+
+                String sql = "SELECT FIL FROM BLOGGINLAGG WHERE TITEL ='" + tableValue + "'";
+
+                try
+                {
+
+                    String hej = Databas.getDatabas().fetchSingle(sql);
+                    if(hej == "" || hej == null){
+                        JOptionPane.showMessageDialog(null, "Det här inlägget har ingen bifogad fil");
+                    }
+                    else{
+                        String path = sokvag + "//" + hej;
+                        File myFile = new File(path);
+                        Desktop.getDesktop().open(myFile);
+                    }
+                }
+
+                catch(IOException ex)
+                {
+                    System.out.println(ex);
+                }
+                catch (InfException ex)
+                {
+                    Logger.getLogger(ForstaSida.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_oppnaFilActionPerformed
+
     private void fetchBlognamesUtbildning() {
         String sqlquery = "select BI_ID, blogginlagg.titel from blogginlagg where b_id = (select b_id from blogg where bloggnamn = 'Utbildning') order by BI_ID DESC";
         ArrayList<HashMap<String, String>> blognames = new ArrayList<>();
@@ -510,6 +570,7 @@ public class InloggadSida extends javax.swing.JFrame {
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnRadera;
     private javax.swing.JButton btnSend;
+    private javax.swing.JButton btn_oppnaFil;
     private javax.swing.JButton btn_tillSorteraFiler;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBakgrundVit;

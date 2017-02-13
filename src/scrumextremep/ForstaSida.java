@@ -203,21 +203,29 @@ public class ForstaSida extends javax.swing.JFrame {
     private void btn_oppnaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_oppnaFilActionPerformed
         if(Desktop.isDesktopSupported())
         {
-
             File mappen = new File("src\\scrumextremep\\resources");
             String sokvag = mappen.getAbsolutePath();
-
+            
             int a = tblBlogTitlar.getSelectedRow();
             int b = tblBlogTitlar.getSelectedColumn();
+            
+            if(a == -1 || b == -1){
+                JOptionPane.showMessageDialog(null, "Du måste välja ett inlägg!");
+            }
+            else{
             String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
 
+            if(tableValue == null || tableValue == "" || tableValue.equals(-1)){
+                JOptionPane.showMessageDialog(null, "Du måste välja ett inlägg!");
+            }
+            
             String sql = "SELECT FIL FROM BLOGGINLAGG WHERE TITEL ='" + tableValue + "'";
 
             try
             {
                 
                 String hej = Databas.getDatabas().fetchSingle(sql);
-                if(hej =="" || hej == null){
+                if(hej == "" || hej == null){
                     JOptionPane.showMessageDialog(null, "Det här inlägget har ingen bifogad fil");
                 }
                 else{
@@ -235,6 +243,7 @@ public class ForstaSida extends javax.swing.JFrame {
             {
                 Logger.getLogger(ForstaSida.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         }
     }//GEN-LAST:event_btn_oppnaFilActionPerformed
 
