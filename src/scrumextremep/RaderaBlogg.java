@@ -283,17 +283,20 @@ public class RaderaBlogg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRaderaActionPerformed
 
     private void btnRedigeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraActionPerformed
-        redigeraInlagg();
-        clearTbl();
-        tf_nyText.setText("");
-        tf_nyTitel.setText("");
-        taForskning.setText("");
-        taUtbildning.setText("");
-        taInformell.setText("");  
-        fetchBlognamesUtbildning();
-        fetchBlognamesForskning();
-        fetchBlognamesInformell();
-        JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+                if(Validering.tomtTextfalt(tf_nyTitel)
+                && Validering.tomtTextfalt(tf_nyText)) {
+                    redigeraInlagg();
+                    clearTbl();
+                    tf_nyText.setText("");
+                    tf_nyTitel.setText("");
+                    taForskning.setText("");
+                    taUtbildning.setText("");
+                    taInformell.setText("");  
+                    fetchBlognamesUtbildning();
+                    fetchBlognamesForskning();
+                    fetchBlognamesInformell();
+                    JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+                }
     }//GEN-LAST:event_btnRedigeraActionPerformed
 
     private void btn_ArkivAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ArkivAdminActionPerformed

@@ -240,15 +240,15 @@ public class EjAdminRaderaBlogg extends javax.swing.JFrame {
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
     private void btnRedigeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraActionPerformed
-        
-        
-        
-        redigeraInlagg();
-        clearTbl();
-        tf_nyText.setText("");
-        tf_nyTitel.setText("");
-        fetchTitlar();
-        JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+        if(Validering.tomtTextfalt(tf_nyTitel)
+            && Validering.tomtTextfalt(tf_nyText)) {        
+                redigeraInlagg();
+                clearTbl();
+                tf_nyText.setText("");
+                tf_nyTitel.setText("");
+                fetchTitlar();
+                JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+        }
     }//GEN-LAST:event_btnRedigeraActionPerformed
 
     private void btnRaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaActionPerformed

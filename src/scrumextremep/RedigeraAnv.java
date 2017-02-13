@@ -274,12 +274,18 @@ public class RedigeraAnv extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAnvActionPerformed
 
     private void saverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saverActionPerformed
-        chb_Blockera.setSelected(false);
-        updateValuesDB();
-        JOptionPane.showMessageDialog(null, "Användare har uppdaterats!");
-        cbAnv.removeAllItems();
-        blockera();
-        fillAnvCB();
+        if(Validering.tomtTextfalt(tfFornamn) && Validering.valideraNamn(tfFornamn)
+                && Validering.tomtTextfalt(tfEfternamn) && Validering.valideraNamn(tfEfternamn)
+                && Validering.tomtTextfalt(tfAnvNamn)
+                && Validering.tomtTextfalt(tfLosenord) && Validering.valideraLosenLangd(tfLosenord)
+                && Validering.tomtTextfalt(tfEmail) && Validering.giltigMail(tfEmail) && Validering.mailUnik(tfEmail)) {
+                    chb_Blockera.setSelected(false);
+                    updateValuesDB();
+                    JOptionPane.showMessageDialog(null, "Användare har uppdaterats!");
+                    cbAnv.removeAllItems();
+                    blockera();
+                    fillAnvCB();
+        }
     }//GEN-LAST:event_saverActionPerformed
 
     private void deleteuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteuActionPerformed
