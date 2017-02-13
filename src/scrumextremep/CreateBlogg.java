@@ -178,7 +178,37 @@ public class CreateBlogg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtNewCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtNewCategoryActionPerformed
-        // TODO add your handling code here:
+                     
+        try {
+       
+        String blogType = cbBlog.getSelectedItem().toString();
+        String subC = TfNewCategory.getText(); 
+       
+      
+        String CbBlog = "SELECT B_ID FROM BLOGG WHERE BLOGGNAMN = '"+ blogType +"'";
+        CbBlog = Databas.getDatabas().fetchSingle(CbBlog);
+        String userC = "SELECT A_ID FROM ANVANDARE WHERE ANVNAMN = '" + anvID + "'";
+        userC = Databas.getDatabas().fetchSingle(userC);
+        String SkID = Databas.getDatabas().getAutoIncrement("SUBKATEGORI" , "SK_ID");
+        
+        String sql = "INSERT INTO SUBKATEGORI values ('" + SkID +  "', '" +subC+ "' ,  "+CbBlog+", " + userC + ")";
+        Databas.getDatabas().insert(sql);
+                
+        JOptionPane.showMessageDialog(null, "Den nya kategorin " + subC + " har lagts till");
+        
+         try
+        {
+        CbCategory.removeAllItems();
+        fyllSubkategori();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+      } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick visst fel: " + ex);
+            }
+      
     }//GEN-LAST:event_BtNewCategoryActionPerformed
 
     private void BtCreateBlogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCreateBlogActionPerformed
@@ -192,7 +222,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         String titel = TFTitle.getText();
         
         
-        // skriva ComboBox för subKategorier, skriva kod för att lägga till kategori samt uppdatera och rensa textfield  
+ 
       
         String CbBlog = "SELECT B_ID FROM BLOGG WHERE BLOGGNAMN = '"+ blogType +"'";
         CbBlog = Databas.getDatabas().fetchSingle(CbBlog);
