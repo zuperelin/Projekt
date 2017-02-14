@@ -285,14 +285,20 @@ public class SkapaMote extends javax.swing.JFrame {
         DefaultTableModel dm = (DefaultTableModel)tbl_anvandare.getModel();
         dm.getDataVector().removeAllElements();
         String motesForslag = (String)cbMotesForslag.getSelectedItem();
+        String forraIdt = "";
         String sqlQueryHamtaMotesForslagsText = "select text from motesforslag where titel = '" +motesForslag+ "'";
+        String sqlQueryHamtaAid = "select anvandare.a_id from ANVANDARE join accepterademoten on anvandare.a_id = accepterademoten.A_ID join mftiddatum on accepterademoten.tiddatum_id = mftiddatum.TIDDATUM_ID join motesforslag on mftiddatum.MF_ID = motesforslag.mf_id where MOTESFORSLAG.TITEL = '" +motesForslag+ "'";
         String sqlQueryHamtaMotesDeltagare = "select fornamn from anvandare join ACCEPTERADEMOTEN on anvandare.a_id = ACCEPTERADEMOTEN.A_ID join MFTIDDATUM on ACCEPTERADEMOTEN.TIDDATUM_ID = MFTIDDATUM.TIDDATUM_ID join MOTESFORSLAG on MFTIDDATUM.MF_ID = MOTESFORSLAG.MF_ID where MOTESFORSLAG.TITEL = '" +motesForslag+ "'";
         try
         {
             if(Databas.getDatabas().fetchColumn(sqlQueryHamtaMotesDeltagare) != null) {
                 anvandareSomSkaDelta = Databas.getDatabas().fetchColumn(sqlQueryHamtaMotesDeltagare);
-                for(String enAnvandare : anvandareSomSkaDelta) {
-                    dm.addRow(new Object[] {enAnvandare});
+                ArrayList<String> anvandarID = Databas.getDatabas().fetchColumn(sqlQueryHamtaAid);
+                for(String enAnvandare : anvandarID) {
+                    if(!enAnvandare.equals(forraIdt) ) {
+                        dm.addRow(new Object[] {Databas.getDatabas().fetchSingle("select fornamn from anvandare where a_id = "+ enAnvandare)});
+                    }
+                    forraIdt = enAnvandare;
                 }
             }
             String text = Databas.getDatabas().fetchSingle(sqlQueryHamtaMotesForslagsText);
