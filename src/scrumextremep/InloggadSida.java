@@ -267,49 +267,11 @@ public class InloggadSida extends javax.swing.JFrame {
     }//GEN-LAST:event_spUtbildningComponentShown
 
     private void tblBlogTitlarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBlogTitlarMouseClicked
-        taForskning.removeAll();
-        taUtbildning.removeAll();
-        taInformell.removeAll();
-        TaKomentarsfällt.removeAll();
-        
-        int a = tblBlogTitlar.getSelectedRow();
-        int b = tblBlogTitlar.getSelectedColumn();
-        String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
-        
-        String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
-        String sqlKom = "SELECT TEXT FROM BLOGGKOMMENTAR where BI_ID = (SELECT BI_ID from Blogginlagg where titel = '" +tableValue+ "')";
-        
-        String titel = new String();
-        String text  = new String(); 
-        
-        try {
-            text = Databas.getDatabas().fetchSingle(sqlKom);
-            titel = Databas.getDatabas().fetchSingle(sqlquery);
-            
-            if(tpBloggar.getSelectedIndex() == 0) {
-                taForskning.setText(titel);
-                TaKomentarsfällt.setText(text);
-            } else if(tpBloggar.getSelectedIndex() == 1) {
-                taUtbildning.setText(titel);
-                TaKomentarsfällt.setText(text);
-            } else if(tpBloggar.getSelectedIndex() == 2) {
-                taInformell.setText(titel);
-                TaKomentarsfällt.setText(text);
-            }
-           
-       bild(tableValue, lbl_bild);
-        ArrayList<HashMap<String, String>> kommentar = new ArrayList<>();
-       
-        kommentar = Databas.getDatabas().fetchRows(text);
-         
-         for(int i = 0; i < kommentar.size(); i++) {
-             String kom = kommentar.get(i).get("TEXT");
-             TaKomentarsfällt.append(kom +"\n \n" );
-    
-         }    
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    taForskning.removeAll();
+    taUtbildning.removeAll();
+    taInformell.removeAll();
+    TaKomentarsfällt.removeAll();
+    inlagg(); 
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
@@ -376,25 +338,25 @@ public class InloggadSida extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_tillSorteraFilerActionPerformed
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+     int a = tblBlogTitlar.getSelectedRow();
+    int b = tblBlogTitlar.getSelectedColumn();
+    String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+    String inlagg = TaKommentar.getText();
 
-        TaKomentarsfällt.removeAll();
-        int a = tblBlogTitlar.getSelectedRow();
-        int b = tblBlogTitlar.getSelectedColumn();
-        String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
-        String inlagg = TaKommentar.getText();
+    try{
 
-        try{
+        String titel = "SELECT BI_ID from Blogginlagg where titel = '" +tableValue+ "'";
+        String inlaggsID = Databas.getDatabas().fetchSingle(titel);
+        String BkID = Databas.getDatabas().getAutoIncrement("BLOGGKOMMENTAR" , "BK_ID");
 
-            String titel = "SELECT BI_ID from Blogginlagg where titel = '" +tableValue+ "'";
-            String inlaggsID = Databas.getDatabas().fetchSingle(titel);
-            String BkID = Databas.getDatabas().getAutoIncrement("BLOGGKOMMENTAR" , "BK_ID");
+        String sql = "INSERT INTO BLOGGKOMMENTAR Values ("+BkID+ " , '" +inlagg+ "' , " + anvID + ", "+inlaggsID+")";
+        Databas.getDatabas().insert(sql);
 
-            String sql = "INSERT INTO BLOGGKOMMENTAR Values ("+BkID+ " , '" +inlagg+ "' , " + anvID + ", "+inlaggsID+")";
-            Databas.getDatabas().insert(sql);
-
-        } catch (InfException e) {
-            System.out.println(e.getMessage());
-        }
+    } catch (InfException e) {
+        System.out.println(e.getMessage());
+    }
+    
+    inlagg();
 
     }//GEN-LAST:event_btnSendActionPerformed
 
@@ -560,6 +522,60 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         }
 }
+    
+    public void inlagg(){  
+    int a = tblBlogTitlar.getSelectedRow();
+    int b = tblBlogTitlar.getSelectedColumn();
+    String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
+    
+    String sqlquery = "Select TEXT from BLOGGINLAGG where TITEL = '" + tableValue + "'";
+    String sqlKom = "SELECT TEXT FROM BLOGGKOMMENTAR where BI_ID = (SELECT BI_ID from Blogginlagg where titel = '" +tableValue+ "')";
+    String sqlFor = "SELECT FORNAMN FROM ANVANDARE WHERE A_ID = " + anvID;
+    String sqlEfter = "SELECT EFTERNAMN FROM ANVANDARE WHERE A_ID = " + anvID;
+    ArrayList<HashMap<String, String>> kommentar = new ArrayList<>();
+    ArrayList<HashMap<String, String>> fornamn = new ArrayList<>();
+    ArrayList<HashMap<String, String>> efternamn = new ArrayList<>();
+    
+    String titel = new String();
+    String forn = new String();
+    String eftern = new String();
+     
+    
+    try {
+        fornamn = Databas.getDatabas().fetchRows(sqlFor);
+        efternamn = Databas.getDatabas().fetchRows(sqlEfter);
+        kommentar = Databas.getDatabas().fetchRows(sqlKom);
+        for(int i = 0; i< fornamn.size(); i++) {
+            forn = fornamn.get(i).get("FORNAMN");
+        }
+        for(int i = 0; i < efternamn.size(); i++) {
+            eftern = efternamn.get(i).get("EFTERNAMN");
+        }
+                 for(int i = 0; i < kommentar.size(); i++) {
+         String kom = kommentar.get(i).get("TEXT");
+         TaKomentarsfällt.append(forn + " " + eftern + "\n" + kom +"\n \n" );
+        titel = Databas.getDatabas().fetchSingle(sqlquery);
+        
+        if(tpBloggar.getSelectedIndex() == 0) {
+            taForskning.setText(titel);
+           // TaKomentarsfällt.setText(kom);
+        } else if(tpBloggar.getSelectedIndex() == 1) {
+            taUtbildning.setText(titel);
+            //TaKomentarsfällt.setText(kom);
+        } else if(tpBloggar.getSelectedIndex() == 2) {
+            taInformell.setText(titel);
+            //TaKomentarsfällt.setText(kom);
+        }
+       
+   
+   
+
+
+     }    
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCalendar;
