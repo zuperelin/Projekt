@@ -434,6 +434,7 @@ public class RaderaBlogg extends javax.swing.JFrame {
         String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
         try {
         String biid = Databas.getDatabas().fetchSingle("Select BI_ID from BLOGGINLAGG where TITEL = '" + tableValue + "';");
+        Databas.getDatabas().delete("DELETE FROM BLOGGKOMMENTAR WHERE BI_ID = " + biid + ";");
         Databas.getDatabas().delete("DELETE FROM BLOGGINLAGG WHERE BI_ID = " + biid + ";");
         } catch (Exception e) {
             System.out.println(e.getMessage());
