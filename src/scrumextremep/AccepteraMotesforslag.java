@@ -45,9 +45,7 @@ public class AccepteraMotesforslag extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(818, 557));
         setMinimumSize(new java.awt.Dimension(818, 557));
-        setPreferredSize(new java.awt.Dimension(818, 557));
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +83,7 @@ public class AccepteraMotesforslag extends javax.swing.JFrame {
                 "Titel", "Datum", "Tid"
             }
         ));
+        tbl_valdaMotesforslag.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbl_valdaMotesforslag);
         if (tbl_valdaMotesforslag.getColumnModel().getColumnCount() > 0) {
             tbl_valdaMotesforslag.getColumnModel().getColumn(0).setResizable(false);
