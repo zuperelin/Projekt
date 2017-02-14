@@ -448,9 +448,13 @@ public class RaderaBlogg extends javax.swing.JFrame {
         String tableValue = (String) tblBlogTitlar.getModel().getValueAt(a, b);
         String filen = lbl_Fil.getText();
         
-        try {
+try {
             
+            int u = JOptionPane.showConfirmDialog(null,"Vill du uppdatera detta blogginlägg?", "UPPDATERA",JOptionPane.YES_NO_OPTION);
+            if (u==0){
+                
             String biid = Databas.getDatabas().fetchSingle("Select BI_ID from BLOGGINLAGG where TITEL = '" + tableValue + "';");
+          
             if(!textValue.equals("") || textValue != null) {
                 Databas.getDatabas().update("Update blogginlagg set text = '" +textValue+ "' where bi_id = " +biid);
             }
@@ -460,11 +464,28 @@ public class RaderaBlogg extends javax.swing.JFrame {
             if(!filen.equals("") || filen != null) {
                 Databas.getDatabas().update("Update blogginlagg set fil = '" +filen+ "' where bi_id = " +biid);
             }
-            if(Validering.ingenBild(biid)){
+            
+            if(Validering.ingenBild(bild)){
               int j = JOptionPane.showConfirmDialog(null, "Detta blogginlägg har redan en bild. Vill du byta?", "BILD", JOptionPane.YES_NO_OPTION);
               if(j==0){
-              
-            if(!bild.equals("") || bild != null) {
+                  
+              FileInputStream stream = new FileInputStream(filpath);
+                FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
+
+                byte [] buffer = new byte[81920];
+                int byteRead;
+                while((byteRead = stream.read(buffer)) != -1) {
+                to.write(buffer,0,byteRead);
+                }
+                Databas.getDatabas().update("Update blogginlagg set bild = '" +bild+ "' where bi_id = " +biid);
+                
+                JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
+              } else {
+                  lbl_Bild.setText("");
+                  JOptionPane.showMessageDialog(null,"Inlägget är ej uppdaterad");
+            }   
+            }
+            if(!Validering.ingenBild(bild)){
                 FileInputStream stream = new FileInputStream(filpath);
                 FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
 
@@ -476,12 +497,12 @@ public class RaderaBlogg extends javax.swing.JFrame {
                 Databas.getDatabas().update("Update blogginlagg set bild = '" +bild+ "' where bi_id = " +biid);
                 
                 JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
-            }
-              } else {
-                  JOptionPane.showMessageDialog(null,"Inlägget är ej uppdaterad");
+            
               }
             }
-        }
+            
+            }
+        
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
