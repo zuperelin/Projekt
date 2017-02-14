@@ -272,6 +272,7 @@ public class InloggadSida extends javax.swing.JFrame {
     taInformell.removeAll();
     TaKomentarsfällt.removeAll();
     TaKomentarsfällt.setText("");
+    
     inlagg(); 
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
@@ -544,6 +545,7 @@ public class InloggadSida extends javax.swing.JFrame {
     
     try {
         titel = Databas.getDatabas().fetchSingle(sqlquery);
+        bild(tableValue, lbl_bild);
         
         if(tpBloggar.getSelectedIndex() == 0) {
             taForskning.setText(titel);
