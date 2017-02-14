@@ -163,7 +163,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRadera);
-        btnRadera.setBounds(270, 10, 160, 25);
+        btnRadera.setBounds(270, 10, 160, 29);
 
         admin.setText("Redigera profiler");
         admin.setActionCommand("Administratör");
@@ -173,7 +173,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(admin);
-        admin.setBounds(130, 10, 114, 25);
+        admin.setBounds(130, 10, 151, 29);
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +182,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoggaUt);
-        btnLoggaUt.setBounds(20, 10, 90, 25);
+        btnLoggaUt.setBounds(20, 10, 90, 29);
 
         BtCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scrumextremep/calendarMini.png"))); // NOI18N
         BtCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +209,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_tillSorteraFiler);
-        btn_tillSorteraFiler.setBounds(460, 10, 130, 25);
+        btn_tillSorteraFiler.setBounds(460, 10, 130, 29);
         getContentPane().add(lbl_bild);
         lbl_bild.setBounds(570, 280, 320, 190);
 
@@ -223,7 +223,7 @@ public class InloggadSida extends javax.swing.JFrame {
         jScrollPane2.setViewportView(TaKommentar);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(640, 580, 230, 70);
+        jScrollPane2.setBounds(640, 550, 230, 70);
 
         btnSend.setText("Skicka kommentar");
         btnSend.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +232,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSend);
-        btnSend.setBounds(740, 670, 140, 30);
+        btnSend.setBounds(640, 630, 170, 30);
 
         btn_oppnaFil.setText("Öppna fil");
         btn_oppnaFil.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +241,7 @@ public class InloggadSida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_oppnaFil);
-        btn_oppnaFil.setBounds(640, 550, 100, 25);
+        btn_oppnaFil.setBounds(640, 510, 100, 29);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -271,6 +271,7 @@ public class InloggadSida extends javax.swing.JFrame {
     taUtbildning.removeAll();
     taInformell.removeAll();
     TaKomentarsfällt.removeAll();
+    TaKomentarsfällt.setText("");
     inlagg(); 
     }//GEN-LAST:event_tblBlogTitlarMouseClicked
 
@@ -542,18 +543,6 @@ public class InloggadSida extends javax.swing.JFrame {
      
     
     try {
-        fornamn = Databas.getDatabas().fetchRows(sqlFor);
-        efternamn = Databas.getDatabas().fetchRows(sqlEfter);
-        kommentar = Databas.getDatabas().fetchRows(sqlKom);
-        for(int i = 0; i< fornamn.size(); i++) {
-            forn = fornamn.get(i).get("FORNAMN");
-        }
-        for(int i = 0; i < efternamn.size(); i++) {
-            eftern = efternamn.get(i).get("EFTERNAMN");
-        }
-                 for(int i = 0; i < kommentar.size(); i++) {
-         String kom = kommentar.get(i).get("TEXT");
-         TaKomentarsfällt.append(forn + " " + eftern + "\n" + kom +"\n \n" );
         titel = Databas.getDatabas().fetchSingle(sqlquery);
         
         if(tpBloggar.getSelectedIndex() == 0) {
@@ -566,10 +555,18 @@ public class InloggadSida extends javax.swing.JFrame {
             taInformell.setText(titel);
             //TaKomentarsfällt.setText(kom);
         }
-       
-   
-   
-
+        fornamn = Databas.getDatabas().fetchRows(sqlFor);
+        efternamn = Databas.getDatabas().fetchRows(sqlEfter);
+        kommentar = Databas.getDatabas().fetchRows(sqlKom);
+        for(int i = 0; i< fornamn.size(); i++) {
+            forn = fornamn.get(i).get("FORNAMN");
+        }
+        for(int i = 0; i < efternamn.size(); i++) {
+            eftern = efternamn.get(i).get("EFTERNAMN");
+        }
+                 for(int i = 0; i < kommentar.size(); i++) {
+         String kom = kommentar.get(i).get("TEXT");
+         TaKomentarsfällt.append(forn + " " + eftern + "\n" + kom +"\n \n" );
 
      }    
     } catch (Exception e) {
