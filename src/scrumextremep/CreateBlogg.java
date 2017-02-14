@@ -69,6 +69,8 @@ public class CreateBlogg extends javax.swing.JFrame {
         BtCreateBlog = new javax.swing.JButton();
         lblRubrik = new java.awt.Label();
         lblBild = new javax.swing.JLabel();
+        lbl_valjBlogg = new javax.swing.JLabel();
+        lbl_valjSubKat = new javax.swing.JLabel();
         btn_Bild = new javax.swing.JButton();
         lblBakgrundVit = new javax.swing.JLabel();
 
@@ -99,8 +101,6 @@ public class CreateBlogg extends javax.swing.JFrame {
         });
         getContentPane().add(cbBlog);
         cbBlog.setBounds(780, 190, 130, 30);
-
-        lbl_fil.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(lbl_fil);
         lbl_fil.setBounds(780, 450, 70, 20);
 
@@ -114,11 +114,11 @@ public class CreateBlogg extends javax.swing.JFrame {
         BtnBack.setBounds(843, 20, 130, 40);
 
         getContentPane().add(CbCategory);
-        CbCategory.setBounds(780, 250, 130, 30);
+        CbCategory.setBounds(780, 260, 130, 30);
 
         LbCreateCategory.setText("Skapa ny kategori");
         getContentPane().add(LbCreateCategory);
-        LbCreateCategory.setBounds(780, 310, 110, 20);
+        LbCreateCategory.setBounds(780, 310, 140, 20);
         getContentPane().add(TfNewCategory);
         TfNewCategory.setBounds(780, 340, 130, 30);
 
@@ -129,7 +129,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtNewCategory);
-        BtNewCategory.setBounds(780, 390, 130, 20);
+        BtNewCategory.setBounds(780, 390, 150, 20);
 
         BtAddFile.setText("Bifoga fil");
         BtAddFile.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +138,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtAddFile);
-        BtAddFile.setBounds(779, 420, 130, 32);
+        BtAddFile.setBounds(779, 420, 130, 29);
 
         BtCreateBlog.setText("Skapa blogginlägg");
         BtCreateBlog.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +147,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtCreateBlog);
-        BtCreateBlog.setBounds(780, 510, 134, 40);
+        BtCreateBlog.setBounds(780, 510, 163, 40);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
         lblRubrik.setBackground(new java.awt.Color(255, 255, 255));
@@ -158,6 +158,14 @@ public class CreateBlogg extends javax.swing.JFrame {
         getContentPane().add(lblBild);
         lblBild.setBounds(80, 350, 680, 240);
 
+        lbl_valjBlogg.setText("Välj blogg");
+        getContentPane().add(lbl_valjBlogg);
+        lbl_valjBlogg.setBounds(780, 160, 90, 20);
+
+        lbl_valjSubKat.setText("Välj subkategori");
+        getContentPane().add(lbl_valjSubKat);
+        lbl_valjSubKat.setBounds(780, 230, 130, 20);
+
         btn_Bild.setText("Bild");
         btn_Bild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +173,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_Bild);
-        btn_Bild.setBounds(780, 480, 110, 32);
+        btn_Bild.setBounds(780, 480, 110, 29);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,7 +186,10 @@ public class CreateBlogg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtNewCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtNewCategoryActionPerformed
-                     
+        if(Validering.tomtTextfalt(TfNewCategory)
+                && Validering.valideraNamn(TfNewCategory)
+                && Validering.ingenSubKategori(TfNewCategory)
+                && Validering.forKort(TfNewCategory)) {
         try {
        
         String blogType = cbBlog.getSelectedItem().toString();
@@ -208,12 +219,14 @@ public class CreateBlogg extends javax.swing.JFrame {
       } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick visst fel: " + ex);
             }
+        }
       
     }//GEN-LAST:event_BtNewCategoryActionPerformed
 
     private void BtCreateBlogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCreateBlogActionPerformed
-     
-        
+    String a = TaCreateBlog.toString();
+        if (Validering.tomtTextfalt(TFTitle)
+               && Validering.tomtTextArea(a)) {
         try {
         String blogText = TaCreateBlog.getText();
         String blogType = cbBlog.getSelectedItem().toString();
@@ -242,9 +255,13 @@ public class CreateBlogg extends javax.swing.JFrame {
         }                
         
         String filen = lbl_fil.getText();
+        String bilden = lblBild.getText();
         
         if(filen == null){
             filen = "";
+        }
+        if(bilden == null) {
+            bilden = "";
         }
         
         String sql = "INSERT INTO BLOGGINLAGG values (" + BiID +  ", '" + titel + "' , '" + blogText + "', '" + filen + "' , "+ userC +", "+ subC +" ," + CbBlog + ", '" + hamtaDatum() + "' , '" +bild+"')";
@@ -263,6 +280,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick visst fel: " + ex);
         }
+    }
       
     }//GEN-LAST:event_BtCreateBlogActionPerformed
 
@@ -409,6 +427,8 @@ public class CreateBlogg extends javax.swing.JFrame {
     private javax.swing.JLabel lblBild;
     private java.awt.Label lblRubrik;
     private javax.swing.JLabel lbl_fil;
+    private javax.swing.JLabel lbl_valjBlogg;
+    private javax.swing.JLabel lbl_valjSubKat;
     private javax.swing.JScrollPane spBlogFlow;
     // End of variables declaration//GEN-END:variables
 }
