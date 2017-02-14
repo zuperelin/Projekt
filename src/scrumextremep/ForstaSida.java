@@ -252,6 +252,7 @@ public class ForstaSida extends javax.swing.JFrame {
         informellFlode();
         taBlogFlow.setCaretPosition(0);
         btnTillbaka.setVisible(false);
+        lbl_bild.setIcon(null);
     }//GEN-LAST:event_btnTillbakaActionPerformed
   
     private void fetchBlognamesInformell() {

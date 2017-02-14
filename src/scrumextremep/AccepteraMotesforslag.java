@@ -7,6 +7,7 @@ package scrumextremep;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,9 +45,7 @@ public class AccepteraMotesforslag extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(818, 557));
         setMinimumSize(new java.awt.Dimension(818, 557));
-        setPreferredSize(new java.awt.Dimension(818, 557));
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +83,7 @@ public class AccepteraMotesforslag extends javax.swing.JFrame {
                 "Titel", "Datum", "Tid"
             }
         ));
+        tbl_valdaMotesforslag.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbl_valdaMotesforslag);
         if (tbl_valdaMotesforslag.getColumnModel().getColumnCount() > 0) {
             tbl_valdaMotesforslag.getColumnModel().getColumn(0).setResizable(false);
@@ -215,9 +215,18 @@ public class AccepteraMotesforslag extends javax.swing.JFrame {
                 try {
                     
                 String sql = "INSERT INTO ACCEPTERADEMOTEN \n" + 
-                        "VALUES (" + anvID + ", " + tiddatum_ID +")";
-                
-                Databas.getDatabas().insert(sql);
+                    "VALUES (" + anvID + ", " + tiddatum_ID +")";
+                    
+                String sqlString = "SELECT * FROM ACCEPTERADEMOTEN WHERE A_ID = " + anvID + " AND TIDDATUM_ID = " + tiddatum_ID + "";
+                sqlString = Databas.getDatabas().fetchSingle(sqlString);
+ 
+                if(sqlString == null) {
+                    Databas.getDatabas().insert(sql);
+                    JOptionPane.showMessageDialog(null, "Du är nu anmäld på det valda förslaget.");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Det valda förslaget är du redan anmäld på.");
+                }
                 
                 fyllTabell();
                     }
