@@ -35,7 +35,7 @@ public class CreateBlogg extends javax.swing.JFrame {
     private String anvID;
     File filnamn;        
     String bild;
-    String filpath;
+    String filpath = "";
     String sokvag;
     public CreateBlogg(String anvandarID) {
         initComponents();
@@ -43,6 +43,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         fyllBloggar(); 
         fyllSubkategori();
         anvID = anvandarID;
+        this.bild = "";
         
     }
 
@@ -227,7 +228,7 @@ public class CreateBlogg extends javax.swing.JFrame {
     String a = TaCreateBlog.toString();
         if (Validering.tomtTextfalt(TFTitle)
                && Validering.tomtTextArea(a)) {
-        try {
+ try {
         String blogText = TaCreateBlog.getText();
         String blogType = cbBlog.getSelectedItem().toString();
         String user = anvID;
@@ -235,7 +236,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         String titel = TFTitle.getText();
         
         
- 
+        // skriva ComboBox för subKategorier, skriva kod för att lägga till kategori samt uppdatera och rensa textfield  
       
         String CbBlog = "SELECT B_ID FROM BLOGG WHERE BLOGGNAMN = '"+ blogType +"'";
         CbBlog = Databas.getDatabas().fetchSingle(CbBlog);
@@ -245,6 +246,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         userC = Databas.getDatabas().fetchSingle(userC);
         String BiID = Databas.getDatabas().getAutoIncrement("BLOGGINLAGG" , "BI_ID");
         
+        if(filpath != "") {
         FileInputStream stream = new FileInputStream(filpath);
         FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
                          
@@ -253,16 +255,13 @@ public class CreateBlogg extends javax.swing.JFrame {
         while((byteRead = stream.read(buffer)) != -1) {
         to.write(buffer,0,byteRead);
         }                
-        
+        }
         String filen = lbl_fil.getText();
-        String bilden = lblBild.getText();
         
         if(filen == null){
             filen = "";
         }
-        if(bilden == null) {
-            bilden = "";
-        }
+       
         
         String sql = "INSERT INTO BLOGGINLAGG values (" + BiID +  ", '" + titel + "' , '" + blogText + "', '" + filen + "' , "+ userC +", "+ subC +" ," + CbBlog + ", '" + hamtaDatum() + "' , '" +bild+"')";
         Databas.getDatabas().insert(sql);
@@ -280,7 +279,7 @@ public class CreateBlogg extends javax.swing.JFrame {
         catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick visst fel: " + ex);
         }
-    }
+        }
       
     }//GEN-LAST:event_BtCreateBlogActionPerformed
 

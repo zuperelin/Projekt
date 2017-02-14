@@ -239,22 +239,20 @@ public class Validering {
         return fel;
     }
       
-           static public boolean ingenBild(String jl) {
+      static public boolean ingenBild(String jl) {
           boolean b = false;
-          String sql = "Select blogginlagg.bild from blogginlagg where bi_id = "+jl;
+          String sql = "Select blogginlagg.bild from blogginlagg where bi_id = '"+jl+"'";
+          
           try{
-              
-         if (!Databas.getDatabas().fetchSingle(sql).equals("")){
+              String se = Databas.getDatabas().fetchSingle(sql);
+         if ( !"".equals(se)){
              b = true;
-             
+      
          }
-         
-         
           } catch (InfException ex) {
             System.out.println(ex);
         }
           return b;
-          
       }
            
            static public boolean ingenSubKategori (JTextField subk)
