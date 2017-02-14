@@ -297,7 +297,7 @@ public class InloggadSida extends javax.swing.JFrame {
                 TaKomentarsfällt.setText(text);
             }
            
-       
+       bild(tableValue, lbl_bild);
         ArrayList<HashMap<String, String>> kommentar = new ArrayList<>();
        
         kommentar = Databas.getDatabas().fetchRows(text);
