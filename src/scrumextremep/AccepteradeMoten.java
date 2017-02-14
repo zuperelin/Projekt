@@ -145,16 +145,16 @@ public class AccepteradeMoten extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbValjMotesforslagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbValjMotesforslagActionPerformed
-          try{
-              cbValjDatum.removeAllItems();
-                String get = cbValjMotesforslag.getSelectedItem().toString(); 
-        String sql = "SELECT DATUM FROM MFTIDDATUM JOIN MOTESFORSLAG ON MOTESFORSLAG.MF_ID = MFTIDDATUM.MF_ID WHERE TITEL = '" + get + "'";
-    
-        ArrayList<HashMap<String, String>> datum = Databas.getDatabas().fetchRows(sql);
-        for (int i = 0; i < datum.size(); i++){
-            cbValjDatum.addItem(datum.get(i).get("DATUM"));
-                                                  }
-           }
+        try{
+            cbValjDatum.removeAllItems();
+            String get = cbValjMotesforslag.getSelectedItem().toString(); 
+            String sql = "SELECT DATUM FROM MFTIDDATUM JOIN MOTESFORSLAG ON MOTESFORSLAG.MF_ID = MFTIDDATUM.MF_ID WHERE TITEL = '" + get + "'";
+
+            ArrayList<HashMap<String, String>> datum = Databas.getDatabas().fetchRows(sql);
+            for (int i = 0; i < datum.size(); i++){
+                cbValjDatum.addItem(datum.get(i).get("DATUM"));
+            }
+        }
         catch(Exception e){
             System.out.println(e);
         }
@@ -209,6 +209,7 @@ public class AccepteradeMoten extends javax.swing.JFrame {
                 DefaultTableModel dmt = (DefaultTableModel)tblAccepteratMote.getModel();
                 dmt.addRow(new Object[] {fornamn, efternamn, email});
     }
+                lblTotal.setText("Totalt anmälda: " +anvandare.size());
     } catch (Exception e) {
             System.out.println(e.getMessage());
         }

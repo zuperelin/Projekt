@@ -10,6 +10,7 @@ import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import oru.inf.InfException;
 
 /**
  *
@@ -26,7 +27,6 @@ public class RedigeraAnv extends javax.swing.JFrame {
     public RedigeraAnv(String anvandarID) {
         initComponents();
         anvID = anvandarID;
-        selectedAID = anvID;
         fillCbAnvandare();
         adminHide();
         fillUserValues();
@@ -132,7 +132,7 @@ public class RedigeraAnv extends javax.swing.JFrame {
 
         chb_Blockera.setText("Blockera");
 
-        jLabel2.setText("Blockera en användare");
+        jLabel2.setText("Vill du blockera en användare");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,7 +148,7 @@ public class RedigeraAnv extends javax.swing.JFrame {
                                 .addComponent(btnSkapa, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)
                                 .addComponent(deleteu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 299, Short.MAX_VALUE))
+                        .addGap(0, 268, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(jLabel1)
@@ -161,46 +161,44 @@ public class RedigeraAnv extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(tfFornamn)
-                                        .addGap(31, 31, 31))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbAnv, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addGap(103, 103, 103))
+                                    .addComponent(cbAnv, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblAnvNamn)
                                     .addComponent(lblEmail))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(chbAdmin)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                                            .addComponent(tfAnvNamn))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                    .addComponent(tfAnvNamn))
+                                .addGap(0, 72, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblLosenord)
-                                    .addComponent(jLabel2)
                                     .addComponent(lblEfternamn))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cb_Anvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(tfEfternamn)
                                     .addComponent(tfLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
-                            .addComponent(chb_Blockera, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(chbAdmin)))
                         .addGap(72, 72, 72))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka)
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(saver, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(259, 259, 259))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(341, 341, 341)
+                        .addComponent(btnTillbaka))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chb_Blockera)
+                            .addComponent(cb_Anvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(saver, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,25 +223,23 @@ public class RedigeraAnv extends javax.swing.JFrame {
                     .addComponent(lblLosenord)
                     .addComponent(tfAnvNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(saver)
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSkapa)
-                            .addComponent(deleteu)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cb_Anvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chb_Blockera)
-                            .addComponent(chbAdmin))))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail)
+                    .addComponent(chbAdmin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(saver)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_Anvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chb_Blockera)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSkapa)
+                    .addComponent(deleteu))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
 
@@ -261,16 +257,12 @@ public class RedigeraAnv extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkapaActionPerformed
 
     private void cbAnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnvActionPerformed
-        
+        if(Validering.adminCheck(anvID)) {
         String valdAnv = (String)cbAnv.getSelectedItem();
-        String sqlQueryHamtaAid = "select a_id from anvandare where email = '" +valdAnv+ "'";
-        try
-        {
-            selectedAID = Databas.getDatabas().fetchSingle(sqlQueryHamtaAid);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+        String anvandarID = valdAnv.replaceAll("[^0-9]", "");
+        selectedAID = anvandarID;
         fillUserValues();
+        }
     }//GEN-LAST:event_cbAnvActionPerformed
 
     private void saverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saverActionPerformed
@@ -278,11 +270,9 @@ public class RedigeraAnv extends javax.swing.JFrame {
                 && Validering.tomtTextfalt(tfEfternamn) && Validering.valideraNamn(tfEfternamn)
                 && Validering.tomtTextfalt(tfAnvNamn)
                 && Validering.tomtTextfalt(tfLosenord) && Validering.valideraLosenLangd(tfLosenord)
-                && Validering.tomtTextfalt(tfEmail) && Validering.giltigMail(tfEmail) && Validering.mailUnik(tfEmail)) {
-                    chb_Blockera.setSelected(false);
+                && Validering.tomtTextfalt(tfEmail) && Validering.giltigMail(tfEmail)) {
                     updateValuesDB();
                     JOptionPane.showMessageDialog(null, "Användare har uppdaterats!");
-                    cbAnv.removeAllItems();
                     blockera();
                     fillAnvCB();
         }
@@ -316,12 +306,12 @@ public class RedigeraAnv extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_AnvandareActionPerformed
 
     private void fillAnvCB() {
-        String sqlfraga = "Select email from ANVANDARE";
+        String sqlfraga = "Select fornamn, efternamn, a_id from ANVANDARE";
         try {
-            ArrayList<String> email = Databas.getDatabas().fetchColumn(sqlfraga);
+            ArrayList<HashMap<String, String>> anvInfo = Databas.getDatabas().fetchRows(sqlfraga);
 
-                for (int i = 0; i < email.size(); i++)
-                    cbAnv.addItem(email.get(i)); 
+                for (int i = 0; i < anvInfo.size(); i++)
+                    cbAnv.addItem(anvInfo.get(i).get("FORNAMN") + " " + anvInfo.get(i).get("EFTERNAMN") +" " + anvInfo.get(i).get("A_ID")); 
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -332,17 +322,22 @@ public class RedigeraAnv extends javax.swing.JFrame {
         
         try {
             if(Validering.adminCheck(anvID)) {
-                String valdAnv = (String)cbAnv.getSelectedItem();
-                String sqlQueryHamtaAnvInfo = "Select fornamn, efternamn, anvnamn, losenord, administrator, email from anvandare where email = '" +valdAnv+ "'";
+                String sqlQueryHamtaAnvInfo = "Select fornamn, efternamn, anvnamn, losenord, administrator, email from anvandare where a_id = " +selectedAID;
                 HashMap<String, String> anvandarInfo = Databas.getDatabas().fetchRow(sqlQueryHamtaAnvInfo);
                 tfFornamn.setText(anvandarInfo.get("FORNAMN"));
                 tfAnvNamn.setText(anvandarInfo.get("ANVNAMN"));
                 tfEmail.setText(anvandarInfo.get("EMAIL"));
                 tfEfternamn.setText(anvandarInfo.get("EFTERNAMN"));
                 tfLosenord.setText(anvandarInfo.get("LOSENORD"));
+                if(anvandarInfo.get("ADMINISTRATOR").equals("T")) {
+                    chbAdmin.setSelected(true);
+                } else {
+                    chbAdmin.setSelected(false);
+                }
                 
             } else {
-                String sqlQueryHamtaAnvInfo = "Select fornamn, efternamn, anvnamn, losenord, email from anvandare where a_id = " +anvID;
+                selectedAID = anvID;
+                String sqlQueryHamtaAnvInfo = "Select fornamn, efternamn, anvnamn, losenord, email from anvandare where a_id = " +selectedAID;
                 HashMap<String, String> anvandarInfo = Databas.getDatabas().fetchRow(sqlQueryHamtaAnvInfo);
                 tfFornamn.setText(anvandarInfo.get("FORNAMN"));
                 tfAnvNamn.setText(anvandarInfo.get("ANVNAMN"));
@@ -356,15 +351,34 @@ public class RedigeraAnv extends javax.swing.JFrame {
     }
     
     private void updateValuesDB() {
-        String sqlfragaT = "update anvandare set fornamn ='" + tfFornamn.getText() + "', efternamn ='" + tfEfternamn.getText() + "', anvnamn ='" + tfAnvNamn.getText() + "', losenord ='" + tfLosenord.getText() + "', administrator ='T', email ='" + tfEmail.getText() + "' where a_id =" + selectedAID + ";";
-        String sqlfragaF = "update anvandare set fornamn ='" + tfFornamn.getText() + "', efternamn ='" + tfEfternamn.getText() + "', anvnamn ='" + tfAnvNamn.getText() + "', losenord ='" + tfLosenord.getText() + "', administrator ='F', email ='" + tfEmail.getText() + "' where a_id =" + selectedAID + ";";
+        String fornamn = tfFornamn.getText();
+        String efternamn = tfEfternamn.getText();
+        String anvNamn = tfAnvNamn.getText();
+        String losenord = tfLosenord.getText();
+        String email = tfEmail.getText();
         try {
+            HashMap<String, String> gammalInfo = Databas.getDatabas().fetchRow("select * from anvandare where a_id = " +selectedAID);
             if (chbAdmin.isSelected()) {
-                Databas.getDatabas().update(sqlfragaT);
+                Databas.getDatabas().update("update anvandare set administrator = 'T' where a_id = " +selectedAID);
                 } else {
-                Databas.getDatabas().update(sqlfragaF);
+                Databas.getDatabas().update("update anvandare set administrator = 'F' where a_id = " +selectedAID);
+                }
+            if(!fornamn.equals(gammalInfo.get("FORNAMN"))) {
+                Databas.getDatabas().update("update anvandare set fornamn = '" +fornamn+ "' where a_id = " +selectedAID);
             }
-        } catch (Exception e) {
+            if(!efternamn.equals(gammalInfo.get("EFTERNAMN"))) {
+                Databas.getDatabas().update("update anvandare set efternamn = '" +efternamn+ "' where a_id = " +selectedAID);
+            }
+            if(!anvNamn.equals(gammalInfo.get("ANVNAMN"))) {
+                Databas.getDatabas().update("update anvandare set anvnamn = '" +anvNamn+ "' where a_id = " +selectedAID);
+            }
+            if(!losenord.equals(gammalInfo.get("LOSENORD"))) {
+                Databas.getDatabas().update("update anvandare set losenord = '" +losenord+ "' where a_id = " +selectedAID);
+            }
+            if(!email.equals(gammalInfo.get("EMAIL"))) {
+                Databas.getDatabas().update("update anvandare set email = '" +email+ "' where a_id = " +selectedAID);
+            }
+        } catch (InfException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -393,7 +407,6 @@ public class RedigeraAnv extends javax.swing.JFrame {
             } else {
                 Databas.getDatabas().delete(sqlQueryAvblockera);
             }
-            fillCbAnvandare();
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
@@ -402,15 +415,15 @@ public class RedigeraAnv extends javax.swing.JFrame {
     private void fillCbAnvandare()
     {
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel() ;
-        String sqlQueryHamtaAnvandare = "select a_id, fornamn, efternamn from anvandare";
+        String sqlQueryHamtaAnvandare = "select a_id, fornamn, efternamn from anvandare where a_id not like " +anvID;
         
         try
         {
             ArrayList<HashMap<String, String>> anvFornamnEfternamn = Databas.getDatabas().fetchRows(sqlQueryHamtaAnvandare);
             for(int i = 0; i<anvFornamnEfternamn.size(); i++) {
+                String a_id = anvFornamnEfternamn.get(i).get("A_ID");
                 String fornamn = anvFornamnEfternamn.get(i).get("FORNAMN");
                 String efternamn = anvFornamnEfternamn.get(i).get("EFTERNAMN");
-                String a_id = anvFornamnEfternamn.get(i).get("A_ID");
                 cbModel.addElement(fornamn + " " +efternamn+ " " +a_id);
             }
         } catch(Exception e) {
