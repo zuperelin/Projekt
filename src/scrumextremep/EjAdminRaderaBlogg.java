@@ -336,22 +336,22 @@ public class EjAdminRaderaBlogg extends javax.swing.JFrame {
               int j = JOptionPane.showConfirmDialog(null, "Detta blogginlägg har redan en bild. Vill du byta?", "BILD", JOptionPane.YES_NO_OPTION);
               if(j==0){
               
-            if(!bild.equals("") || bild != null) {
-                FileInputStream stream = new FileInputStream(filpath);
-                FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
+                if(!bild.equals("") || bild != null) {
+                    FileInputStream stream = new FileInputStream(filpath);
+                    FileOutputStream to = new FileOutputStream(sokvag + "//" +  bild);
 
-                byte [] buffer = new byte[81920];
-                int byteRead;
-                while((byteRead = stream.read(buffer)) != -1) {
-                to.write(buffer,0,byteRead);
+                    byte [] buffer = new byte[81920];
+                    int byteRead;
+                    while((byteRead = stream.read(buffer)) != -1) {
+                    to.write(buffer,0,byteRead);
+                    }
+                    Databas.getDatabas().update("Update blogginlagg set bild = '" +bild+ "' where bi_id = " +biid);
+
+                    JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
                 }
-                Databas.getDatabas().update("Update blogginlagg set bild = '" +bild+ "' where bi_id = " +biid);
-                
-                JOptionPane.showMessageDialog(null, "Blogginlägget är redigerat!");
-            }
-              } else {
+                } else {
                   JOptionPane.showMessageDialog(null,"Inlägget är ej uppdaterad");
-              }
+                }
             }
         }
         catch (Exception e) {
