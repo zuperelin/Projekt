@@ -139,7 +139,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtAddFile);
-        BtAddFile.setBounds(779, 420, 130, 29);
+        BtAddFile.setBounds(779, 420, 130, 32);
 
         BtCreateBlog.setText("Skapa blogginlägg");
         BtCreateBlog.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +148,7 @@ public class CreateBlogg extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtCreateBlog);
-        BtCreateBlog.setBounds(780, 510, 163, 40);
+        BtCreateBlog.setBounds(780, 510, 134, 40);
 
         lblRubrik.setAlignment(java.awt.Label.CENTER);
         lblRubrik.setBackground(new java.awt.Color(255, 255, 255));
@@ -161,20 +161,20 @@ public class CreateBlogg extends javax.swing.JFrame {
 
         lbl_valjBlogg.setText("Välj blogg");
         getContentPane().add(lbl_valjBlogg);
-        lbl_valjBlogg.setBounds(780, 160, 90, 20);
+        lbl_valjBlogg.setBounds(780, 160, 90, 16);
 
         lbl_valjSubKat.setText("Välj subkategori");
         getContentPane().add(lbl_valjSubKat);
-        lbl_valjSubKat.setBounds(780, 230, 130, 20);
+        lbl_valjSubKat.setBounds(780, 230, 130, 16);
 
-        btn_Bild.setText("Bild");
+        btn_Bild.setText("Bifoga bild");
         btn_Bild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_BildActionPerformed(evt);
             }
         });
         getContentPane().add(btn_Bild);
-        btn_Bild.setBounds(780, 480, 110, 29);
+        btn_Bild.setBounds(780, 470, 130, 32);
 
         lblBakgrundVit.setBackground(java.awt.Color.white);
         lblBakgrundVit.setForeground(new java.awt.Color(255, 255, 255));

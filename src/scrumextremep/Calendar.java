@@ -21,7 +21,6 @@ public class Calendar extends javax.swing.JFrame {
     public Calendar(String anvandarID) {
         initComponents();
         anvID = anvandarID;
-        fillTblMoten2();
         setLocationRelativeTo(null);
     }
 
@@ -35,8 +34,6 @@ public class Calendar extends javax.swing.JFrame {
     private void initComponents() {
 
         btnDate = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblMoten2 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblMoten1 = new javax.swing.JTable();
         dateChooser = new com.toedter.calendar.JDateChooser();
@@ -56,29 +53,6 @@ public class Calendar extends javax.swing.JFrame {
                 btnDateActionPerformed(evt);
             }
         });
-
-        tblMoten2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Möte", "Datum", "Tid"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblMoten2);
-        if (tblMoten2.getColumnModel().getColumnCount() > 0) {
-            tblMoten2.getColumnModel().getColumn(0).setResizable(false);
-            tblMoten2.getColumnModel().getColumn(1).setResizable(false);
-            tblMoten2.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         tblMoten1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,29 +133,26 @@ public class Calendar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BtnShowAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_AcceptedMoten))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(BtnShowAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_AcceptedMoten))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_acceptmf, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(createBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(backBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_acceptmf, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(createBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(backBtn)))))
                 .addGap(0, 26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -197,11 +168,9 @@ public class Calendar extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnShowAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_AcceptedMoten, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -308,30 +277,7 @@ public class Calendar extends javax.swing.JFrame {
         }
     }
     
-    private void fillTblMoten2(){
-        
-    try {
-         String mSql = "select mote.namn, mote.datum, mote.STARTTID from MOTE\n" +
-                       "join ANVANDAREDELTARMOTE\n" +
-                       "on mote.M_ID = ANVANDAREDELTARMOTe.A_ID\n" +
-                       "join ANVANDARE\n" +
-                       "on ANVANDAREDELTARMOTE.A_ID = ANVANDARE.A_ID\n" +
-                       "where ANVANDARE.A_ID ="+ anvID;
-                
-                ArrayList<HashMap<String, String>> meetings = Databas.getDatabas().fetchRows(mSql);
-                
-                for(int i = 0; i < meetings.size(); i++) {
-                         String name = meetings.get(i).get("NAMN");
-                         String time = meetings.get(i).get("DATUM");
-                         String Date = meetings.get(i).get("STARTTID");
-
-                DefaultTableModel dmt = (DefaultTableModel)tblMoten2.getModel();
-                dmt.addRow(new Object[] {name, time, Date});
-    }
-    } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+   
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -344,9 +290,7 @@ public class Calendar extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblMoten1;
-    private javax.swing.JTable tblMoten2;
     // End of variables declaration//GEN-END:variables
 }

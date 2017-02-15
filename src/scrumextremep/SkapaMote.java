@@ -226,7 +226,7 @@ public class SkapaMote extends javax.swing.JFrame {
                 && Validering.datumKorrekt(datechooser)
                  && Validering.tomCombo(cb_timmar)
                     && Validering.tomCombo(cb_minuter)
-                        && Validering.tomttable(tbl_anvandare)){
+                        ){
             
         String valtDatum = dFormat.format(datechooser.getDate());
         try
